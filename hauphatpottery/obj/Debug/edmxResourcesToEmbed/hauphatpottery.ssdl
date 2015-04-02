@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="hauphatpotteryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="hauphatpotteryModelStoreContainer">
+    <EntitySet Name="BILL" EntityType="hauphatpotteryModel.Store.BILL" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CONTRACT" EntityType="hauphatpotteryModel.Store.CONTRACT" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CONTRACT_DETAIL" EntityType="hauphatpotteryModel.Store.CONTRACT_DETAIL" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CONTRACT_HISTORY" EntityType="hauphatpotteryModel.Store.CONTRACT_HISTORY" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CUSTOMER" EntityType="hauphatpotteryModel.Store.CUSTOMER" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CUSTOMER_HISTORY" EntityType="hauphatpotteryModel.Store.CUSTOMER_HISTORY" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CUSTOMER_NODELI" EntityType="hauphatpotteryModel.Store.CUSTOMER_NODELI" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EMPLOYER" EntityType="hauphatpotteryModel.Store.EMPLOYER" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GROUP" EntityType="hauphatpotteryModel.Store.GROUP" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GROUP_MENU" EntityType="hauphatpotteryModel.Store.GROUP_MENU" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MENU_PARENT" EntityType="hauphatpotteryModel.Store.MENU_PARENT" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="USER" EntityType="hauphatpotteryModel.Store.USER" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="BILL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CONT" Type="int" />
+    <Property Name="BILL_STATUS" Type="int" />
+    <Property Name="ID_EMPLOY" Type="int" />
+    <Property Name="BILL_DELI_DATE" Type="smalldatetime" />
+    <Property Name="BILLL_RECEIVER_DATE" Type="smalldatetime" />
+    <Property Name="CONTD_DATE_THU" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="CONTRACT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CUS" Type="int" />
+    <Property Name="CONT_NO" Type="nvarchar" MaxLength="150" />
+    <Property Name="CONT_PRODUCT_NAME" Type="nvarchar" MaxLength="550" />
+    <Property Name="CONT_PRODUCT_PRICE" Type="decimal" />
+    <Property Name="CONT_TOTAL_PRICE" Type="decimal" />
+    <Property Name="CONT_PREPAY_PRICE" Type="decimal" />
+    <Property Name="CONT_DEBT_PRICE" Type="decimal" />
+    <Property Name="CONT_TYPE" Type="int" />
+    <Property Name="CONT_STATUS" Type="int" Nullable="false" />
+    <Property Name="CONT_DATE" Type="smalldatetime" />
+    <Property Name="CONT_LOST_PRICE" Type="decimal" />
+    <Property Name="CONT_NOTE" Type="nvarchar" MaxLength="550" />
+    <Property Name="CONT_NOTE_TRACK" Type="nvarchar" MaxLength="550" />
+    <Property Name="CONT_DELI_DATE" Type="smalldatetime" />
+    <Property Name="CONT_DELI_PRICE" Type="decimal" />
+    <Property Name="CONT_WEEK_PRICE" Type="decimal" />
+    <Property Name="CONT_WEEK_COUNT" Type="int" />
+    <Property Name="USER_ID" Type="int" />
+    <Property Name="BILL_STATUS" Type="int" />
+    <Property Name="DATE_STATUS" Type="smalldatetime" />
+    <Property Name="IS_DELETE" Type="bit" />
+    <Property Name="EMP_BH" Type="varchar" MaxLength="50" />
+    <Property Name="EMP_XM" Type="varchar" MaxLength="50" />
+    <Property Name="EMP_GH" Type="varchar" MaxLength="50" />
+    <Property Name="CUS_GT" Type="nvarchar" MaxLength="550" />
+    <Property Name="EMP_TN" Type="int" />
+    <Property Name="CONT_NOTE_DELI" Type="nvarchar" MaxLength="550" />
+    <Property Name="CONT_NOTE_XM" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="CONTRACT_DETAIL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CONT" Type="int" />
+    <Property Name="CONTD_DATE_THU" Type="smalldatetime" />
+    <Property Name="CONTD_DATE_THU_TT" Type="smalldatetime" />
+    <Property Name="CONTD_PAY_PRICE" Type="decimal" />
+    <Property Name="CONTD_DEBT_PRICE" Type="decimal" />
+    <Property Name="CONTD_DEBT_PRICE_TT" Type="decimal" />
+  </EntityType>
+  <EntityType Name="CONTRACT_HISTORY">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CONT" Type="int" />
+    <Property Name="CONTHIS_TYPE" Type="int" />
+    <Property Name="CONTHIS_TRANSFER_DATE" Type="smalldatetime" />
+    <Property Name="USER_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CUS_FULLNAME" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="CUS_CMND" Type="nvarchar" MaxLength="100" />
+    <Property Name="CUS_PHONE" Type="nvarchar" MaxLength="100" />
+    <Property Name="CUS_ADDRESS" Type="nvarchar" MaxLength="500" />
+    <Property Name="CUS_TYPE" Type="int" Nullable="false" />
+    <Property Name="CUS_CREATE_DATE" Type="smalldatetime" Nullable="false" />
+    <Property Name="CUS_UPDATE_DATE" Type="smalldatetime" />
+    <Property Name="USER_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="CUSTOMER_HISTORY">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CUS" Type="int" Nullable="false" />
+    <Property Name="CUSHIS_DATE" Type="smalldatetime" Nullable="false" />
+    <Property Name="CUSHIS_TYPE" Type="int" Nullable="false" />
+    <Property Name="USER_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="CUSTOMER_NODELI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CUS_FULLNAME" Type="nvarchar" MaxLength="150" />
+    <Property Name="CUS_PHONE" Type="nvarchar" MaxLength="150" />
+    <Property Name="CUS_ADDRESS" Type="nvarchar" MaxLength="550" />
+    <Property Name="CUS_PRODUCT" Type="nvarchar" MaxLength="250" />
+    <Property Name="CUS_CREATE_DATE" Type="smalldatetime" />
+    <Property Name="CUS_FAX_DATE" Type="smalldatetime" />
+    <Property Name="EMP_BH" Type="varchar" MaxLength="50" />
+    <Property Name="EMP_XM" Type="varchar" MaxLength="50" />
+    <Property Name="NOTE_XM" Type="nvarchar" MaxLength="550" />
+    <Property Name="PROCESS_STATUS" Type="int" />
+    <Property Name="USER_ID" Type="int" />
+    <Property Name="CUS_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="EMPLOYER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="EMP_NAME" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="EMP_CHUCVU" Type="nvarchar" MaxLength="100" />
+    <Property Name="EMP_PHONE" Type="nvarchar" MaxLength="100" />
+    <Property Name="EMP_ADDRESS" Type="nvarchar" MaxLength="500" />
+    <Property Name="EMP_DATE" Type="smalldatetime" Nullable="false" />
+    <Property Name="USER_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="GROUP">
+    <Key>
+      <PropertyRef Name="GROUP_ID" />
+    </Key>
+    <Property Name="GROUP_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GROUP_NAME" Type="nvarchar" MaxLength="400" />
+    <Property Name="GROUP_TYPE" Type="int" />
+  </EntityType>
+  <EntityType Name="GROUP_MENU">
+    <Key>
+      <PropertyRef Name="GROUP_MENU_ID" />
+    </Key>
+    <Property Name="GROUP_MENU_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MENU_ID" Type="int" />
+    <Property Name="GROUP_ID" Type="int" />
+    <Property Name="ORDER" Type="int" />
+  </EntityType>
+  <EntityType Name="MENU_PARENT">
+    <Key>
+      <PropertyRef Name="MENU_PAR_ID" />
+    </Key>
+    <Property Name="MENU_PAR_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MENU_NAME" Type="nvarchar" MaxLength="550" />
+    <Property Name="MENU_PAR_ACTIVE" Type="int" />
+    <Property Name="MENU_RANK" Type="int" />
+    <Property Name="MENU_PARENT" Type="int" />
+    <Property Name="MENU_PARENT_LINK" Type="nvarchar" MaxLength="250" />
+    <Property Name="ORDERBY" Type="int" />
+  </EntityType>
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="USER_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="USER_UN" Type="varchar" MaxLength="50" />
+    <Property Name="USER_PW" Type="varchar" MaxLength="50" />
+    <Property Name="USER_TYPE" Type="int" />
+    <Property Name="SALT" Type="varchar" MaxLength="50" />
+    <Property Name="USER_EMAIL" Type="nvarchar" MaxLength="400" />
+    <Property Name="USER_ADDRESS" Type="nvarchar" MaxLength="400" />
+    <Property Name="USER_PHONE" Type="nvarchar" MaxLength="400" />
+    <Property Name="USER_DATE" Type="smalldatetime" />
+    <Property Name="GROUP_ID" Type="int" />
+    <Property Name="USER_ACTIVE" Type="int" />
+    <Property Name="USER_THEM" Type="int" />
+    <Property Name="USER_SUA" Type="int" />
+    <Property Name="USER_XOA" Type="int" />
+    <Property Name="USER_CAPNHAT" Type="int" />
+  </EntityType>
+</Schema>

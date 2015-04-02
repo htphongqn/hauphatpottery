@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="hauphatpotteryModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="hauphatpotteryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BILLs" EntityType="hauphatpotteryModel.BILL" />
+    <EntitySet Name="CONTRACTs" EntityType="hauphatpotteryModel.CONTRACT" />
+    <EntitySet Name="CONTRACT_DETAIL" EntityType="hauphatpotteryModel.CONTRACT_DETAIL" />
+    <EntitySet Name="CONTRACT_HISTORY" EntityType="hauphatpotteryModel.CONTRACT_HISTORY" />
+    <EntitySet Name="CUSTOMERs" EntityType="hauphatpotteryModel.CUSTOMER" />
+    <EntitySet Name="CUSTOMER_HISTORY" EntityType="hauphatpotteryModel.CUSTOMER_HISTORY" />
+    <EntitySet Name="CUSTOMER_NODELI" EntityType="hauphatpotteryModel.CUSTOMER_NODELI" />
+    <EntitySet Name="EMPLOYERs" EntityType="hauphatpotteryModel.EMPLOYER" />
+    <EntitySet Name="GROUPs" EntityType="hauphatpotteryModel.GROUP" />
+    <EntitySet Name="GROUP_MENU" EntityType="hauphatpotteryModel.GROUP_MENU" />
+    <EntitySet Name="MENU_PARENT" EntityType="hauphatpotteryModel.MENU_PARENT" />
+    <EntitySet Name="USERs" EntityType="hauphatpotteryModel.USER" />
+  </EntityContainer>
+  <EntityType Name="BILL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CONT" Type="Int32" />
+    <Property Name="BILL_STATUS" Type="Int32" />
+    <Property Name="ID_EMPLOY" Type="Int32" />
+    <Property Name="BILL_DELI_DATE" Type="DateTime" />
+    <Property Name="BILLL_RECEIVER_DATE" Type="DateTime" />
+    <Property Name="CONTD_DATE_THU" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="CONTRACT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CUS" Type="Int32" />
+    <Property Name="CONT_NO" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="CONT_PRODUCT_NAME" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+    <Property Name="CONT_PRODUCT_PRICE" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CONT_TOTAL_PRICE" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CONT_PREPAY_PRICE" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CONT_DEBT_PRICE" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CONT_TYPE" Type="Int32" />
+    <Property Name="CONT_STATUS" Type="Int32" Nullable="false" />
+    <Property Name="CONT_DATE" Type="DateTime" />
+    <Property Name="CONT_LOST_PRICE" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CONT_NOTE" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+    <Property Name="CONT_NOTE_TRACK" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+    <Property Name="CONT_DELI_DATE" Type="DateTime" />
+    <Property Name="CONT_DELI_PRICE" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CONT_WEEK_PRICE" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CONT_WEEK_COUNT" Type="Int32" />
+    <Property Name="USER_ID" Type="Int32" />
+    <Property Name="BILL_STATUS" Type="Int32" />
+    <Property Name="DATE_STATUS" Type="DateTime" />
+    <Property Name="IS_DELETE" Type="Boolean" />
+    <Property Name="EMP_BH" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="EMP_XM" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="EMP_GH" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="CUS_GT" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+    <Property Name="EMP_TN" Type="Int32" />
+    <Property Name="CONT_NOTE_DELI" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+    <Property Name="CONT_NOTE_XM" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="CONTRACT_DETAIL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CONT" Type="Int32" />
+    <Property Name="CONTD_DATE_THU" Type="DateTime" />
+    <Property Name="CONTD_DATE_THU_TT" Type="DateTime" />
+    <Property Name="CONTD_PAY_PRICE" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CONTD_DEBT_PRICE" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CONTD_DEBT_PRICE_TT" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="CONTRACT_HISTORY">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CONT" Type="Int32" />
+    <Property Name="CONTHIS_TYPE" Type="Int32" />
+    <Property Name="CONTHIS_TRANSFER_DATE" Type="DateTime" />
+    <Property Name="USER_ID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CUS_FULLNAME" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="CUS_CMND" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="CUS_PHONE" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="CUS_ADDRESS" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="CUS_TYPE" Type="Int32" Nullable="false" />
+    <Property Name="CUS_CREATE_DATE" Type="DateTime" Nullable="false" />
+    <Property Name="CUS_UPDATE_DATE" Type="DateTime" />
+    <Property Name="USER_ID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CUSTOMER_HISTORY">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CUS" Type="Int32" Nullable="false" />
+    <Property Name="CUSHIS_DATE" Type="DateTime" Nullable="false" />
+    <Property Name="CUSHIS_TYPE" Type="Int32" Nullable="false" />
+    <Property Name="USER_ID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CUSTOMER_NODELI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CUS_FULLNAME" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="CUS_PHONE" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="CUS_ADDRESS" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+    <Property Name="CUS_PRODUCT" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="CUS_CREATE_DATE" Type="DateTime" />
+    <Property Name="CUS_FAX_DATE" Type="DateTime" />
+    <Property Name="EMP_BH" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="EMP_XM" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="NOTE_XM" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+    <Property Name="PROCESS_STATUS" Type="Int32" />
+    <Property Name="USER_ID" Type="Int32" />
+    <Property Name="CUS_ID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="EMPLOYER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EMP_NAME" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="EMP_CHUCVU" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="EMP_PHONE" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="EMP_ADDRESS" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="EMP_DATE" Type="DateTime" Nullable="false" />
+    <Property Name="USER_ID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="GROUP">
+    <Key>
+      <PropertyRef Name="GROUP_ID" />
+    </Key>
+    <Property Name="GROUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GROUP_NAME" Type="String" MaxLength="400" Unicode="true" FixedLength="false" />
+    <Property Name="GROUP_TYPE" Type="Int32" />
+  </EntityType>
+  <EntityType Name="GROUP_MENU">
+    <Key>
+      <PropertyRef Name="GROUP_MENU_ID" />
+    </Key>
+    <Property Name="GROUP_MENU_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MENU_ID" Type="Int32" />
+    <Property Name="GROUP_ID" Type="Int32" />
+    <Property Name="ORDER" Type="Int32" />
+  </EntityType>
+  <EntityType Name="MENU_PARENT">
+    <Key>
+      <PropertyRef Name="MENU_PAR_ID" />
+    </Key>
+    <Property Name="MENU_PAR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MENU_NAME" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+    <Property Name="MENU_PAR_ACTIVE" Type="Int32" />
+    <Property Name="MENU_RANK" Type="Int32" />
+    <Property Name="MENU_PARENT1" Type="Int32" />
+    <Property Name="MENU_PARENT_LINK" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Type="Int32" Name="ORDERBY" />
+  </EntityType>
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USER_NAME" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="USER_UN" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="USER_PW" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="USER_TYPE" Type="Int32" />
+    <Property Name="SALT" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="USER_EMAIL" Type="String" MaxLength="400" Unicode="true" FixedLength="false" />
+    <Property Name="USER_ADDRESS" Type="String" MaxLength="400" Unicode="true" FixedLength="false" />
+    <Property Name="USER_PHONE" Type="String" MaxLength="400" Unicode="true" FixedLength="false" />
+    <Property Name="USER_DATE" Type="DateTime" />
+    <Property Name="GROUP_ID" Type="Int32" />
+    <Property Name="USER_ACTIVE" Type="Int32" />
+    <Property Name="USER_THEM" Type="Int32" />
+    <Property Name="USER_SUA" Type="Int32" />
+    <Property Name="USER_XOA" Type="Int32" />
+    <Property Name="USER_CAPNHAT" Type="Int32" />
+  </EntityType>
+</Schema>

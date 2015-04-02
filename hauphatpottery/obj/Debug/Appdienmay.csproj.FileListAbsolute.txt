@@ -1,0 +1,25 @@
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app\Appdienmay\Appketoan\bin\Appketoan.dll
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app\Appdienmay\Appketoan\bin\Appketoan.pdb
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app\Appdienmay\Appketoan\obj\Debug\Appdienmay.csprojResolveAssemblyReference.cache
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app\Appdienmay\Appketoan\obj\Debug\Appketoan.dll.licenses
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app\Appdienmay\Appketoan\obj\Debug\Appketoan.dll
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app\Appdienmay\Appketoan\obj\Debug\Appketoan.pdb
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app\Appdienmay\Appketoan\bin\AjaxControlToolkit.dll
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app - Copy\Appdienmay\Appketoan\bin\Appketoan.dll
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app - Copy\Appdienmay\Appketoan\bin\Appketoan.pdb
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app - Copy\Appdienmay\Appketoan\bin\AjaxControlToolkit.dll
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app - Copy\Appdienmay\Appketoan\obj\Debug\Appdienmay.csprojResolveAssemblyReference.cache
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app - Copy\Appdienmay\Appketoan\obj\Debug\Appketoan.dll.licenses
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app - Copy\Appdienmay\Appketoan\obj\Debug\Appketoan.dll
+D:\PhongHT\Websites\dev\dienmayhoangphu.vstore.app - Copy\Appdienmay\Appketoan\obj\Debug\Appketoan.pdb
+E:\PFO\hoangphu\Appketoan\bin\Appketoan.dll
+E:\PFO\hoangphu\Appketoan\bin\Appketoan.pdb
+E:\PFO\hoangphu\Appketoan\bin\DevExpress.Data.v12.1.xml
+E:\PFO\hoangphu\Appketoan\bin\DevExpress.Web.ASPxEditors.v12.1.xml
+E:\PFO\hoangphu\Appketoan\bin\DevExpress.Web.ASPxGridView.v12.1.xml
+E:\PFO\hoangphu\Appketoan\bin\DevExpress.Web.ASPxTreeList.v12.1.xml
+E:\PFO\hoangphu\Appketoan\bin\DevExpress.Web.v12.1.xml
+E:\PFO\hoangphu\Appketoan\bin\DevExpress.XtraTreeList.v12.1.xml
+E:\PFO\hoangphu\Appketoan\obj\Debug\Appdienmay.csprojResolveAssemblyReference.cache
+E:\PFO\hoangphu\Appketoan\obj\Debug\Appketoan.dll
+E:\PFO\hoangphu\Appketoan\obj\Debug\Appketoan.pdb

@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="hauphatpotteryModelStoreContainer" CdmEntityContainer="hauphatpotteryEntities">
+    <EntitySetMapping Name="BILLs">
+      <EntityTypeMapping TypeName="hauphatpotteryModel.BILL">
+        <MappingFragment StoreEntitySet="BILL">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_CONT" ColumnName="ID_CONT" />
+          <ScalarProperty Name="BILL_STATUS" ColumnName="BILL_STATUS" />
+          <ScalarProperty Name="ID_EMPLOY" ColumnName="ID_EMPLOY" />
+          <ScalarProperty Name="BILL_DELI_DATE" ColumnName="BILL_DELI_DATE" />
+          <ScalarProperty Name="BILLL_RECEIVER_DATE" ColumnName="BILLL_RECEIVER_DATE" />
+          <ScalarProperty Name="CONTD_DATE_THU" ColumnName="CONTD_DATE_THU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONTRACTs">
+      <EntityTypeMapping TypeName="hauphatpotteryModel.CONTRACT">
+        <MappingFragment StoreEntitySet="CONTRACT">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_CUS" ColumnName="ID_CUS" />
+          <ScalarProperty Name="CONT_NO" ColumnName="CONT_NO" />
+          <ScalarProperty Name="CONT_PRODUCT_NAME" ColumnName="CONT_PRODUCT_NAME" />
+          <ScalarProperty Name="CONT_PRODUCT_PRICE" ColumnName="CONT_PRODUCT_PRICE" />
+          <ScalarProperty Name="CONT_TOTAL_PRICE" ColumnName="CONT_TOTAL_PRICE" />
+          <ScalarProperty Name="CONT_PREPAY_PRICE" ColumnName="CONT_PREPAY_PRICE" />
+          <ScalarProperty Name="CONT_DEBT_PRICE" ColumnName="CONT_DEBT_PRICE" />
+          <ScalarProperty Name="CONT_TYPE" ColumnName="CONT_TYPE" />
+          <ScalarProperty Name="CONT_STATUS" ColumnName="CONT_STATUS" />
+          <ScalarProperty Name="CONT_DATE" ColumnName="CONT_DATE" />
+          <ScalarProperty Name="CONT_LOST_PRICE" ColumnName="CONT_LOST_PRICE" />
+          <ScalarProperty Name="CONT_NOTE" ColumnName="CONT_NOTE" />
+          <ScalarProperty Name="CONT_NOTE_TRACK" ColumnName="CONT_NOTE_TRACK" />
+          <ScalarProperty Name="CONT_DELI_DATE" ColumnName="CONT_DELI_DATE" />
+          <ScalarProperty Name="CONT_DELI_PRICE" ColumnName="CONT_DELI_PRICE" />
+          <ScalarProperty Name="CONT_WEEK_PRICE" ColumnName="CONT_WEEK_PRICE" />
+          <ScalarProperty Name="CONT_WEEK_COUNT" ColumnName="CONT_WEEK_COUNT" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="BILL_STATUS" ColumnName="BILL_STATUS" />
+          <ScalarProperty Name="DATE_STATUS" ColumnName="DATE_STATUS" />
+          <ScalarProperty Name="IS_DELETE" ColumnName="IS_DELETE" />
+          <ScalarProperty Name="EMP_BH" ColumnName="EMP_BH" />
+          <ScalarProperty Name="EMP_XM" ColumnName="EMP_XM" />
+          <ScalarProperty Name="EMP_GH" ColumnName="EMP_GH" />
+          <ScalarProperty Name="CUS_GT" ColumnName="CUS_GT" />
+          <ScalarProperty Name="EMP_TN" ColumnName="EMP_TN" />
+          <ScalarProperty Name="CONT_NOTE_DELI" ColumnName="CONT_NOTE_DELI" />
+          <ScalarProperty Name="CONT_NOTE_XM" ColumnName="CONT_NOTE_XM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONTRACT_DETAIL">
+      <EntityTypeMapping TypeName="hauphatpotteryModel.CONTRACT_DETAIL">
+        <MappingFragment StoreEntitySet="CONTRACT_DETAIL">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_CONT" ColumnName="ID_CONT" />
+          <ScalarProperty Name="CONTD_DATE_THU" ColumnName="CONTD_DATE_THU" />
+          <ScalarProperty Name="CONTD_DATE_THU_TT" ColumnName="CONTD_DATE_THU_TT" />
+          <ScalarProperty Name="CONTD_PAY_PRICE" ColumnName="CONTD_PAY_PRICE" />
+          <ScalarProperty Name="CONTD_DEBT_PRICE" ColumnName="CONTD_DEBT_PRICE" />
+          <ScalarProperty Name="CONTD_DEBT_PRICE_TT" ColumnName="CONTD_DEBT_PRICE_TT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONTRACT_HISTORY">
+      <EntityTypeMapping TypeName="hauphatpotteryModel.CONTRACT_HISTORY">
+        <MappingFragment StoreEntitySet="CONTRACT_HISTORY">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_CONT" ColumnName="ID_CONT" />
+          <ScalarProperty Name="CONTHIS_TYPE" ColumnName="CONTHIS_TYPE" />
+          <ScalarProperty Name="CONTHIS_TRANSFER_DATE" ColumnName="CONTHIS_TRANSFER_DATE" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CUSTOMERs">
+      <EntityTypeMapping TypeName="hauphatpotteryModel.CUSTOMER">
+        <MappingFragment StoreEntitySet="CUSTOMER">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CUS_FULLNAME" ColumnName="CUS_FULLNAME" />
+          <ScalarProperty Name="CUS_CMND" ColumnName="CUS_CMND" />
+          <ScalarProperty Name="CUS_PHONE" ColumnName="CUS_PHONE" />
+          <ScalarProperty Name="CUS_ADDRESS" ColumnName="CUS_ADDRESS" />
+          <ScalarProperty Name="CUS_TYPE" ColumnName="CUS_TYPE" />
+          <ScalarProperty Name="CUS_CREATE_DATE" ColumnName="CUS_CREATE_DATE" />
+          <ScalarProperty Name="CUS_UPDATE_DATE" ColumnName="CUS_UPDATE_DATE" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CUSTOMER_HISTORY">
+      <EntityTypeMapping TypeName="hauphatpotteryModel.CUSTOMER_HISTORY">
+        <MappingFragment StoreEntitySet="CUSTOMER_HISTORY">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_CUS" ColumnName="ID_CUS" />
+          <ScalarProperty Name="CUSHIS_DATE" ColumnName="CUSHIS_DATE" />
+          <ScalarProperty Name="CUSHIS_TYPE" ColumnName="CUSHIS_TYPE" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CUSTOMER_NODELI">
+      <EntityTypeMapping TypeName="hauphatpotteryModel.CUSTOMER_NODELI">
+        <MappingFragment StoreEntitySet="CUSTOMER_NODELI">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CUS_FULLNAME" ColumnName="CUS_FULLNAME" />
+          <ScalarProperty Name="CUS_PHONE" ColumnName="CUS_PHONE" />
+          <ScalarProperty Name="CUS_ADDRESS" ColumnName="CUS_ADDRESS" />
+          <ScalarProperty Name="CUS_PRODUCT" ColumnName="CUS_PRODUCT" />
+          <ScalarProperty Name="CUS_CREATE_DATE" ColumnName="CUS_CREATE_DATE" />
+          <ScalarProperty Name="CUS_FAX_DATE" ColumnName="CUS_FAX_DATE" />
+          <ScalarProperty Name="EMP_BH" ColumnName="EMP_BH" />
+          <ScalarProperty Name="EMP_XM" ColumnName="EMP_XM" />
+          <ScalarProperty Name="NOTE_XM" ColumnName="NOTE_XM" />
+          <ScalarProperty Name="PROCESS_STATUS" ColumnName="PROCESS_STATUS" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="CUS_ID" ColumnName="CUS_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMPLOYERs">
+      <EntityTypeMapping TypeName="hauphatpotteryModel.EMPLOYER">
+        <MappingFragment StoreEntitySet="EMPLOYER">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EMP_NAME" ColumnName="EMP_NAME" />
+          <ScalarProperty Name="EMP_CHUCVU" ColumnName="EMP_CHUCVU" />
+          <ScalarProperty Name="EMP_PHONE" ColumnName="EMP_PHONE" />
+          <ScalarProperty Name="EMP_ADDRESS" ColumnName="EMP_ADDRESS" />
+          <ScalarProperty Name="EMP_DATE" ColumnName="EMP_DATE" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GROUPs">
+      <EntityTypeMapping TypeName="hauphatpotteryModel.GROUP">
+        <MappingFragment StoreEntitySet="GROUP">
+          <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
+          <ScalarProperty Name="GROUP_NAME" ColumnName="GROUP_NAME" />
+          <ScalarProperty Name="GROUP_TYPE" ColumnName="GROUP_TYPE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GROUP_MENU">
+      <EntityTypeMapping TypeName="hauphatpotteryModel.GROUP_MENU">
+        <MappingFragment StoreEntitySet="GROUP_MENU">
+          <ScalarProperty Name="GROUP_MENU_ID" ColumnName="GROUP_MENU_ID" />
+          <ScalarProperty Name="MENU_ID" ColumnName="MENU_ID" />
+          <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
+          <ScalarProperty Name="ORDER" ColumnName="ORDER" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MENU_PARENT">
+      <EntityTypeMapping TypeName="hauphatpotteryModel.MENU_PARENT">
+        <MappingFragment StoreEntitySet="MENU_PARENT">
+          <ScalarProperty Name="ORDERBY" ColumnName="ORDERBY" />
+          <ScalarProperty Name="MENU_PAR_ID" ColumnName="MENU_PAR_ID" />
+          <ScalarProperty Name="MENU_NAME" ColumnName="MENU_NAME" />
+          <ScalarProperty Name="MENU_PAR_ACTIVE" ColumnName="MENU_PAR_ACTIVE" />
+          <ScalarProperty Name="MENU_RANK" ColumnName="MENU_RANK" />
+          <ScalarProperty Name="MENU_PARENT1" ColumnName="MENU_PARENT" />
+          <ScalarProperty Name="MENU_PARENT_LINK" ColumnName="MENU_PARENT_LINK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERs">
+      <EntityTypeMapping TypeName="hauphatpotteryModel.USER">
+        <MappingFragment StoreEntitySet="USER">
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+          <ScalarProperty Name="USER_UN" ColumnName="USER_UN" />
+          <ScalarProperty Name="USER_PW" ColumnName="USER_PW" />
+          <ScalarProperty Name="USER_TYPE" ColumnName="USER_TYPE" />
+          <ScalarProperty Name="SALT" ColumnName="SALT" />
+          <ScalarProperty Name="USER_EMAIL" ColumnName="USER_EMAIL" />
+          <ScalarProperty Name="USER_ADDRESS" ColumnName="USER_ADDRESS" />
+          <ScalarProperty Name="USER_PHONE" ColumnName="USER_PHONE" />
+          <ScalarProperty Name="USER_DATE" ColumnName="USER_DATE" />
+          <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
+          <ScalarProperty Name="USER_ACTIVE" ColumnName="USER_ACTIVE" />
+          <ScalarProperty Name="USER_THEM" ColumnName="USER_THEM" />
+          <ScalarProperty Name="USER_SUA" ColumnName="USER_SUA" />
+          <ScalarProperty Name="USER_XOA" ColumnName="USER_XOA" />
+          <ScalarProperty Name="USER_CAPNHAT" ColumnName="USER_CAPNHAT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

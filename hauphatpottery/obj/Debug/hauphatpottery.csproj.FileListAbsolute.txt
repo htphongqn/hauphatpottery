@@ -1,0 +1,7 @@
+E:\PFO\hauphatpottery\hauphatpottery\bin\hauphatpottery.dll
+E:\PFO\hauphatpottery\hauphatpottery\bin\hauphatpottery.pdb
+E:\PFO\hauphatpottery\hauphatpottery\obj\Debug\hauphatpottery.dll
+E:\PFO\hauphatpottery\hauphatpottery\obj\Debug\hauphatpottery.pdb
+E:\PFO\hauphatpottery\hauphatpottery\obj\Debug\hauphatpottery.csprojResolveAssemblyReference.cache
+E:\PFO\hauphatpottery\hauphatpottery\obj\Debug\hauphatpottery.dll.licenses
+E:\PFO\hauphatpottery\hauphatpottery\bin\Karpach.WebControls.dll

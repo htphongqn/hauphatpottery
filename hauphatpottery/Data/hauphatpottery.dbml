@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="hauphatpottery" Class="hauphatpotteryDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(local);Initial Catalog=hauphatpottery;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="hauphatpotteryConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[GROUP]" Member="GROUPs">
+    <Type Name="GROUP">
+      <Column Name="GROUP_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GROUP_NAME" Type="System.String" DbType="NVarChar(400)" CanBeNull="true" />
+      <Column Name="GROUP_TYPE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GROUP_MENU" Member="GROUP_MENUs">
+    <Type Name="GROUP_MENU">
+      <Column Name="GROUP_MENU_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MENU_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GROUP_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[ORDER]" Member="ORDER" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MENU_PARENT" Member="MENU_PARENTs">
+    <Type Name="MENU_PARENT">
+      <Column Name="MENU_PAR_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MENU_NAME" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Column Name="MENU_PAR_ACTIVE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MENU_RANK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MENU_PARENT" Member="MENU_PARENT1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MENU_PARENT_LINK" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ORDERBY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[USER]" Member="USERs">
+    <Type Name="USER">
+      <Column Name="USER_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="USER_NAME" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="USER_UN" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="USER_PW" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="USER_TYPE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SALT" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="USER_EMAIL" Type="System.String" DbType="NVarChar(400)" CanBeNull="true" />
+      <Column Name="USER_ADDRESS" Type="System.String" DbType="NVarChar(400)" CanBeNull="true" />
+      <Column Name="USER_PHONE" Type="System.String" DbType="NVarChar(400)" CanBeNull="true" />
+      <Column Name="USER_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="GROUP_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USER_ACTIVE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USER_THEM" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USER_SUA" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USER_XOA" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USER_CAPNHAT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="USER_ORDER" Member="ORDERs" ThisKey="USER_ID" OtherKey="CREATOR_ID" Type="ORDER" />
+      <Association Name="USER_INVENTORY" Member="INVENTORies" ThisKey="USER_ID" OtherKey="CREATOR_ID" Type="INVENTORY" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UNIT" Member="UNITs">
+    <Type Name="UNIT">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Column Name="NOTE" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Association Name="UNIT_MATERIAL" Member="MATERIALs" ThisKey="ID" OtherKey="UNIT_ID" Type="MATERIAL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MATERIAL" Member="MATERIALs">
+    <Type Name="MATERIAL">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Column Name="NOTE" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Column Name="UNIT_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="MATERIAL_PRODUCT_DETAIL_MATERIAL" Member="PRODUCT_DETAIL_MATERIALs" ThisKey="ID" OtherKey="MATERIAL_ID" Type="PRODUCT_DETAIL_MATERIAL" />
+      <Association Name="UNIT_MATERIAL" Member="UNIT" ThisKey="UNIT_ID" OtherKey="ID" Type="UNIT" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TYPE" Member="TYPEs">
+    <Type Name="TYPE">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Column Name="NOTE" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Association Name="TYPE_PRODUCT_DETAIL" Member="PRODUCT_DETAILs" ThisKey="ID" OtherKey="TYPE_ID" Type="PRODUCT_DETAIL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRODUCT" Member="PRODUCTs">
+    <Type Name="PRODUCT">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CODE" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="IMAGE" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Association Name="PRODUCT_PRODUCT_DETAIL" Member="PRODUCT_DETAILs" ThisKey="ID" OtherKey="PRODUCT_ID" Type="PRODUCT_DETAIL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRODUCT_DETAIL_MATERIAL" Member="PRODUCT_DETAIL_MATERIALs">
+    <Type Name="PRODUCT_DETAIL_MATERIAL">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PRODUCT_DETAIL_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MATERIAL_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QUANTITY" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="MATERIAL_PRODUCT_DETAIL_MATERIAL" Member="MATERIAL" ThisKey="MATERIAL_ID" OtherKey="ID" Type="MATERIAL" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_MATERIAL" Member="PRODUCT_DETAIL" ThisKey="PRODUCT_DETAIL_ID" OtherKey="ID" Type="PRODUCT_DETAIL" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDER_DETAIL" Member="ORDER_DETAILs">
+    <Type Name="ORDER_DETAIL">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ORDER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRODUCT_DETAIL_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QUANTITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRICE" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="SUBTOTAL" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="COLOR1" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="COLOR2" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Association Name="ORDER_ORDER_DETAIL" Member="ORDER" ThisKey="ORDER_ID" OtherKey="ID" Type="ORDER" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="PRODUCT_DETAIL_ORDER_DETAIL" Member="PRODUCT_DETAIL" ThisKey="PRODUCT_DETAIL_ID" OtherKey="ID" Type="PRODUCT_DETAIL" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[ORDER]" Member="ORDERs">
+    <Type Name="ORDER">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CODE" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Column Name="STATUS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NOTE" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Column Name="START_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="FINISH_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="DEADLINE_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="CREATE_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="TOTALPRICE" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="ORDERPRICE" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="BALANCEPRICE" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="CUSTOMER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CREATOR_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ORDER_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="ID" OtherKey="ORDER_ID" Type="ORDER_DETAIL" />
+      <Association Name="ORDER_INVENTORY" Member="INVENTORies" ThisKey="ID" OtherKey="ORDER_ID" Type="INVENTORY" />
+      <Association Name="USER_ORDER" Member="USER" ThisKey="CREATOR_ID" OtherKey="USER_ID" Type="USER" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="CUSTOMER_ORDER" Member="CUSTOMER" ThisKey="CUSTOMER_ID" OtherKey="ID" Type="CUSTOMER" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.INVENTORY" Member="INVENTORies">
+    <Type Name="INVENTORY">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ORDER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRODUCT_DETAIL_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QUANTITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CREATE_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="TYPE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CREATOR_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ORDER_INVENTORY" Member="ORDER" ThisKey="ORDER_ID" OtherKey="ID" Type="ORDER" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="USER_INVENTORY" Member="USER" ThisKey="CREATOR_ID" OtherKey="USER_ID" Type="USER" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="PRODUCT_DETAIL_INVENTORY" Member="PRODUCT_DETAIL" ThisKey="PRODUCT_DETAIL_ID" OtherKey="ID" Type="PRODUCT_DETAIL" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CUSTOMER" Member="CUSTOMERs">
+    <Type Name="CUSTOMER">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FULLNAME" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="TAX_CODE" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="PHONE" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="EMAIL" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Column Name="ADDRESS" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="CREATED_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="CREATOR_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CUSTOMER_ORDER" Member="ORDERs" ThisKey="ID" OtherKey="CUSTOMER_ID" Type="ORDER" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRODUCT_DETAIL" Member="PRODUCT_DETAILs">
+    <Type Name="PRODUCT_DETAIL">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CODE" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Column Name="M2" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="SHAPE_CODE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="WEIGHT" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="TYPE_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRODUCT_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_MATERIAL" Member="PRODUCT_DETAIL_MATERIALs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="PRODUCT_DETAIL_MATERIAL" />
+      <Association Name="PRODUCT_DETAIL_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="ORDER_DETAIL" />
+      <Association Name="PRODUCT_DETAIL_INVENTORY" Member="INVENTORies" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="INVENTORY" />
+      <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_SIZE" Member="PRODUCT_DETAIL_SIZEs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="PRODUCT_DETAIL_SIZE" />
+      <Association Name="PRODUCT_PRODUCT_DETAIL" Member="PRODUCT" ThisKey="PRODUCT_ID" OtherKey="ID" Type="PRODUCT" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="TYPE_PRODUCT_DETAIL" Member="TYPE" ThisKey="TYPE_ID" OtherKey="ID" Type="TYPE" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRODUCT_DETAIL_SIZE" Member="PRODUCT_DETAIL_SIZEs">
+    <Type Name="PRODUCT_DETAIL_SIZE">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PRODUCT_DETAIL_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="D" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="H" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="L" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="W" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_SIZE" Member="PRODUCT_DETAIL" ThisKey="PRODUCT_DETAIL_ID" OtherKey="ID" Type="PRODUCT_DETAIL" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SHAPE" Member="SHAPEs">
+    <Type Name="SHAPE">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CODE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SHAPE_PROPERTY" Member="SHAPE_PROPERTies">
+    <Type Name="SHAPE_PROPERTY">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SHAPE_CODE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="D" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="H" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="L" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="W" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
