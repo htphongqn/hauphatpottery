@@ -17,7 +17,6 @@ namespace hauphatpottery.Pages
         private ProductRepo _ProductRepo = new ProductRepo();
         private ProductDetailRepo _ProductDetailRepo = new ProductDetailRepo();
         private TypeRepo _TypeRepo = new TypeRepo();
-        private ShapeRepo _ShapeRepo = new ShapeRepo();
         private int id = 0;
         private UnitDataRepo _UnitDataRepo = new UnitDataRepo();
         #endregion
@@ -34,7 +33,6 @@ namespace hauphatpottery.Pages
             {
                 LoadProduct();
                 LoadType();
-                LoadShape();
                 getInfo();
             }
         }
@@ -49,12 +47,6 @@ namespace hauphatpottery.Pages
             var list = _TypeRepo.GetAll();
             ddlType.DataSource = list;
             ddlType.DataBind();
-        }
-        private void LoadShape()
-        {
-            var list = _ShapeRepo.GetAll();
-            ddlShape.DataSource = list;
-            ddlShape.DataBind();
         }
 
         #region getInfo
@@ -71,7 +63,6 @@ namespace hauphatpottery.Pages
                     txtWeight.Text = Utils.CDecDef(productDetails.WEIGHT) > 0 ? Utils.CStrDef(productDetails.WEIGHT) : "";
                     ddlType.SelectedValue = Utils.CStrDef(productDetails.TYPE_ID);
                     ddlProduct.SelectedValue = Utils.CStrDef(productDetails.PRODUCT_ID);
-                    ddlShape.SelectedValue = Utils.CStrDef(productDetails.SHAPE_CODE);
                 }
             }
             catch
@@ -90,7 +81,6 @@ namespace hauphatpottery.Pages
                 {
                     ProductDetail.CODE = txtCode.Text;
                     ProductDetail.NAME = txtName.Text;
-                    ProductDetail.SHAPE_CODE = ddlShape.SelectedValue;
                     ProductDetail.M2 = Utils.CDecDef(txtM2.Text);
                     ProductDetail.WEIGHT = Utils.CDecDef(txtWeight.Text); ;
                     ProductDetail.TYPE_ID = Utils.CIntDef(ddlType.SelectedValue);
@@ -105,7 +95,6 @@ namespace hauphatpottery.Pages
                     ProductDetail = new PRODUCT_DETAIL();
                     ProductDetail.CODE = txtCode.Text;
                     ProductDetail.NAME = txtName.Text;
-                    ProductDetail.SHAPE_CODE = ddlShape.SelectedValue;
                     ProductDetail.M2 = Utils.CDecDef(txtM2.Text);
                     ProductDetail.WEIGHT = Utils.CDecDef(txtWeight.Text); ;
                     ProductDetail.TYPE_ID = Utils.CIntDef(ddlType.SelectedValue);

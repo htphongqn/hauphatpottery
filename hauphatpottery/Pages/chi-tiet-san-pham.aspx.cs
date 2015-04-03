@@ -17,6 +17,7 @@ namespace hauphatpottery.Pages
         private ProductRepo _ProductRepo = new ProductRepo();
         private int id = 0;
         private UnitDataRepo _UnitDataRepo = new UnitDataRepo();
+        private ShapeRepo _ShapeRepo = new ShapeRepo();
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -28,10 +29,19 @@ namespace hauphatpottery.Pages
             }
             id = Utils.CIntDef(Request.QueryString["id"], 0);
             if (!IsPostBack)
-            {                
+            {
+                LoadShape();
                 getInfo();
             }
         }
+
+        private void LoadShape()
+        {
+            var list = _ShapeRepo.GetAll();
+            ddlShape.DataSource = list;
+            ddlShape.DataBind();
+        }
+
         #region getInfo
         private void getInfo()
         {
@@ -41,6 +51,7 @@ namespace hauphatpottery.Pages
                 if (products != null)
                 {
                     txtCode.Text = products.CODE;
+                    ddlShape.SelectedValue = Utils.CStrDef(products.SHAPE_CODE);
                     string image = products.IMAGE;
                     if (!string.IsNullOrEmpty(image))
                     {
@@ -77,6 +88,7 @@ namespace hauphatpottery.Pages
                 if (id > 0 && Product != null)
                 {
                     Product.CODE = txtCode.Text;
+                    Product.SHAPE_CODE = ddlShape.SelectedValue;
                     if (FileUploadImage.Visible && FileUploadImage.HasFile)
                     {
                         string imgName = Product.IMAGE;
@@ -100,7 +112,8 @@ namespace hauphatpottery.Pages
                 else
                 {
                     Product = new PRODUCT();
-                    Product.CODE = txtCode.Text;
+                    Product.CODE = txtCode.Text; 
+                    Product.SHAPE_CODE = ddlShape.SelectedValue;
                     //Product.CREATOR_ID = Utils.CIntDef(Session["Userid"]);
                     //Product.CREATED_DATE = DateTime.Now;
                     _ProductRepo.Create(Product);

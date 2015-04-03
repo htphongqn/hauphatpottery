@@ -15,6 +15,7 @@ namespace hauphatpottery.Pages
         #region Declare
         private ProductRepo _ProductRepo = new ProductRepo();
         private UserRepo _UserRepo = new UserRepo();
+        private ShapeRepo _ShapeRepo = new ShapeRepo();
         private UnitDataRepo _UnitDataRepo = new UnitDataRepo();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
@@ -99,6 +100,16 @@ namespace hauphatpottery.Pages
             if (user != null)
             {
                 return user.USER_NAME;
+            }
+            return "";
+        }
+        public string getShapeName(object shapeCode)
+        {
+            string _code = Utils.CStrDef(shapeCode);
+            var shape = _ShapeRepo.GetByCode(_code);
+            if (shape != null)
+            {
+                return shape.NAME;
             }
             return "";
         }

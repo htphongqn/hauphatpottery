@@ -13,10 +13,10 @@ namespace hauphatpottery.Pages
     public partial class danh_sach_size_san_pham_chi_tiet : System.Web.UI.Page
     {
         #region Declare
-        private MaterialRepo _MaterialRepo = new MaterialRepo();
+        private ShapePropertyRepo _ShapePropertyRepo = new ShapePropertyRepo();
         private UnitRepo _UnitRepo = new UnitRepo();
         private ProductDetailRepo _ProductDetailRepo = new ProductDetailRepo();
-        private ProductDetailMaterialRepo _ProductDetailMaterialRepo = new ProductDetailMaterialRepo();
+        private ProductDetailSizeRepo _ProductDetailSizeRepo = new ProductDetailSizeRepo();
         private int id = 0;
         private UnitDataRepo _UnitDataRepo = new UnitDataRepo();
         #endregion
@@ -31,12 +31,30 @@ namespace hauphatpottery.Pages
             if (!IsPostBack)
             {
                 LoadProductDetail();
+                SetShapeProperty();
                 LoadProductDetail_Size();
             }
             else
             {
                 ASPxGridView1_ProductDetail_Size.DataSource = HttpContext.Current.Session["listProductSize"];
                 ASPxGridView1_ProductDetail_Size.DataBind();
+            }
+        }
+        private void SetShapeProperty()
+        {
+            int productDetailId = Utils.CIntDef(ddLProductDetail.SelectedValue);
+            var item = _ShapePropertyRepo.GetByProductDetailId(productDetailId);
+            if (item != null)
+            {
+                tdD.Visible = Utils.CIntDef(item.D) == 1 ? true : false;
+                tdH.Visible = Utils.CIntDef(item.H) == 1 ? true : false;
+                tdL.Visible = Utils.CIntDef(item.L) == 1 ? true : false;
+                tdW.Visible = Utils.CIntDef(item.W) == 1 ? true : false;
+
+                ASPxGridView1_ProductDetail_Size.Columns["D"].Visible = Utils.CIntDef(item.D) == 1 ? true : false;
+                ASPxGridView1_ProductDetail_Size.Columns["H"].Visible = Utils.CIntDef(item.H) == 1 ? true : false;
+                ASPxGridView1_ProductDetail_Size.Columns["L"].Visible = Utils.CIntDef(item.L) == 1 ? true : false;
+                ASPxGridView1_ProductDetail_Size.Columns["W"].Visible = Utils.CIntDef(item.W) == 1 ? true : false;
             }
         }
         private void LoadProductDetail()
@@ -63,7 +81,7 @@ namespace hauphatpottery.Pages
             try
             {
                 int productDetailId = Utils.CIntDef(ddLProductDetail.SelectedValue);
-                var list = _ProductDetailMaterialRepo.GetByProductDetailId(productDetailId);
+                var list = _ProductDetailSizeRepo.GetByProductDetailId(productDetailId);
 
                 HttpContext.Current.Session["listProductSize"] = list;
                 ASPxGridView1_ProductDetail_Size.DataSource = list;
@@ -80,7 +98,7 @@ namespace hauphatpottery.Pages
             List<object> fieldValues = ASPxGridView1_ProductDetail_Size.GetSelectedFieldValues(new string[] { "ID" });
             foreach (var item in fieldValues)
             {
-                _ProductDetailMaterialRepo.Remove(Utils.CIntDef(item));
+                _ProductDetailSizeRepo.Remove(Utils.CIntDef(item));
             }
             Response.Redirect("danh-sach-size-san-pham-chi-tiet.aspx?id=" + id);
         }
@@ -108,26 +126,6 @@ namespace hauphatpottery.Pages
             if (unit != null)
             {
                 return unit.NAME;
-            }
-            return "";
-        }
-        public string getNameMaterial(object materialId)
-        {
-            int _id = Utils.CIntDef(materialId);
-            var Material = _MaterialRepo.GetById(_id);
-            if (Material != null)
-            {
-                return Material.NAME;
-            }
-            return "";
-        }
-        public string getNameUnit(object materialId)
-        {
-            int _id = Utils.CIntDef(materialId);
-            var Material = _MaterialRepo.GetById(_id);
-            if (Material != null)
-            {
-                return Material.UNIT.NAME;
             }
             return "";
         }
@@ -169,37 +167,26 @@ namespace hauphatpottery.Pages
         }
         private void Save()
         {
-            //try
-            //{
-            //    int productDetailId = Utils.CIntDef(ddLProductDetail.SelectedValue);
-            //    int materialId = Utils.CIntDef(ddlMaterial.SelectedValue);
-            //    var ProductDetailMateria = _ProductDetailMaterialRepo.GetByProductDetailIdAndMaterialId(productDetailId, materialId);
-            //    if (ProductDetailMateria != null)
-            //    {
-            //        ProductDetailMateria.PRODUCT_DETAIL_ID = Utils.CIntDef(ddLProductDetail.SelectedValue);
-            //        ProductDetailMateria.MATERIAL_ID = Utils.CIntDef(ddlMaterial.SelectedValue);
-            //        ProductDetailMateria.QUANTITY = Utils.CDecDef(txtQuantity.Value);
+            try
+            {
+                int productDetailId = Utils.CIntDef(ddLProductDetail.SelectedValue);
 
-            //        _ProductDetailMaterialRepo.Update(ProductDetailMateria);
-            //    }
-            //    else
-            //    {
-            //        ProductDetailMateria = new PRODUCT_DETAIL_MATERIAL();
-            //        ProductDetailMateria.PRODUCT_DETAIL_ID = Utils.CIntDef(ddLProductDetail.SelectedValue);
-            //        ProductDetailMateria.MATERIAL_ID = Utils.CIntDef(ddlMaterial.SelectedValue);
-            //        ProductDetailMateria.QUANTITY = Utils.CDecDef(txtQuantity.Value);
+                var ProductDetailSize = new PRODUCT_DETAIL_SIZE();
+                ProductDetailSize.PRODUCT_DETAIL_ID = Utils.CIntDef(ddLProductDetail.SelectedValue);
+                ProductDetailSize.D = Utils.CIntDef(txtD.Value);
+                ProductDetailSize.H = Utils.CIntDef(txtH.Value);
+                ProductDetailSize.L = Utils.CIntDef(txtL.Value);
+                ProductDetailSize.W = Utils.CIntDef(txtW.Value);
+                _ProductDetailSizeRepo.Create(ProductDetailSize);
+            }
+            catch
+            {
 
-            //        _ProductDetailMaterialRepo.Create(ProductDetailMateria);
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    throw;
-            //}
-            //finally
-            //{
-            //    Response.Redirect("nguyen-lieu-can-cho-san-pham.aspx?id=" + ddLProductDetail.SelectedValue);
-            //}
+            }
+            finally
+            {
+                Response.Redirect("danh-sach-size-san-pham-chi-tiet.aspx?id=" + ddLProductDetail.SelectedValue);
+            }
         }
     }
 }

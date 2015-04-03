@@ -78,7 +78,12 @@
                                 <a href="<%# getlink(Eval("ID")) %>" title='<%# Eval("CODE")%>'>
                                     <%# getShortString(Eval("CODE"), 40)%></a>
                             </DataItemTemplate>
-                        </dx:GridViewDataTextColumn>                                                  
+                        </dx:GridViewDataTextColumn>  
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Hình dạng">
+                            <DataItemTemplate>
+                                <%#getShapeName(Eval("SHAPE_CODE"))%>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>                                                
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Hình ảnh" FieldName="IMAGE" Width="200px">
                             <DataItemTemplate>
                             <img src="<%# getImage(Eval("IMAGE"))%>" width="100" height="70" />                                

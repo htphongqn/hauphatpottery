@@ -320,6 +320,7 @@
     <Content Include="Pages\chi-tiet-san-pham.aspx" />
     <Content Include="Pages\chi-tiet-san-pham-chi-tiet.aspx" />
     <Content Include="Pages\chi-tiet-don-hang.aspx" />
+    <Content Include="Pages\hinh-dang.aspx" />
     <Content Include="Pages\danh-sach-size-san-pham-chi-tiet.aspx" />
     <Content Include="Pages\nguyen-lieu-can-cho-san-pham.aspx" />
     <Content Include="Pages\xuat-san-pham.aspx" />
@@ -378,6 +379,7 @@
     <Compile Include="Components\clsFormat.cs" />
     <Compile Include="Components\clsUtility.cs" />
     <Compile Include="Components\Cost.cs" />
+    <Compile Include="Data\ShapePropertyRepo.cs" />
     <Compile Include="Data\ProductDetailSizeRepo.cs" />
     <Compile Include="Data\ShapeRepo.cs" />
     <Compile Include="Data\InventoryRepo.cs" />
@@ -480,6 +482,13 @@
     </Compile>
     <Compile Include="Pages\chi-tiet-don-hang.aspx.designer.cs">
       <DependentUpon>chi-tiet-don-hang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\hinh-dang.aspx.cs">
+      <DependentUpon>hinh-dang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\hinh-dang.aspx.designer.cs">
+      <DependentUpon>hinh-dang.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\danh-sach-size-san-pham-chi-tiet.aspx.cs">
       <DependentUpon>danh-sach-size-san-pham-chi-tiet.aspx</DependentUpon>

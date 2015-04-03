@@ -74,14 +74,6 @@
       <Association Name="TYPE_PRODUCT_DETAIL" Member="PRODUCT_DETAILs" ThisKey="ID" OtherKey="TYPE_ID" Type="PRODUCT_DETAIL" />
     </Type>
   </Table>
-  <Table Name="dbo.PRODUCT" Member="PRODUCTs">
-    <Type Name="PRODUCT">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CODE" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="IMAGE" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
-      <Association Name="PRODUCT_PRODUCT_DETAIL" Member="PRODUCT_DETAILs" ThisKey="ID" OtherKey="PRODUCT_ID" Type="PRODUCT_DETAIL" />
-    </Type>
-  </Table>
   <Table Name="dbo.PRODUCT_DETAIL_MATERIAL" Member="PRODUCT_DETAIL_MATERIALs">
     <Type Name="PRODUCT_DETAIL_MATERIAL">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -154,24 +146,6 @@
       <Association Name="CUSTOMER_ORDER" Member="ORDERs" ThisKey="ID" OtherKey="CUSTOMER_ID" Type="ORDER" />
     </Type>
   </Table>
-  <Table Name="dbo.PRODUCT_DETAIL" Member="PRODUCT_DETAILs">
-    <Type Name="PRODUCT_DETAIL">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CODE" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="NAME" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
-      <Column Name="M2" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="SHAPE_CODE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="WEIGHT" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="TYPE_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PRODUCT_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_MATERIAL" Member="PRODUCT_DETAIL_MATERIALs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="PRODUCT_DETAIL_MATERIAL" />
-      <Association Name="PRODUCT_DETAIL_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="ORDER_DETAIL" />
-      <Association Name="PRODUCT_DETAIL_INVENTORY" Member="INVENTORies" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="INVENTORY" />
-      <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_SIZE" Member="PRODUCT_DETAIL_SIZEs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="PRODUCT_DETAIL_SIZE" />
-      <Association Name="PRODUCT_PRODUCT_DETAIL" Member="PRODUCT" ThisKey="PRODUCT_ID" OtherKey="ID" Type="PRODUCT" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="TYPE_PRODUCT_DETAIL" Member="TYPE" ThisKey="TYPE_ID" OtherKey="ID" Type="TYPE" IsForeignKey="true" DeleteRule="SET NULL" />
-    </Type>
-  </Table>
   <Table Name="dbo.PRODUCT_DETAIL_SIZE" Member="PRODUCT_DETAIL_SIZEs">
     <Type Name="PRODUCT_DETAIL_SIZE">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -198,6 +172,32 @@
       <Column Name="H" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="L" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="W" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRODUCT" Member="PRODUCTs">
+    <Type Name="PRODUCT">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CODE" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="IMAGE" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Column Name="SHAPE_CODE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="PRODUCT_PRODUCT_DETAIL" Member="PRODUCT_DETAILs" ThisKey="ID" OtherKey="PRODUCT_ID" Type="PRODUCT_DETAIL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRODUCT_DETAIL" Member="PRODUCT_DETAILs">
+    <Type Name="PRODUCT_DETAIL">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CODE" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(550)" CanBeNull="true" />
+      <Column Name="M2" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="WEIGHT" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="TYPE_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRODUCT_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_MATERIAL" Member="PRODUCT_DETAIL_MATERIALs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="PRODUCT_DETAIL_MATERIAL" />
+      <Association Name="PRODUCT_DETAIL_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="ORDER_DETAIL" />
+      <Association Name="PRODUCT_DETAIL_INVENTORY" Member="INVENTORies" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="INVENTORY" />
+      <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_SIZE" Member="PRODUCT_DETAIL_SIZEs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="PRODUCT_DETAIL_SIZE" />
+      <Association Name="PRODUCT_PRODUCT_DETAIL" Member="PRODUCT" ThisKey="PRODUCT_ID" OtherKey="ID" Type="PRODUCT" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="TYPE_PRODUCT_DETAIL" Member="TYPE" ThisKey="TYPE_ID" OtherKey="ID" Type="TYPE" IsForeignKey="true" DeleteRule="SET NULL" />
     </Type>
   </Table>
 </Database>

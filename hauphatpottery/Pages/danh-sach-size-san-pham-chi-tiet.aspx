@@ -27,34 +27,34 @@
                             CssClass="k-textbox textbox" AppendDataBoundItems="true" DataTextField="Code" 
                             DataValueField="Id" Width="200" AutoPostBack="True" 
                             onselectedindexchanged="ddLProductDetail_SelectedIndexChanged">
-                            <asp:ListItem Value="0" Text="--Chọn sản phẩm chi tiết--"></asp:ListItem>
+                            <%--<asp:ListItem Value="0" Text="--Chọn sản phẩm chi tiết--"></asp:ListItem>--%>
                         </asp:DropDownList>                                               
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Chưa chọn sản phẩm chi tiết"
                             ControlToValidate="ddLProductDetail" Display="None" ForeColor="Red" ValidationGroup="G2"
                             CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
                     </td>
-                    <td>
+                    <td id="tdD" runat="server" visible="false">
                         <input class="k-textbox" width="40" id="txtD" name="txtD" type="text" value="" runat="server" placeholder="D" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Chưa nhập D"
                                                     ControlToValidate="txtD" Display="None" ForeColor="Red" ValidationGroup="G2"
                                                     CssClass="tlp-error">*</asp:RequiredFieldValidator>
                     </td>
-                    <td>
+                    <td id="tdH" runat="server" visible="false">
                         <input class="k-textbox" width="40" id="txtH" type="text" value="" runat="server" placeholder="H" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="Chưa nhập H"
                                                     ControlToValidate="txtH" Display="None" ForeColor="Red" ValidationGroup="G2"
                                                     CssClass="tlp-error">*</asp:RequiredFieldValidator>
                     </td>
-                    <td>
+                    <td id="tdL" runat="server" visible="false">
                         <input class="k-textbox" width="40" id="txtL" type="text" value="" runat="server" placeholder="L" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ErrorMessage="Chưa nhập L"
                                                     ControlToValidate="txtL" Display="None" ForeColor="Red" ValidationGroup="G2"
                                                     CssClass="tlp-error">*</asp:RequiredFieldValidator>
                     </td>
-                    <td>
+                    <td id="tdW" runat="server" visible="false">
                         <input class="k-textbox" width="40" id="txtW" type="text" value="" runat="server" placeholder="W" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ErrorMessage="Chưa nhập W"
-                                                    ControlToValidate="txtW" Display="None" ForeColor="Red" ValidationGroup="G2"
+                                                   ControlToValidate="txtW" Display="None" ForeColor="Red" ValidationGroup="G2"
                                                     CssClass="tlp-error">*</asp:RequiredFieldValidator>
                     </td>
                     <td>
@@ -95,22 +95,22 @@
                                     <%# getShortString(getNameProductDetail(Eval("PRODUCT_DETAIL_ID")), 40)%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>--%>
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="D">
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="D" Visible="false">
                             <DataItemTemplate>
                                     <%# Eval("D")%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="H">
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="H" Visible="false">
                             <DataItemTemplate>
                                     <%# Eval("H")%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="L">
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="L" Visible="false">
                             <DataItemTemplate>
                                     <%# Eval("L")%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="W">
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="W" Visible="false">
                             <DataItemTemplate>
                                     <%# Eval("W")%>
                             </DataItemTemplate>

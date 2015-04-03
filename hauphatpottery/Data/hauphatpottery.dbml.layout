@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 12.75" name="hauphatpotteryDataContext">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 11.75" name="hauphatpotteryDataContext">
   <DataContextMoniker Name="/hauphatpotteryDataContext" />
   <nestedChildShapes>
     <classShape Id="c65e141b-a00b-489b-92de-e362a0f32e2d" absoluteBounds="7.75, 1, 2, 1.3862939453125">
@@ -51,12 +51,6 @@
         <elementListCompartment Id="ed68b1f5-0bce-4171-87c8-896f793f86d9" absoluteBounds="3.3899999999999997, 7.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="03789673-5782-49b2-a180-eb8154e6cfaa" absoluteBounds="3.375, 8.5, 2, 1.3862939453125">
-      <DataClassMoniker Name="/hauphatpotteryDataContext/PRODUCT" />
-      <nestedChildShapes>
-        <elementListCompartment Id="0ef4e72b-a4f1-4013-8eab-f4dde1d4d411" absoluteBounds="3.39, 8.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="173118ca-a217-4ddc-8e92-aac5360d89ed" absoluteBounds="3.375, 4.875, 2, 1.5785953776041666">
       <DataClassMoniker Name="/hauphatpotteryDataContext/PRODUCT_DETAIL_MATERIAL" />
       <nestedChildShapes>
@@ -82,7 +76,7 @@
         <elementListCompartment Id="62d5fea7-f6d1-447e-9e9d-10133ba89777" absoluteBounds="3.14, 1.46, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.125 : 3.59215413411458); (2.5 : 3.59215413411458)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.125 : 3.59215413411458); (2.5 : 3.59215413411458)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/hauphatpotteryDataContext/ORDER/ORDER_ORDER_DETAIL" />
       <nodes>
         <classShapeMoniker Id="1c411938-4bf5-456e-a881-04349bff063f" />
@@ -102,7 +96,7 @@
         <elementListCompartment Id="c5ffa151-a2c0-4870-a76d-013fa26434d8" absoluteBounds="8.64, 7.7100000000000009, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.125 : 4.30930826822917); (4.125 : 4.625); (5.5 : 4.625); (5.5 : 5.15549967447917); (5.625 : 5.15549967447917); (5.625 : 9.0112939453125); (8.25 : 9.0112939453125); (8.25 : 8.32774983723958); (8.625 : 8.32774983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3.21875 : 4.30930826822917); (3.21875 : 9.11464680989583); (8.625 : 9.11464680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/hauphatpotteryDataContext/ORDER/ORDER_INVENTORY" />
       <nodes>
         <classShapeMoniker Id="1c411938-4bf5-456e-a881-04349bff063f" />
@@ -129,71 +123,77 @@
         <classShapeMoniker Id="1c411938-4bf5-456e-a881-04349bff063f" />
       </nodes>
     </associationConnector>
-    <classShape Id="ee5cbb05-d2f6-4abe-a34f-8a5b2a9f65c9" absoluteBounds="0.5, 5.875, 2, 2.3478011067708335">
-      <DataClassMoniker Name="/hauphatpotteryDataContext/PRODUCT_DETAIL" />
+    <classShape Id="724e5954-77ba-4f0c-a15c-2a10cd410283" absoluteBounds="0.5, 9.5, 2, 1.9631982421875">
+      <DataClassMoniker Name="/hauphatpotteryDataContext/PRODUCT_DETAIL_SIZE" />
       <nestedChildShapes>
-        <elementListCompartment Id="5589c866-4108-484a-8fe3-f1c707489e8e" absoluteBounds="0.515, 6.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6408401d-8538-4817-9223-f231f70658a9" absoluteBounds="0.515, 9.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.5 : 6.16429768880208); (3.375 : 6.16429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <classShape Id="d3e9da5a-d871-4a26-ba44-1780d7b3ad5b" absoluteBounds="5, 9.625, 2, 1.3862939453125">
+      <DataClassMoniker Name="/hauphatpotteryDataContext/SHAPE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b4913354-c391-4bab-84eb-23e697e67491" absoluteBounds="5.0150000000000006, 10.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a45d6b88-eefe-4930-aad6-80b1dbd667a1" absoluteBounds="2.875, 9.5, 2, 1.9631982421875">
+      <DataClassMoniker Name="/hauphatpotteryDataContext/SHAPE_PROPERTY" />
+      <nestedChildShapes>
+        <elementListCompartment Id="607e3a72-0c26-4674-94aa-5d4b009f31cd" absoluteBounds="2.89, 9.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="be12deaf-ab92-4008-ad76-9948a9dd197e" absoluteBounds="0.5, 5.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/hauphatpotteryDataContext/PRODUCT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="74fd8c1f-ac96-4cac-a589-99362b3b2fd3" absoluteBounds="0.515, 5.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ae8208c5-0813-4d4d-bfbc-32957cd45f6e" absoluteBounds="0.5, 7.25, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/hauphatpotteryDataContext/PRODUCT_DETAIL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5b042b88-2495-418a-91b8-8bb5aeac05b9" absoluteBounds="0.51500000000000012, 7.7100000000000009, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 7.25153746153846); (2.875 : 6.87653746153846); (2.875 : 5.66429768880208); (3.13541666666667 : 5.66429768880208 : JumpStart); (3.30208333333333 : 5.66429768880208 : JumpEnd); (3.375 : 5.66429768880208)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/hauphatpotteryDataContext/PRODUCT_DETAIL/PRODUCT_DETAIL_PRODUCT_DETAIL_MATERIAL" />
       <nodes>
-        <classShapeMoniker Id="ee5cbb05-d2f6-4abe-a34f-8a5b2a9f65c9" />
+        <classShapeMoniker Id="ae8208c5-0813-4d4d-bfbc-32957cd45f6e" />
         <classShapeMoniker Id="173118ca-a217-4ddc-8e92-aac5360d89ed" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.5 : 5.875); (1.5 : 5.22280110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(0.501537461538462 : 7.25); (0.125 : 6.87346253846154); (0.125 : 5.5993385683093); (0.501537461538462 : 5.22280110677083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/hauphatpotteryDataContext/PRODUCT_DETAIL/PRODUCT_DETAIL_ORDER_DETAIL" />
       <nodes>
-        <classShapeMoniker Id="ee5cbb05-d2f6-4abe-a34f-8a5b2a9f65c9" />
+        <classShapeMoniker Id="ae8208c5-0813-4d4d-bfbc-32957cd45f6e" />
         <classShapeMoniker Id="953b4355-951d-41c7-8f09-27f9f0be42fb" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 6.78929768880208); (5.54166666666667 : 6.78929768880208 : JumpStart); (5.70833333333333 : 6.78929768880208 : JumpEnd); (6.91666666666667 : 6.78929768880208 : JumpStart); (7.08333333333333 : 6.78929768880208 : JumpEnd); (9.29166666666667 : 6.78929768880208 : JumpStart); (9.45833333333333 : 6.78929768880208 : JumpEnd); (10.40625 : 6.78929768880208); (10.40625 : 7.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.5 : 8.90672037760417); (3.13541666666667 : 8.90672037760417 : JumpStart); (3.30208333333333 : 8.90672037760417 : JumpEnd); (8.625 : 8.90672037760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/hauphatpotteryDataContext/PRODUCT_DETAIL/PRODUCT_DETAIL_INVENTORY" />
       <nodes>
-        <classShapeMoniker Id="ee5cbb05-d2f6-4abe-a34f-8a5b2a9f65c9" />
+        <classShapeMoniker Id="ae8208c5-0813-4d4d-bfbc-32957cd45f6e" />
         <classShapeMoniker Id="462050ae-bbea-4c21-8161-921ccd920918" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.375 : 8.5); (3 : 8.125); (2.875 : 8.125); (2.875 : 8.59780110677083); (2.5 : 8.22280110677083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/hauphatpotteryDataContext/PRODUCT/PRODUCT_PRODUCT_DETAIL" />
-      <nodes>
-        <classShapeMoniker Id="03789673-5782-49b2-a180-eb8154e6cfaa" />
-        <classShapeMoniker Id="ee5cbb05-d2f6-4abe-a34f-8a5b2a9f65c9" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(3.375 : 7.54890055338542); (2.5 : 7.54890055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/hauphatpotteryDataContext/TYPE/TYPE_PRODUCT_DETAIL" />
-      <nodes>
-        <classShapeMoniker Id="77141e0e-5b15-4df8-a7f9-b0bb28ddd968" />
-        <classShapeMoniker Id="ee5cbb05-d2f6-4abe-a34f-8a5b2a9f65c9" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="724e5954-77ba-4f0c-a15c-2a10cd410283" absoluteBounds="0.5, 8.875, 2, 1.9631982421875">
-      <DataClassMoniker Name="/hauphatpotteryDataContext/PRODUCT_DETAIL_SIZE" />
-      <nestedChildShapes>
-        <elementListCompartment Id="6408401d-8538-4817-9223-f231f70658a9" absoluteBounds="0.515, 9.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(1.4687475 : 8.22280110677083); (1.4687475 : 8.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.5 : 9.40549967447917); (1.5 : 9.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/hauphatpotteryDataContext/PRODUCT_DETAIL/PRODUCT_DETAIL_PRODUCT_DETAIL_SIZE" />
       <nodes>
-        <classShapeMoniker Id="ee5cbb05-d2f6-4abe-a34f-8a5b2a9f65c9" />
+        <classShapeMoniker Id="ae8208c5-0813-4d4d-bfbc-32957cd45f6e" />
         <classShapeMoniker Id="724e5954-77ba-4f0c-a15c-2a10cd410283" />
       </nodes>
     </associationConnector>
-    <classShape Id="d3e9da5a-d871-4a26-ba44-1780d7b3ad5b" absoluteBounds="0.5, 11.125, 2, 1.3862939453125">
-      <DataClassMoniker Name="/hauphatpotteryDataContext/SHAPE" />
-      <nestedChildShapes>
-        <elementListCompartment Id="b4913354-c391-4bab-84eb-23e697e67491" absoluteBounds="0.51500000000000012, 11.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="a45d6b88-eefe-4930-aad6-80b1dbd667a1" absoluteBounds="3.25, 10.375, 2, 1.9631982421875">
-      <DataClassMoniker Name="/hauphatpotteryDataContext/SHAPE_PROPERTY" />
-      <nestedChildShapes>
-        <elementListCompartment Id="607e3a72-0c26-4674-94aa-5d4b009f31cd" absoluteBounds="3.265, 10.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
+    <associationConnector edgePoints="[(1.53202123076923 : 7.07859537760417); (1.53202123076923 : 7.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/hauphatpotteryDataContext/PRODUCT/PRODUCT_PRODUCT_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="be12deaf-ab92-4008-ad76-9948a9dd197e" />
+        <classShapeMoniker Id="ae8208c5-0813-4d4d-bfbc-32957cd45f6e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.375 : 7.78766820342548); (3.30208333333333 : 7.78766820342548 : JumpStart); (3.13541666666667 : 7.78766820342548 : JumpEnd); (2.5 : 7.78766820342548)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/hauphatpotteryDataContext/TYPE/TYPE_PRODUCT_DETAIL" />
+      <nodes>
+        <classShapeMoniker Id="77141e0e-5b15-4df8-a7f9-b0bb28ddd968" />
+        <classShapeMoniker Id="ae8208c5-0813-4d4d-bfbc-32957cd45f6e" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

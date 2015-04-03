@@ -110,15 +110,15 @@
                                     <%# Convert.ToDecimal(Eval("WEIGHT")) > 0 ? Convert.ToString(Eval("WEIGHT")) : "" %>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Size">
+                            <DataItemTemplate>
+                                <a href="<%# getlinkproductdetailsize(Eval("ID")) %>">Xem</a>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Nguyên liệu cần cho sản phẩm" FieldName="ID" Width="200">
                             <DataItemTemplate>
                                     <a href="<%# getlink_nguyenlieucan(Eval("ID")) %>" title='<%# Eval("CODE")%>'>
                                     Nguyên liệu cần cho sản phẩm</a>
-                            </DataItemTemplate>
-                        </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Size">
-                            <DataItemTemplate>
-                                <a href="<%# getlinkproductdetailsize(Eval("ID")) %>">Xem</a>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
                     </Columns>

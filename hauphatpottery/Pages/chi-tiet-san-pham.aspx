@@ -68,6 +68,19 @@
                                                     ControlToValidate="txtCode" Display="None" ForeColor="Red" ValidationGroup="G2"
                                                     CssClass="tlp-error">*</asp:RequiredFieldValidator>
                                             </td>
+                                        </tr>                                        
+                                        <tr>
+                                            <td class="td_left" align="right" valign="top" nowrap="nowrap">
+                                                <span style="color: Red;">*</span>&nbsp;Hình dạng
+                                            </td>
+                                            <td align="left" nowrap="nowrap">
+                                                <asp:DropDownList runat="server" ID="ddlShape" CssClass="k-textbox textbox" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Code">
+                                                    <asp:ListItem Value="0" Text="--Chọn Hình Dạng--"></asp:ListItem>
+                                                </asp:DropDownList>                                               
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ErrorMessage="Chưa chọn hình dạng"
+                                                    ControlToValidate="ddlShape" Display="None" ForeColor="Red" ValidationGroup="G2"
+                                                    CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="td_left" align="right" valign="top" nowrap="nowrap">

@@ -98,6 +98,10 @@ namespace hauphatpottery.Pages
         {
             return Utils.CIntDef(id) > 0 ? "nguyen-lieu-can-cho-san-pham.aspx?id=" + Utils.CIntDef(id) : "nguyen-lieu-can-cho-san-pham.aspx";
         }
+        public string getlinkproductdetailsize(object id)
+        {
+            return Utils.CIntDef(id) > 0 ? "danh-sach-size-san-pham-chi-tiet.aspx?id=" + Utils.CIntDef(id) : "danh-sach-size-san-pham-chi-tiet.aspx";
+        }
         public string getDate(object date)
         {
             return string.Format("{0:dd/MM/yyyy}", date);

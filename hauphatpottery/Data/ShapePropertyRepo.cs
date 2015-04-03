@@ -5,34 +5,57 @@ using System.Web;
 
 namespace hauphatpottery.Data
 {
-    public class ProductDetailSizeRepo
+    public class ShapePropertyRepo
     {
         private hauphatpotteryDataContext db = new hauphatpotteryDataContext();
 
-        public virtual List<PRODUCT_DETAIL_SIZE> GetByProductDetailId(int productDetailId)
-        {
-            return this.db.PRODUCT_DETAIL_SIZEs.Where(n=>n.PRODUCT_DETAIL_ID == productDetailId).OrderBy(n => n.ID).ToList();
-        }
-        public virtual PRODUCT_DETAIL_SIZE GetById(int id)
+        public virtual SHAPE_PROPERTY GetByProductDetailId(int productDetailId)
         {
             try
             {
-                return this.db.PRODUCT_DETAIL_SIZEs.Single(u => u.ID == id);
+                var item = (from a in db.SHAPE_PROPERTies
+                            join b in db.PRODUCTs on a.SHAPE_CODE equals b.SHAPE_CODE
+                            join c in db.PRODUCT_DETAILs on b.ID equals c.PRODUCT_ID
+                            where c.ID == productDetailId
+                            select a).Single();
+                return item;
             }
             catch
             {
                 return null;
             }
         }
-        public virtual List<PRODUCT_DETAIL_SIZE> GetAll()
-        {
-            return this.db.PRODUCT_DETAIL_SIZEs.OrderBy(n => n.ID).ToList();
-        }
-        public virtual void Create(PRODUCT_DETAIL_SIZE cus)
+        public virtual SHAPE_PROPERTY GetByCode(string code)
         {
             try
             {
-                this.db.PRODUCT_DETAIL_SIZEs.InsertOnSubmit(cus);
+                return this.db.SHAPE_PROPERTies.Single(u => u.SHAPE_CODE == code);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public virtual SHAPE_PROPERTY GetById(int id)
+        {
+            try
+            {
+                return this.db.SHAPE_PROPERTies.Single(u => u.ID == id);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public virtual List<SHAPE_PROPERTY> GetAll()
+        {
+            return this.db.SHAPE_PROPERTies.OrderBy(n => n.ID).ToList();
+        }
+        public virtual void Create(SHAPE_PROPERTY cus)
+        {
+            try
+            {
+                this.db.SHAPE_PROPERTies.InsertOnSubmit(cus);
                 db.SubmitChanges();
             }
             catch// (Exception e)
@@ -40,11 +63,11 @@ namespace hauphatpottery.Data
                 //throw new Exception(e.Message);
             }
         }
-        public virtual void Update(PRODUCT_DETAIL_SIZE cus)
+        public virtual void Update(SHAPE_PROPERTY cus)
         {
             try
             {
-                PRODUCT_DETAIL_SIZE cusOld = this.GetById(cus.ID);
+                SHAPE_PROPERTY cusOld = this.GetById(cus.ID);
                 cusOld = cus;
                 db.SubmitChanges();
             }
@@ -57,7 +80,7 @@ namespace hauphatpottery.Data
         {
             try
             {
-                PRODUCT_DETAIL_SIZE cus = this.GetById(id);
+                SHAPE_PROPERTY cus = this.GetById(id);
                 this.Remove(cus);
             }
             catch //(Exception e)
@@ -65,11 +88,11 @@ namespace hauphatpottery.Data
                 //throw new Exception(e.Message);
             }
         }
-        public virtual void Remove(PRODUCT_DETAIL_SIZE cus)
+        public virtual void Remove(SHAPE_PROPERTY cus)
         {
             try
             {
-                db.PRODUCT_DETAIL_SIZEs.DeleteOnSubmit(cus);
+                db.SHAPE_PROPERTies.DeleteOnSubmit(cus);
                 db.SubmitChanges();
             }
             catch (Exception e)
@@ -81,7 +104,7 @@ namespace hauphatpottery.Data
         {
             try
             {
-                PRODUCT_DETAIL_SIZE cus = this.GetById(id);
+                SHAPE_PROPERTY cus = this.GetById(id);
                 return this.Delete(cus);
             }
             catch (Exception e)
@@ -90,7 +113,7 @@ namespace hauphatpottery.Data
                 throw new Exception(e.Message);
             }
         }
-        public virtual int Delete(PRODUCT_DETAIL_SIZE cus)
+        public virtual int Delete(SHAPE_PROPERTY cus)
         {
             try
             {

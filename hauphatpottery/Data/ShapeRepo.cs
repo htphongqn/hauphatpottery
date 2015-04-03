@@ -13,6 +13,17 @@ namespace hauphatpottery.Data
         {
             return this.db.SHAPEs.Where(n => n.NAME.Contains(name)).OrderBy(a => a.NAME).ToList();
         }
+        public virtual SHAPE GetByCode(string code)
+        {
+            try
+            {
+                return this.db.SHAPEs.Single(u => u.CODE == code);
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public virtual SHAPE GetById(int id)
         {
             try
