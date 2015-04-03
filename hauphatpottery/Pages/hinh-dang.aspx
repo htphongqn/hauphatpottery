@@ -50,8 +50,12 @@
                                                     CssClass="tlp-error">*</asp:RequiredFieldValidator>
                     </td>
                     <td>
+                        <asp:LinkButton ID="lbtnAdd" ToolTip="Thêm thông tin" CssClass="k-button" runat="server"
+                OnClick="lbtnAdd_Click" ValidationGroup="G2"><img alt="Lưu thông tin" src="../Images/add1.png" /></asp:LinkButton>
+                    </td>
+                    <td>
                         <asp:LinkButton ID="lbtnSave" ToolTip="Lưu thông tin" CssClass="k-button" runat="server"
-                OnClick="lbtnSave_Click" ValidationGroup="G2"><img alt="Lưu thông tin" src="../Images/icon-20-save.png" /></asp:LinkButton>
+                OnClick="lbtnSave_Click"><img alt="Lưu thông tin" src="../Images/icon-20-save.png" /></asp:LinkButton>
                     </td>
                     <td>
                         <asp:LinkButton ID="lbtnDelete" OnClientClick="return confirm('Bạn có chắc muốn xóa ?');"
@@ -65,7 +69,7 @@
     <table width="100%" cellpadding="3" cellspacing="3" style="background-color: #f4f4f4;
         border: 1px solid #aecaf0">
         <tr>
-            <td>                
+            <td>
                 <dx:ASPxGridView ID="ASPxGridView1_Shape" runat="server" AutoGenerateColumns="False"
                     Width="100%" KeyFieldName="ID" Theme="Aqua">
                     <Columns>
@@ -88,35 +92,53 @@
                                     <%# Eval("Name")%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="D" FieldName="D"  Width="50px">
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="D" FieldName="D"  Width="50px">                        
                             <DataItemTemplate>
-                                <asp:CheckBox id="chkD" runat="server" checked='<%# Eval("D")%>'></asp:CheckBox>
+                                <dx:ASPxCheckBox ID="chkD" runat="server" Checked='<%# getBool(Eval("D"))%>'>
+                                </dx:ASPxCheckBox>
+                                <asp:HiddenField ID= "hddCode" runat="server" Value='<%# Eval("Code")%>' />
                             </DataItemTemplate>
+                            <HeaderStyle HorizontalAlign="Center" />
+                            <cellstyle horizontalalign="Center">
+                            </cellstyle>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="H" FieldName="H"  Width="50px">
                             <DataItemTemplate>
-                                <asp:CheckBox id="chkH" runat="server" checked='<%# Eval("H")%>'></asp:CheckBox>
+                                <dx:ASPxCheckBox id="chkH" runat="server" Checked='<%# getBool(Eval("H"))%>'></dx:ASPxCheckBox>
                             </DataItemTemplate>
+                            <HeaderStyle HorizontalAlign="Center" />
+                            <cellstyle horizontalalign="Center">
+                            </cellstyle>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="L" FieldName="L"  Width="50px">
                             <DataItemTemplate>
-                                <asp:CheckBox id="chkL" runat="server" checked='<%# Eval("L")%>'></asp:CheckBox>
+                                <dx:ASPxCheckBox id="chkL" runat="server" Checked='<%# getBool(Eval("L"))%>'></dx:ASPxCheckBox>
                             </DataItemTemplate>
+                            <HeaderStyle HorizontalAlign="Center" />
+                            <cellstyle horizontalalign="Center">
+                            </cellstyle>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="W" FieldName="W"  Width="50px">
                             <DataItemTemplate>
-                                <asp:CheckBox id="chkW" runat="server" checked='<%# Eval("W")%>'></asp:CheckBox>
+                                <dx:ASPxCheckBox id="chkW" runat="server" Checked='<%# getBool(Eval("W"))%>'></dx:ASPxCheckBox>
                             </DataItemTemplate>
+                            <HeaderStyle HorizontalAlign="Center" />
+                            <cellstyle horizontalalign="Center">
+                            </cellstyle>
                         </dx:GridViewDataTextColumn>
                     </Columns>
                     <Settings ShowHorizontalScrollBar="true" />
                     <Settings VerticalScrollableHeight="350" />
                     <Settings ShowVerticalScrollBar="true" />
-                    <SettingsPager PageSize="30">
+                    <SettingsPager PageSize="30" mode="ShowAllRecords">
                     </SettingsPager>
+
+                        <Settings ShowVerticalScrollBar="True" ShowHorizontalScrollBar="True" 
+                        VerticalScrollableHeight="350"></Settings>
                 </dx:ASPxGridView>
+                
             </td>
         </tr>
-    </table>   
+    </table>
     <uc1:MessageBox ID="MessageBox1" runat="server" /> 
 </asp:Content>

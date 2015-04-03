@@ -40,61 +40,47 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\ComponentArt.Web.UI.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Data.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.Data.v12.1.dll</HintPath>
+    <Reference Include="DevExpress.Data.v12.1">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.Data.v12.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Printing.v12.1.Core, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.Printing.v12.1.Core.dll</HintPath>
+    <Reference Include="DevExpress.Printing.v12.1.Core">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.Printing.v12.1.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Utils.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.Utils.v12.1.dll</HintPath>
+    <Reference Include="DevExpress.Utils.v12.1">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.Utils.v12.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Web.ASPxEditors.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.Web.ASPxEditors.v12.1.dll</HintPath>
+    <Reference Include="DevExpress.Web.ASPxEditors.v12.1">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.Web.ASPxEditors.v12.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Web.ASPxGridView.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.Web.ASPxGridView.v12.1.dll</HintPath>
+    <Reference Include="DevExpress.Web.ASPxGridView.v12.1">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.Web.ASPxGridView.v12.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Web.ASPxGridView.v12.1.Export, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.Web.ASPxGridView.v12.1.Export.dll</HintPath>
+    <Reference Include="DevExpress.Web.ASPxGridView.v12.1.Export">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.Web.ASPxGridView.v12.1.Export.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Web.ASPxThemes.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.Web.ASPxThemes.v12.1.dll</HintPath>
+    <Reference Include="DevExpress.Web.ASPxThemes.v12.1">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.Web.ASPxThemes.v12.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Web.ASPxTreeList.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.Web.ASPxTreeList.v12.1.dll</HintPath>
+    <Reference Include="DevExpress.Web.ASPxTreeList.v12.1">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.Web.ASPxTreeList.v12.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Web.ASPxTreeList.v12.1.Export, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.Web.ASPxTreeList.v12.1.Export.dll</HintPath>
+    <Reference Include="DevExpress.Web.ASPxTreeList.v12.1.Export">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.Web.ASPxTreeList.v12.1.Export.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Web.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.Web.v12.1.dll</HintPath>
+    <Reference Include="DevExpress.Web.v12.1">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.Web.v12.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.XtraPrinting.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.XtraPrinting.v12.1.dll</HintPath>
+    <Reference Include="DevExpress.XtraPrinting.v12.1">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.XtraPrinting.v12.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.XtraReports.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.XtraReports.v12.1.dll</HintPath>
+    <Reference Include="DevExpress.XtraReports.v12.1">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.XtraReports.v12.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.XtraReports.v12.1.Web, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.XtraReports.v12.1.Web.dll</HintPath>
+    <Reference Include="DevExpress.XtraReports.v12.1.Web">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.XtraReports.v12.1.Web.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.XtraTreeList.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DevExpress.XtraTreeList.v12.1.dll</HintPath>
+    <Reference Include="DevExpress.XtraTreeList.v12.1">
+      <HintPath>..\..\..\hoangphu\Appketoan\bin\DevExpress.XtraTreeList.v12.1.dll</HintPath>
     </Reference>
     <Reference Include="Karpach.WebControls">
       <HintPath>..\..\Bin-2014-12-11\Karpach.WebControls.dll</HintPath>
@@ -131,20 +117,6 @@
   <ItemGroup>
     <Content Include="bin\AjaxControlToolkit.dll" />
     <Content Include="bin\ComponentArt.Web.UI.dll" />
-    <Content Include="bin\DevExpress.Data.v12.1.dll" />
-    <Content Include="bin\DevExpress.Printing.v12.1.Core.dll" />
-    <Content Include="bin\DevExpress.Utils.v12.1.dll" />
-    <Content Include="bin\DevExpress.Web.ASPxEditors.v12.1.dll" />
-    <Content Include="bin\DevExpress.Web.ASPxGridView.v12.1.dll" />
-    <Content Include="bin\DevExpress.Web.ASPxGridView.v12.1.Export.dll" />
-    <Content Include="bin\DevExpress.Web.ASPxThemes.v12.1.dll" />
-    <Content Include="bin\DevExpress.Web.ASPxTreeList.v12.1.dll" />
-    <Content Include="bin\DevExpress.Web.ASPxTreeList.v12.1.Export.dll" />
-    <Content Include="bin\DevExpress.Web.v12.1.dll" />
-    <Content Include="bin\DevExpress.XtraPrinting.v12.1.dll" />
-    <Content Include="bin\DevExpress.XtraReports.v12.1.dll" />
-    <Content Include="bin\DevExpress.XtraReports.v12.1.Web.dll" />
-    <Content Include="bin\DevExpress.XtraTreeList.v12.1.dll" />
     <Content Include="bin\MSCaptcha.dll" />
     <Content Include="bin\vpro.functions.dll" />
     <Content Include="Calendar\calendarStyle.css" />
