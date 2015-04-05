@@ -117,6 +117,27 @@
   <ItemGroup>
     <Content Include="bin\AjaxControlToolkit.dll" />
     <Content Include="bin\ComponentArt.Web.UI.dll" />
+    <Content Include="bin\DevExpress.Data.v12.1.dll" />
+    <Content Include="bin\DevExpress.Data.v12.1.xml" />
+    <Content Include="bin\DevExpress.Printing.v12.1.Core.dll" />
+    <Content Include="bin\DevExpress.Utils.v12.1.dll" />
+    <Content Include="bin\DevExpress.Web.ASPxEditors.v12.1.dll" />
+    <Content Include="bin\DevExpress.Web.ASPxEditors.v12.1.xml" />
+    <Content Include="bin\DevExpress.Web.ASPxGridView.v12.1.dll" />
+    <Content Include="bin\DevExpress.Web.ASPxGridView.v12.1.Export.dll" />
+    <Content Include="bin\DevExpress.Web.ASPxGridView.v12.1.xml" />
+    <Content Include="bin\DevExpress.Web.ASPxThemes.v12.1.dll" />
+    <Content Include="bin\DevExpress.Web.ASPxTreeList.v12.1.dll" />
+    <Content Include="bin\DevExpress.Web.ASPxTreeList.v12.1.Export.dll" />
+    <Content Include="bin\DevExpress.Web.ASPxTreeList.v12.1.xml" />
+    <Content Include="bin\DevExpress.Web.v12.1.dll" />
+    <Content Include="bin\DevExpress.Web.v12.1.xml" />
+    <Content Include="bin\DevExpress.XtraPrinting.v12.1.dll" />
+    <Content Include="bin\DevExpress.XtraReports.v12.1.dll" />
+    <Content Include="bin\DevExpress.XtraReports.v12.1.Web.dll" />
+    <Content Include="bin\DevExpress.XtraTreeList.v12.1.dll" />
+    <Content Include="bin\DevExpress.XtraTreeList.v12.1.xml" />
+    <Content Include="bin\Karpach.WebControls.dll" />
     <Content Include="bin\MSCaptcha.dll" />
     <Content Include="bin\vpro.functions.dll" />
     <Content Include="Calendar\calendarStyle.css" />

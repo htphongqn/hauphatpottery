@@ -10,11 +10,11 @@ namespace hauphatpottery.Data
     {
         private hauphatpotteryDataContext db = new hauphatpotteryDataContext();
 
-        public virtual ORDER_DETAIL GetByProductDetailId(int productDetailId, int orderId)
+        public virtual ORDER_DETAIL GetByProductDetailId(int productDetailId, int productDetailSizeId, int orderId)
         {
             try
             {
-                return this.db.ORDER_DETAILs.Single(u => u.PRODUCT_DETAIL_ID == productDetailId && u.ORDER_ID == orderId);
+                return this.db.ORDER_DETAILs.Single(u => u.PRODUCT_DETAIL_ID == productDetailId && u.PRODUCT_DETAIL_SIZE_ID == productDetailSizeId && u.ORDER_ID == orderId);
             }
             catch
             {

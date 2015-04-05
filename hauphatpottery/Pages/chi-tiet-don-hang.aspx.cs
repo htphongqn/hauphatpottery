@@ -16,6 +16,8 @@ namespace hauphatpottery.Pages
         #region Declare
         private ProductRepo _ProductRepo = new ProductRepo();
         private ProductDetailRepo _ProductDetailRepo = new ProductDetailRepo();
+        private ShapePropertyRepo _ShapePropertyRepo = new ShapePropertyRepo();
+        private ProductDetailSizeRepo _ProductDetailSizeRepo = new ProductDetailSizeRepo();
         private TypeRepo _TypeRepo = new TypeRepo();
         private CustomerRepo _CustomerRepo = new CustomerRepo();
         private OrderRepo _OrderRepo = new OrderRepo();
@@ -82,7 +84,32 @@ namespace hauphatpottery.Pages
             ddlProductDetail.DataBind();
             ddlProductDetail.Items.Insert(0, new ListItem("--Chọn Sản Phẩm Chi Tiết--", "0"));
         }
+        private void LoadProductDetailSize()
+        {
+            int ProductDetailId = Utils.CIntDef(ddlProductDetail.SelectedValue);
+            var list = _ProductDetailSizeRepo.GetByProductDetailId(ProductDetailId);
+            var shapeProperty = _ShapePropertyRepo.GetByProductDetailId(ProductDetailId);
+            ddlProductDetailSize.Items.Clear();
+            if (list != null && list.Count > 0 && shapeProperty != null)
+            {
+                ddlProductDetailSize.Items.Add(new ListItem("Bộ", "-1"));
+                foreach (var item in list)
+                {
+                    string name = "";
+                    if (Utils.CIntDef(shapeProperty.D) == 1)
+                        name += "D" + item.D +" ";
+                    if (Utils.CIntDef(shapeProperty.H) == 1)
+                        name += "H" + item.H + " ";
+                    if (Utils.CIntDef(shapeProperty.L) == 1)
+                        name += "L" + item.D + " "; 
+                    if (Utils.CIntDef(shapeProperty.W) == 1)
+                        name += "W" + item.W + " ";
 
+                    ddlProductDetailSize.Items.Add(new ListItem(name, Utils.CStrDef(item.ID)));
+                }
+            }
+            ddlProductDetailSize.Items.Insert(0, new ListItem("--Chọn Size--", "0"));
+        }
         #region getInfo
         private void getInfo()
         {
@@ -96,7 +123,7 @@ namespace hauphatpottery.Pages
                     pickerAndCalendarDeadlineDate.returnDate = Utils.CDateDef(order.DEADLINE_DATE, DateTime.Now);
                     pickerAndCalendarStartDate.returnDate = Utils.CDateDef(order.START_DATE, DateTime.Now);
                     txtNote.Text = Utils.CStrDef(order.NOTE);
-                    ddlStatus.SelectedValue = Utils.CStrDef(order.STATUS);
+                    rdlStatus.SelectedValue = Utils.CStrDef(order.STATUS);
                     LoadOrderDetail();
                 }
             }
@@ -126,7 +153,7 @@ namespace hauphatpottery.Pages
                     order.START_DATE = pickerAndCalendarStartDate.returnDate;
                     order.DEADLINE_DATE = pickerAndCalendarDeadlineDate.returnDate;
                     order.NOTE = txtNote.Text;
-                    order.STATUS = Utils.CIntDef(ddlStatus.SelectedValue);
+                    order.STATUS = Utils.CIntDef(rdlStatus.SelectedValue);
 
                     order.CREATE_DATE = DateTime.Now;
                     order.CREATOR_ID = Utils.CIntDef(Session["Userid"]);
@@ -206,13 +233,16 @@ namespace hauphatpottery.Pages
             try
             {
 
-                var orderDetail = _OrderDetailRepo.GetByProductDetailId(Utils.CIntDef(ddlProductDetail.SelectedValue), id);
+                var orderDetail = _OrderDetailRepo.GetByProductDetailId(Utils.CIntDef(ddlProductDetail.SelectedValue), Utils.CIntDef(ddlProductDetailSize.SelectedValue), id);
                 if (orderDetail != null)
                 {
                     orderDetail.ORDER_ID = id;
                     orderDetail.PRODUCT_DETAIL_ID = Utils.CIntDef(ddlProductDetail.SelectedValue);
-                    orderDetail.QUANTITY = Utils.CIntDef(txtQuantity.Text);
-                    orderDetail.COLOR1 = ColorPicker1.Color;
+                    orderDetail.PRODUCT_DETAIL_SIZE_ID = Utils.CIntDef(ddlProductDetailSize.SelectedValue);
+                    orderDetail.QUANTITY = Utils.CIntDef(txtQuantity.Text.Replace(",",""));
+                    orderDetail.PRICE = Utils.CIntDef(txtPrice.Text.Replace(",", ""));
+                    orderDetail.SUBTOTAL = Utils.CIntDef(txtQuantity.Text.Replace(",", "")) * Utils.CIntDef(txtPrice.Text.Replace(",", ""));
+                    orderDetail.COLOR1 = ColorEdit1.Text;
                     orderDetail.COLOR2 = txtColor2.Text;
                     _OrderDetailRepo.Update(orderDetail);
                 }
@@ -221,8 +251,11 @@ namespace hauphatpottery.Pages
                     orderDetail = new ORDER_DETAIL();
                     orderDetail.ORDER_ID = id;
                     orderDetail.PRODUCT_DETAIL_ID = Utils.CIntDef(ddlProductDetail.SelectedValue);
-                    orderDetail.QUANTITY = Utils.CIntDef(txtQuantity.Text);
-                    orderDetail.COLOR1 = ColorPicker1.Color;
+                    orderDetail.PRODUCT_DETAIL_SIZE_ID = Utils.CIntDef(ddlProductDetailSize.SelectedValue);
+                    orderDetail.QUANTITY = Utils.CIntDef(txtQuantity.Text.Replace(",", ""));
+                    orderDetail.PRICE = Utils.CIntDef(txtPrice.Text.Replace(",", ""));
+                    orderDetail.SUBTOTAL = Utils.CIntDef(txtQuantity.Text.Replace(",", "")) * Utils.CIntDef(txtPrice.Text.Replace(",", ""));
+                    orderDetail.COLOR1 = ColorEdit1.Text;
                     orderDetail.COLOR2 = txtColor2.Text;
                     _OrderDetailRepo.Create(orderDetail);
                 }
@@ -243,6 +276,30 @@ namespace hauphatpottery.Pages
             Response.Redirect("chi-tiet-don-hang.aspx?id=" + id + "&activetab=" + 1);
         }
         #endregion
+        public string getProductDetailSize(object productDetailId, object productDetailSizeId)
+        {
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            if (_productDetailSizeId == -1)
+                return "Bộ";
+
+            var item = _ProductDetailSizeRepo.GetById(_productDetailSizeId);
+            var shapeProperty = _ShapePropertyRepo.GetByProductDetailId(Utils.CIntDef(productDetailId));
+
+            if (item != null && shapeProperty != null)
+            {
+                string name = "";
+                if (Utils.CIntDef(shapeProperty.D) == 1)
+                    name += "D" + item.D + " ";
+                if (Utils.CIntDef(shapeProperty.H) == 1)
+                    name += "H" + item.H + " ";
+                if (Utils.CIntDef(shapeProperty.L) == 1)
+                    name += "L" + item.D + " ";
+                if (Utils.CIntDef(shapeProperty.W) == 1)
+                    name += "W" + item.W + " ";
+                return name;
+            }
+            return "";
+        }
         public int getProductIdByProductDetailId(object productDetailId)
         {
             int _id = Utils.CIntDef(productDetailId);
@@ -252,6 +309,24 @@ namespace hauphatpottery.Pages
                 return Utils.CIntDef(ProductDetail.PRODUCT_ID);
             }
             return 0;
+        }
+        public string getSumQuantity()
+        {
+            var orderDetail = _OrderDetailRepo.GetByOrderId(id);
+            if (orderDetail != null)
+            {
+                return cls.FormatMoneyNotext(orderDetail.Sum(n => n.QUANTITY));
+            }
+            return "";
+        }
+        public string getSumSubtotal()
+        {
+            var orderDetail = _OrderDetailRepo.GetByOrderId(id);
+            if (orderDetail != null)
+            {
+                return cls.FormatMoneyNotext(orderDetail.Sum(n => n.SUBTOTAL));
+            }
+            return "";
         }
         public string getShortString(object title, int length)
         {
@@ -348,6 +423,12 @@ namespace hauphatpottery.Pages
         protected void ddlProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadProductDetail();
+            ASPxPageControl2.ActiveTabIndex = 1;
+        }
+
+        protected void ddlProductDetail_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadProductDetailSize();
             ASPxPageControl2.ActiveTabIndex = 1;
         }
     }

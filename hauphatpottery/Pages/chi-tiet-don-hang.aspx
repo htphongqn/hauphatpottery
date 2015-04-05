@@ -72,9 +72,7 @@
                                         <tr>
                                             <td>
                                             </td>
-                                            <td>
-                                                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" ShowMessageBox="True"
-                                                    ShowSummary="False" ValidationGroup="G2" />
+                                            <td>                                                
                                                 <asp:Label ID="Lberrors" runat="server" Text="" ForeColor="Red"></asp:Label>
                                             </td>
                                         </tr>
@@ -125,15 +123,20 @@
                                             <td class="td_left" align="right" valign="top" nowrap="nowrap">
                                                 <span style="color: Red;">*</span>&nbsp;Trạng thái
                                             </td>
-                                            <td align="left" nowrap="nowrap">                                                  
-                                                <asp:DropDownList runat="server" ID="ddlStatus" CssClass="k-textbox textbox" AppendDataBoundItems="true">
+                                            <td align="left" nowrap="nowrap">  
+                                                <asp:RadioButtonList ID="rdlStatus" runat="server" RepeatDirection="Horizontal">
+                                                    <asp:ListItem Value="1" Text="Đang chờ" Selected="true"></asp:ListItem>
+                                                    <asp:ListItem Value="2" Text="Sản xuất"></asp:ListItem>
+                                                    <asp:ListItem Value="3" Text="Hoàn tất"></asp:ListItem>
+                                                </asp:RadioButtonList>                                       
+                                                <%--<asp:DropDownList runat="server" ID="ddlStatus" CssClass="k-textbox textbox" AppendDataBoundItems="true">
                                                     <asp:ListItem Value="1" Text="Đang chờ"></asp:ListItem>
                                                     <asp:ListItem Value="2" Text="Sản xuất"></asp:ListItem>
                                                     <asp:ListItem Value="3" Text="Hoàn tất"></asp:ListItem>
                                                 </asp:DropDownList>                                             
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Chưa chọn trạng thái"
                                                     ControlToValidate="ddlStatus" Display="None" ForeColor="Red" ValidationGroup="G2"
-                                                    CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
+                                                    CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>--%>
                                             </td>
                                         </tr>
                                         <tr>
@@ -156,10 +159,6 @@
                                             <table>
                                                 <tbody>
                                                     <tr>
-                                                        <td>
-                                                            <asp:ValidationSummary ID="ValidationSummary2" runat="server" ForeColor="Red" ShowMessageBox="True"
-                                                                ShowSummary="False" ValidationGroup="G21" />
-                                                        </td>
                                                         <td align="left" nowrap="nowrap">
                                                             <asp:DropDownList runat="server" ID="ddlProduct" CssClass="k-textbox textbox" 
                                                                 AppendDataBoundItems="true" DataTextField="Code" DataValueField="Id" 
@@ -169,23 +168,43 @@
                                                             </asp:DropDownList>
                                                         </td>
                                                         <td align="left" nowrap="nowrap">
-                                                            <asp:DropDownList runat="server" ID="ddlProductDetail" CssClass="k-textbox textbox" DataTextField="Code" DataValueField="Id" Width="200">
+                                                            <asp:DropDownList runat="server" ID="ddlProductDetail" 
+                                                                CssClass="k-textbox textbox" DataTextField="Code" DataValueField="Id" 
+                                                                Width="200" AutoPostBack="True" 
+                                                                OnSelectedIndexChanged="ddlProductDetail_SelectedIndexChanged">
                                                                 <%--<asp:ListItem Value="0" Text="--Chọn Sản Phẩm Chi Tiết--"></asp:ListItem>--%>
                                                             </asp:DropDownList>                                               
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Chưa chọn sản phẩm chi tiết"
                                                                 ControlToValidate="ddlProductDetail" Display="None" ForeColor="Red" ValidationGroup="G21"
                                                                 CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
-                                                        </td>
+                                                        </td>                                                        
                                                         <td>
-                                                        <asp:TextBox ID="txtQuantity" runat="server" class="text" CssClass="k-textbox textbox" onkeyup="FormatNumber(this);" onblur="FormatNumber(this);" Width="70" placeholder="Số lượng"></asp:TextBox>
+                                                            <asp:TextBox ID="txtQuantity" runat="server" class="text" CssClass="k-textbox textbox" onkeyup="FormatNumber(this);" onblur="FormatNumber(this);" Width="70" placeholder="Số lượng"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Chưa nhập số lượng"
                                                                                         ControlToValidate="txtQuantity" Display="None" ForeColor="Red" ValidationGroup="G21"
                                                                                         CssClass="tlp-error">*</asp:RequiredFieldValidator>
                                                         </td>
                                                         <td>
-                                                            <cc1:ColorPicker ID="ColorPicker1" runat="server"/>                                                            
+                                                            <asp:TextBox ID="txtPrice" runat="server" class="text" CssClass="k-textbox textbox" onkeyup="FormatNumber(this);" onblur="FormatNumber(this);" Width="100" placeholder="Đơn giá"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Chưa nhập đơn giá"
+                                                                                        ControlToValidate="txtPrice" Display="None" ForeColor="Red" ValidationGroup="G21"
+                                                                                        CssClass="tlp-error">*</asp:RequiredFieldValidator>
+                                                        </td>
+                                                        <td align="left" nowrap="nowrap">
+                                                            <asp:DropDownList runat="server" ID="ddlProductDetailSize" CssClass="k-textbox textbox" Width="200">
+                                                            </asp:DropDownList>                                               
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="Chưa chọn size"
+                                                                ControlToValidate="ddlProductDetailSize" Display="None" ForeColor="Red" ValidationGroup="G21"
+                                                                CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
                                                         </td>
                                                         <td>
+                                                            <dx:ASPxColorEdit runat="server" ID="ColorEdit1" Color="#f7f7f7" >
+                                                            </dx:ASPxColorEdit>
+                                                        </td>
+                                                        <%--<td align="left" nowrap="nowrap">
+                                                            <cc1:ColorPicker ID="ColorPicker1" runat="server"/>                                                            
+                                                        </td>--%>
+                                                        <td align="left" nowrap="nowrap">
                                                             <asp:TextBox ID="txtColor2" runat="server" class="text" CssClass="k-textbox textbox" placeholder="Màu sắc ghi chú"></asp:TextBox>                                                            
                                                         </td>
                                                         <td>
@@ -206,7 +225,7 @@
                                             <tr>
                                                 <td>
                                                     <dx:ASPxGridView ID="ASPxGridView1_OrderDetail" runat="server" AutoGenerateColumns="False"
-                                                        Width="100%" KeyFieldName="ID" Theme="Aqua">
+                                                        Width="100%" KeyFieldName="ID" Theme="Aqua" Settings-ShowFooter="True">
                                                         <Columns>
                                                             <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Width="45px">
                                                             </dx:GridViewCommandColumn>
@@ -234,12 +253,28 @@
                                                             </dx:GridViewDataTextColumn>
                                                             <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng đặt" FieldName="Quantity"  Width="100px">
                                                                 <DataItemTemplate>
-                                                                        <%# Eval("Quantity")%>
+                                                                        <%# Eval("Quantity")%> <%# getProductDetailSize(Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID"))%>
                                                                 </DataItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <strong> <%# getSumQuantity()%></strong> 
+                                                                </FooterTemplate>
+                                                            </dx:GridViewDataTextColumn>
+                                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Đơn giá" FieldName="Quantity"  Width="100px">
+                                                                <DataItemTemplate>
+                                                                        <%# getFormatQuantity(Eval("Price"))%>
+                                                                </DataItemTemplate>
+                                                            </dx:GridViewDataTextColumn>
+                                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Thành tiền" FieldName="Quantity"  Width="100px">
+                                                                <DataItemTemplate>
+                                                                        <%# getFormatQuantity(Eval("Subtotal"))%>
+                                                                </DataItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <strong><%# getSumSubtotal()%></strong> 
+                                                                </FooterTemplate>
                                                             </dx:GridViewDataTextColumn>
                                                             <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Màu sắc"  Width="150px">
                                                                 <DataItemTemplate>
-                                                                        <%# Eval("Color1") + " - " + Eval("Color2") %>
+                                                                        <span style='color:<%# Eval("Color1")%>'><%# Eval("Color1") + " - " + Eval("Color2") %></span
                                                                 </DataItemTemplate>
                                                             </dx:GridViewDataTextColumn>
                                                             <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng thô đã làm" Width="140px">
@@ -321,6 +356,8 @@
                                                         <Settings ShowVerticalScrollBar="true" />
                                                         <SettingsPager PageSize="30">
                                                         </SettingsPager>
+
+<Settings ShowVerticalScrollBar="True" ShowHorizontalScrollBar="True" VerticalScrollableHeight="350"></Settings>
                                                     </dx:ASPxGridView>
                                                 </td>
                                             </tr>
@@ -344,7 +381,10 @@
         </tr>
         <tr>
             <td>
-                &nbsp;
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" ShowMessageBox="True"
+                                                    ShowSummary="False" ValidationGroup="G2" />
+                <asp:ValidationSummary ID="ValidationSummary2" runat="server" ForeColor="Red" ShowMessageBox="True"
+                                                                ShowSummary="False" ValidationGroup="G21" />
             </td>
         </tr>
     </table>

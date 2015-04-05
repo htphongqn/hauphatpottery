@@ -54,9 +54,6 @@ namespace hauphatpottery.Data
     partial void InsertPRODUCT_DETAIL_MATERIAL(PRODUCT_DETAIL_MATERIAL instance);
     partial void UpdatePRODUCT_DETAIL_MATERIAL(PRODUCT_DETAIL_MATERIAL instance);
     partial void DeletePRODUCT_DETAIL_MATERIAL(PRODUCT_DETAIL_MATERIAL instance);
-    partial void InsertORDER_DETAIL(ORDER_DETAIL instance);
-    partial void UpdateORDER_DETAIL(ORDER_DETAIL instance);
-    partial void DeleteORDER_DETAIL(ORDER_DETAIL instance);
     partial void InsertORDER(ORDER instance);
     partial void UpdateORDER(ORDER instance);
     partial void DeleteORDER(ORDER instance);
@@ -81,6 +78,9 @@ namespace hauphatpottery.Data
     partial void InsertPRODUCT_DETAIL(PRODUCT_DETAIL instance);
     partial void UpdatePRODUCT_DETAIL(PRODUCT_DETAIL instance);
     partial void DeletePRODUCT_DETAIL(PRODUCT_DETAIL instance);
+    partial void InsertORDER_DETAIL(ORDER_DETAIL instance);
+    partial void UpdateORDER_DETAIL(ORDER_DETAIL instance);
+    partial void DeleteORDER_DETAIL(ORDER_DETAIL instance);
     #endregion
 		
 		public hauphatpotteryDataContext() : 
@@ -177,14 +177,6 @@ namespace hauphatpottery.Data
 			}
 		}
 		
-		public System.Data.Linq.Table<ORDER_DETAIL> ORDER_DETAILs
-		{
-			get
-			{
-				return this.GetTable<ORDER_DETAIL>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ORDER> ORDERs
 		{
 			get
@@ -246,6 +238,14 @@ namespace hauphatpottery.Data
 			get
 			{
 				return this.GetTable<PRODUCT_DETAIL>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ORDER_DETAIL> ORDER_DETAILs
+		{
+			get
+			{
+				return this.GetTable<ORDER_DETAIL>();
 			}
 		}
 	}
@@ -1873,318 +1873,6 @@ namespace hauphatpottery.Data
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ORDER_DETAIL")]
-	public partial class ORDER_DETAIL : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private System.Nullable<int> _ORDER_ID;
-		
-		private System.Nullable<int> _PRODUCT_DETAIL_ID;
-		
-		private System.Nullable<int> _QUANTITY;
-		
-		private System.Nullable<decimal> _PRICE;
-		
-		private System.Nullable<decimal> _SUBTOTAL;
-		
-		private string _COLOR1;
-		
-		private string _COLOR2;
-		
-		private EntityRef<ORDER> _ORDER;
-		
-		private EntityRef<PRODUCT_DETAIL> _PRODUCT_DETAIL;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnORDER_IDChanging(System.Nullable<int> value);
-    partial void OnORDER_IDChanged();
-    partial void OnPRODUCT_DETAIL_IDChanging(System.Nullable<int> value);
-    partial void OnPRODUCT_DETAIL_IDChanged();
-    partial void OnQUANTITYChanging(System.Nullable<int> value);
-    partial void OnQUANTITYChanged();
-    partial void OnPRICEChanging(System.Nullable<decimal> value);
-    partial void OnPRICEChanged();
-    partial void OnSUBTOTALChanging(System.Nullable<decimal> value);
-    partial void OnSUBTOTALChanged();
-    partial void OnCOLOR1Changing(string value);
-    partial void OnCOLOR1Changed();
-    partial void OnCOLOR2Changing(string value);
-    partial void OnCOLOR2Changed();
-    #endregion
-		
-		public ORDER_DETAIL()
-		{
-			this._ORDER = default(EntityRef<ORDER>);
-			this._PRODUCT_DETAIL = default(EntityRef<PRODUCT_DETAIL>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ORDER_ID", DbType="Int")]
-		public System.Nullable<int> ORDER_ID
-		{
-			get
-			{
-				return this._ORDER_ID;
-			}
-			set
-			{
-				if ((this._ORDER_ID != value))
-				{
-					if (this._ORDER.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnORDER_IDChanging(value);
-					this.SendPropertyChanging();
-					this._ORDER_ID = value;
-					this.SendPropertyChanged("ORDER_ID");
-					this.OnORDER_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRODUCT_DETAIL_ID", DbType="Int")]
-		public System.Nullable<int> PRODUCT_DETAIL_ID
-		{
-			get
-			{
-				return this._PRODUCT_DETAIL_ID;
-			}
-			set
-			{
-				if ((this._PRODUCT_DETAIL_ID != value))
-				{
-					if (this._PRODUCT_DETAIL.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPRODUCT_DETAIL_IDChanging(value);
-					this.SendPropertyChanging();
-					this._PRODUCT_DETAIL_ID = value;
-					this.SendPropertyChanged("PRODUCT_DETAIL_ID");
-					this.OnPRODUCT_DETAIL_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QUANTITY", DbType="Int")]
-		public System.Nullable<int> QUANTITY
-		{
-			get
-			{
-				return this._QUANTITY;
-			}
-			set
-			{
-				if ((this._QUANTITY != value))
-				{
-					this.OnQUANTITYChanging(value);
-					this.SendPropertyChanging();
-					this._QUANTITY = value;
-					this.SendPropertyChanged("QUANTITY");
-					this.OnQUANTITYChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRICE", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> PRICE
-		{
-			get
-			{
-				return this._PRICE;
-			}
-			set
-			{
-				if ((this._PRICE != value))
-				{
-					this.OnPRICEChanging(value);
-					this.SendPropertyChanging();
-					this._PRICE = value;
-					this.SendPropertyChanged("PRICE");
-					this.OnPRICEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUBTOTAL", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> SUBTOTAL
-		{
-			get
-			{
-				return this._SUBTOTAL;
-			}
-			set
-			{
-				if ((this._SUBTOTAL != value))
-				{
-					this.OnSUBTOTALChanging(value);
-					this.SendPropertyChanging();
-					this._SUBTOTAL = value;
-					this.SendPropertyChanged("SUBTOTAL");
-					this.OnSUBTOTALChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COLOR1", DbType="NVarChar(150)")]
-		public string COLOR1
-		{
-			get
-			{
-				return this._COLOR1;
-			}
-			set
-			{
-				if ((this._COLOR1 != value))
-				{
-					this.OnCOLOR1Changing(value);
-					this.SendPropertyChanging();
-					this._COLOR1 = value;
-					this.SendPropertyChanged("COLOR1");
-					this.OnCOLOR1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COLOR2", DbType="NVarChar(150)")]
-		public string COLOR2
-		{
-			get
-			{
-				return this._COLOR2;
-			}
-			set
-			{
-				if ((this._COLOR2 != value))
-				{
-					this.OnCOLOR2Changing(value);
-					this.SendPropertyChanging();
-					this._COLOR2 = value;
-					this.SendPropertyChanged("COLOR2");
-					this.OnCOLOR2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ORDER_ORDER_DETAIL", Storage="_ORDER", ThisKey="ORDER_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public ORDER ORDER
-		{
-			get
-			{
-				return this._ORDER.Entity;
-			}
-			set
-			{
-				ORDER previousValue = this._ORDER.Entity;
-				if (((previousValue != value) 
-							|| (this._ORDER.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ORDER.Entity = null;
-						previousValue.ORDER_DETAILs.Remove(this);
-					}
-					this._ORDER.Entity = value;
-					if ((value != null))
-					{
-						value.ORDER_DETAILs.Add(this);
-						this._ORDER_ID = value.ID;
-					}
-					else
-					{
-						this._ORDER_ID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("ORDER");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PRODUCT_DETAIL_ORDER_DETAIL", Storage="_PRODUCT_DETAIL", ThisKey="PRODUCT_DETAIL_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public PRODUCT_DETAIL PRODUCT_DETAIL
-		{
-			get
-			{
-				return this._PRODUCT_DETAIL.Entity;
-			}
-			set
-			{
-				PRODUCT_DETAIL previousValue = this._PRODUCT_DETAIL.Entity;
-				if (((previousValue != value) 
-							|| (this._PRODUCT_DETAIL.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._PRODUCT_DETAIL.Entity = null;
-						previousValue.ORDER_DETAILs.Remove(this);
-					}
-					this._PRODUCT_DETAIL.Entity = value;
-					if ((value != null))
-					{
-						value.ORDER_DETAILs.Add(this);
-						this._PRODUCT_DETAIL_ID = value.ID;
-					}
-					else
-					{
-						this._PRODUCT_DETAIL_ID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("PRODUCT_DETAIL");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[ORDER]")]
 	public partial class ORDER : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2217,9 +1905,9 @@ namespace hauphatpottery.Data
 		
 		private System.Nullable<int> _CREATOR_ID;
 		
-		private EntitySet<ORDER_DETAIL> _ORDER_DETAILs;
-		
 		private EntitySet<INVENTORY> _INVENTORies;
+		
+		private EntitySet<ORDER_DETAIL> _ORDER_DETAILs;
 		
 		private EntityRef<USER> _USER;
 		
@@ -2259,8 +1947,8 @@ namespace hauphatpottery.Data
 		
 		public ORDER()
 		{
-			this._ORDER_DETAILs = new EntitySet<ORDER_DETAIL>(new Action<ORDER_DETAIL>(this.attach_ORDER_DETAILs), new Action<ORDER_DETAIL>(this.detach_ORDER_DETAILs));
 			this._INVENTORies = new EntitySet<INVENTORY>(new Action<INVENTORY>(this.attach_INVENTORies), new Action<INVENTORY>(this.detach_INVENTORies));
+			this._ORDER_DETAILs = new EntitySet<ORDER_DETAIL>(new Action<ORDER_DETAIL>(this.attach_ORDER_DETAILs), new Action<ORDER_DETAIL>(this.detach_ORDER_DETAILs));
 			this._USER = default(EntityRef<USER>);
 			this._CUSTOMER = default(EntityRef<CUSTOMER>);
 			OnCreated();
@@ -2534,19 +2222,6 @@ namespace hauphatpottery.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ORDER_ORDER_DETAIL", Storage="_ORDER_DETAILs", ThisKey="ID", OtherKey="ORDER_ID")]
-		public EntitySet<ORDER_DETAIL> ORDER_DETAILs
-		{
-			get
-			{
-				return this._ORDER_DETAILs;
-			}
-			set
-			{
-				this._ORDER_DETAILs.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ORDER_INVENTORY", Storage="_INVENTORies", ThisKey="ID", OtherKey="ORDER_ID")]
 		public EntitySet<INVENTORY> INVENTORies
 		{
@@ -2557,6 +2232,19 @@ namespace hauphatpottery.Data
 			set
 			{
 				this._INVENTORies.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ORDER_ORDER_DETAIL", Storage="_ORDER_DETAILs", ThisKey="ID", OtherKey="ORDER_ID")]
+		public EntitySet<ORDER_DETAIL> ORDER_DETAILs
+		{
+			get
+			{
+				return this._ORDER_DETAILs;
+			}
+			set
+			{
+				this._ORDER_DETAILs.Assign(value);
 			}
 		}
 		
@@ -2648,18 +2336,6 @@ namespace hauphatpottery.Data
 			}
 		}
 		
-		private void attach_ORDER_DETAILs(ORDER_DETAIL entity)
-		{
-			this.SendPropertyChanging();
-			entity.ORDER = this;
-		}
-		
-		private void detach_ORDER_DETAILs(ORDER_DETAIL entity)
-		{
-			this.SendPropertyChanging();
-			entity.ORDER = null;
-		}
-		
 		private void attach_INVENTORies(INVENTORY entity)
 		{
 			this.SendPropertyChanging();
@@ -2667,6 +2343,18 @@ namespace hauphatpottery.Data
 		}
 		
 		private void detach_INVENTORies(INVENTORY entity)
+		{
+			this.SendPropertyChanging();
+			entity.ORDER = null;
+		}
+		
+		private void attach_ORDER_DETAILs(ORDER_DETAIL entity)
+		{
+			this.SendPropertyChanging();
+			entity.ORDER = this;
+		}
+		
+		private void detach_ORDER_DETAILs(ORDER_DETAIL entity)
 		{
 			this.SendPropertyChanging();
 			entity.ORDER = null;
@@ -3959,11 +3647,11 @@ namespace hauphatpottery.Data
 		
 		private EntitySet<PRODUCT_DETAIL_MATERIAL> _PRODUCT_DETAIL_MATERIALs;
 		
-		private EntitySet<ORDER_DETAIL> _ORDER_DETAILs;
-		
 		private EntitySet<INVENTORY> _INVENTORies;
 		
 		private EntitySet<PRODUCT_DETAIL_SIZE> _PRODUCT_DETAIL_SIZEs;
+		
+		private EntitySet<ORDER_DETAIL> _ORDER_DETAILs;
 		
 		private EntityRef<PRODUCT> _PRODUCT;
 		
@@ -3992,9 +3680,9 @@ namespace hauphatpottery.Data
 		public PRODUCT_DETAIL()
 		{
 			this._PRODUCT_DETAIL_MATERIALs = new EntitySet<PRODUCT_DETAIL_MATERIAL>(new Action<PRODUCT_DETAIL_MATERIAL>(this.attach_PRODUCT_DETAIL_MATERIALs), new Action<PRODUCT_DETAIL_MATERIAL>(this.detach_PRODUCT_DETAIL_MATERIALs));
-			this._ORDER_DETAILs = new EntitySet<ORDER_DETAIL>(new Action<ORDER_DETAIL>(this.attach_ORDER_DETAILs), new Action<ORDER_DETAIL>(this.detach_ORDER_DETAILs));
 			this._INVENTORies = new EntitySet<INVENTORY>(new Action<INVENTORY>(this.attach_INVENTORies), new Action<INVENTORY>(this.detach_INVENTORies));
 			this._PRODUCT_DETAIL_SIZEs = new EntitySet<PRODUCT_DETAIL_SIZE>(new Action<PRODUCT_DETAIL_SIZE>(this.attach_PRODUCT_DETAIL_SIZEs), new Action<PRODUCT_DETAIL_SIZE>(this.detach_PRODUCT_DETAIL_SIZEs));
+			this._ORDER_DETAILs = new EntitySet<ORDER_DETAIL>(new Action<ORDER_DETAIL>(this.attach_ORDER_DETAILs), new Action<ORDER_DETAIL>(this.detach_ORDER_DETAILs));
 			this._PRODUCT = default(EntityRef<PRODUCT>);
 			this._TYPE = default(EntityRef<TYPE>);
 			OnCreated();
@@ -4161,19 +3849,6 @@ namespace hauphatpottery.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PRODUCT_DETAIL_ORDER_DETAIL", Storage="_ORDER_DETAILs", ThisKey="ID", OtherKey="PRODUCT_DETAIL_ID")]
-		public EntitySet<ORDER_DETAIL> ORDER_DETAILs
-		{
-			get
-			{
-				return this._ORDER_DETAILs;
-			}
-			set
-			{
-				this._ORDER_DETAILs.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PRODUCT_DETAIL_INVENTORY", Storage="_INVENTORies", ThisKey="ID", OtherKey="PRODUCT_DETAIL_ID")]
 		public EntitySet<INVENTORY> INVENTORies
 		{
@@ -4197,6 +3872,19 @@ namespace hauphatpottery.Data
 			set
 			{
 				this._PRODUCT_DETAIL_SIZEs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PRODUCT_DETAIL_ORDER_DETAIL", Storage="_ORDER_DETAILs", ThisKey="ID", OtherKey="PRODUCT_DETAIL_ID")]
+		public EntitySet<ORDER_DETAIL> ORDER_DETAILs
+		{
+			get
+			{
+				return this._ORDER_DETAILs;
+			}
+			set
+			{
+				this._ORDER_DETAILs.Assign(value);
 			}
 		}
 		
@@ -4300,18 +3988,6 @@ namespace hauphatpottery.Data
 			entity.PRODUCT_DETAIL = null;
 		}
 		
-		private void attach_ORDER_DETAILs(ORDER_DETAIL entity)
-		{
-			this.SendPropertyChanging();
-			entity.PRODUCT_DETAIL = this;
-		}
-		
-		private void detach_ORDER_DETAILs(ORDER_DETAIL entity)
-		{
-			this.SendPropertyChanging();
-			entity.PRODUCT_DETAIL = null;
-		}
-		
 		private void attach_INVENTORies(INVENTORY entity)
 		{
 			this.SendPropertyChanging();
@@ -4334,6 +4010,354 @@ namespace hauphatpottery.Data
 		{
 			this.SendPropertyChanging();
 			entity.PRODUCT_DETAIL = null;
+		}
+		
+		private void attach_ORDER_DETAILs(ORDER_DETAIL entity)
+		{
+			this.SendPropertyChanging();
+			entity.PRODUCT_DETAIL = this;
+		}
+		
+		private void detach_ORDER_DETAILs(ORDER_DETAIL entity)
+		{
+			this.SendPropertyChanging();
+			entity.PRODUCT_DETAIL = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ORDER_DETAIL")]
+	public partial class ORDER_DETAIL : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _ORDER_ID;
+		
+		private System.Nullable<int> _PRODUCT_DETAIL_ID;
+		
+		private System.Nullable<int> _PRODUCT_DETAIL_SIZE_ID;
+		
+		private System.Nullable<int> _QUANTITY;
+		
+		private System.Nullable<decimal> _PRICE;
+		
+		private System.Nullable<decimal> _SUBTOTAL;
+		
+		private string _COLOR1;
+		
+		private string _COLOR2;
+		
+		private EntityRef<ORDER> _ORDER;
+		
+		private EntityRef<PRODUCT_DETAIL> _PRODUCT_DETAIL;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnORDER_IDChanging(System.Nullable<int> value);
+    partial void OnORDER_IDChanged();
+    partial void OnPRODUCT_DETAIL_IDChanging(System.Nullable<int> value);
+    partial void OnPRODUCT_DETAIL_IDChanged();
+    partial void OnPRODUCT_DETAIL_SIZE_IDChanging(System.Nullable<int> value);
+    partial void OnPRODUCT_DETAIL_SIZE_IDChanged();
+    partial void OnQUANTITYChanging(System.Nullable<int> value);
+    partial void OnQUANTITYChanged();
+    partial void OnPRICEChanging(System.Nullable<decimal> value);
+    partial void OnPRICEChanged();
+    partial void OnSUBTOTALChanging(System.Nullable<decimal> value);
+    partial void OnSUBTOTALChanged();
+    partial void OnCOLOR1Changing(string value);
+    partial void OnCOLOR1Changed();
+    partial void OnCOLOR2Changing(string value);
+    partial void OnCOLOR2Changed();
+    #endregion
+		
+		public ORDER_DETAIL()
+		{
+			this._ORDER = default(EntityRef<ORDER>);
+			this._PRODUCT_DETAIL = default(EntityRef<PRODUCT_DETAIL>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ORDER_ID", DbType="Int")]
+		public System.Nullable<int> ORDER_ID
+		{
+			get
+			{
+				return this._ORDER_ID;
+			}
+			set
+			{
+				if ((this._ORDER_ID != value))
+				{
+					if (this._ORDER.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnORDER_IDChanging(value);
+					this.SendPropertyChanging();
+					this._ORDER_ID = value;
+					this.SendPropertyChanged("ORDER_ID");
+					this.OnORDER_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRODUCT_DETAIL_ID", DbType="Int")]
+		public System.Nullable<int> PRODUCT_DETAIL_ID
+		{
+			get
+			{
+				return this._PRODUCT_DETAIL_ID;
+			}
+			set
+			{
+				if ((this._PRODUCT_DETAIL_ID != value))
+				{
+					if (this._PRODUCT_DETAIL.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPRODUCT_DETAIL_IDChanging(value);
+					this.SendPropertyChanging();
+					this._PRODUCT_DETAIL_ID = value;
+					this.SendPropertyChanged("PRODUCT_DETAIL_ID");
+					this.OnPRODUCT_DETAIL_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRODUCT_DETAIL_SIZE_ID", DbType="Int")]
+		public System.Nullable<int> PRODUCT_DETAIL_SIZE_ID
+		{
+			get
+			{
+				return this._PRODUCT_DETAIL_SIZE_ID;
+			}
+			set
+			{
+				if ((this._PRODUCT_DETAIL_SIZE_ID != value))
+				{
+					this.OnPRODUCT_DETAIL_SIZE_IDChanging(value);
+					this.SendPropertyChanging();
+					this._PRODUCT_DETAIL_SIZE_ID = value;
+					this.SendPropertyChanged("PRODUCT_DETAIL_SIZE_ID");
+					this.OnPRODUCT_DETAIL_SIZE_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QUANTITY", DbType="Int")]
+		public System.Nullable<int> QUANTITY
+		{
+			get
+			{
+				return this._QUANTITY;
+			}
+			set
+			{
+				if ((this._QUANTITY != value))
+				{
+					this.OnQUANTITYChanging(value);
+					this.SendPropertyChanging();
+					this._QUANTITY = value;
+					this.SendPropertyChanged("QUANTITY");
+					this.OnQUANTITYChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRICE", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> PRICE
+		{
+			get
+			{
+				return this._PRICE;
+			}
+			set
+			{
+				if ((this._PRICE != value))
+				{
+					this.OnPRICEChanging(value);
+					this.SendPropertyChanging();
+					this._PRICE = value;
+					this.SendPropertyChanged("PRICE");
+					this.OnPRICEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUBTOTAL", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> SUBTOTAL
+		{
+			get
+			{
+				return this._SUBTOTAL;
+			}
+			set
+			{
+				if ((this._SUBTOTAL != value))
+				{
+					this.OnSUBTOTALChanging(value);
+					this.SendPropertyChanging();
+					this._SUBTOTAL = value;
+					this.SendPropertyChanged("SUBTOTAL");
+					this.OnSUBTOTALChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COLOR1", DbType="NVarChar(150)")]
+		public string COLOR1
+		{
+			get
+			{
+				return this._COLOR1;
+			}
+			set
+			{
+				if ((this._COLOR1 != value))
+				{
+					this.OnCOLOR1Changing(value);
+					this.SendPropertyChanging();
+					this._COLOR1 = value;
+					this.SendPropertyChanged("COLOR1");
+					this.OnCOLOR1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COLOR2", DbType="NVarChar(150)")]
+		public string COLOR2
+		{
+			get
+			{
+				return this._COLOR2;
+			}
+			set
+			{
+				if ((this._COLOR2 != value))
+				{
+					this.OnCOLOR2Changing(value);
+					this.SendPropertyChanging();
+					this._COLOR2 = value;
+					this.SendPropertyChanged("COLOR2");
+					this.OnCOLOR2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ORDER_ORDER_DETAIL", Storage="_ORDER", ThisKey="ORDER_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public ORDER ORDER
+		{
+			get
+			{
+				return this._ORDER.Entity;
+			}
+			set
+			{
+				ORDER previousValue = this._ORDER.Entity;
+				if (((previousValue != value) 
+							|| (this._ORDER.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ORDER.Entity = null;
+						previousValue.ORDER_DETAILs.Remove(this);
+					}
+					this._ORDER.Entity = value;
+					if ((value != null))
+					{
+						value.ORDER_DETAILs.Add(this);
+						this._ORDER_ID = value.ID;
+					}
+					else
+					{
+						this._ORDER_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("ORDER");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PRODUCT_DETAIL_ORDER_DETAIL", Storage="_PRODUCT_DETAIL", ThisKey="PRODUCT_DETAIL_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public PRODUCT_DETAIL PRODUCT_DETAIL
+		{
+			get
+			{
+				return this._PRODUCT_DETAIL.Entity;
+			}
+			set
+			{
+				PRODUCT_DETAIL previousValue = this._PRODUCT_DETAIL.Entity;
+				if (((previousValue != value) 
+							|| (this._PRODUCT_DETAIL.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._PRODUCT_DETAIL.Entity = null;
+						previousValue.ORDER_DETAILs.Remove(this);
+					}
+					this._PRODUCT_DETAIL.Entity = value;
+					if ((value != null))
+					{
+						value.ORDER_DETAILs.Add(this);
+						this._PRODUCT_DETAIL_ID = value.ID;
+					}
+					else
+					{
+						this._PRODUCT_DETAIL_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("PRODUCT_DETAIL");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

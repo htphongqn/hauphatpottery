@@ -25,7 +25,7 @@
                 <tr>
                     <td>
                         <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" ShowMessageBox="True"
-                            ShowSummary="False" ValidationGroup="G2" />
+                            ShowSummary="False" ValidationGroup="G2" />                            
                     </td>
                     <td>
                         Đơn vị

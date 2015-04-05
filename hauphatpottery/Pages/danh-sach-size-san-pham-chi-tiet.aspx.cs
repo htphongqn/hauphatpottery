@@ -74,6 +74,7 @@ namespace hauphatpottery.Pages
 
         protected void ddLProductDetail_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SetShapeProperty();
             LoadProductDetail_Size();
         }
         private void LoadProductDetail_Size()

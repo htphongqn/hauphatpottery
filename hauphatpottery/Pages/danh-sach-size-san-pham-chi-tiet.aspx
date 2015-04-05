@@ -27,7 +27,7 @@
                             CssClass="k-textbox textbox" AppendDataBoundItems="true" DataTextField="Code" 
                             DataValueField="Id" Width="200" AutoPostBack="True" 
                             onselectedindexchanged="ddLProductDetail_SelectedIndexChanged">
-                            <%--<asp:ListItem Value="0" Text="--Chọn sản phẩm chi tiết--"></asp:ListItem>--%>
+                            <asp:ListItem Value="0" Text="--Chọn sản phẩm chi tiết--"></asp:ListItem>
                         </asp:DropDownList>                                               
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Chưa chọn sản phẩm chi tiết"
                             ControlToValidate="ddLProductDetail" Display="None" ForeColor="Red" ValidationGroup="G2"

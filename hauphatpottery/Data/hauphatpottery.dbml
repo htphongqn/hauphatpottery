@@ -84,20 +84,6 @@
       <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_MATERIAL" Member="PRODUCT_DETAIL" ThisKey="PRODUCT_DETAIL_ID" OtherKey="ID" Type="PRODUCT_DETAIL" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
-  <Table Name="dbo.ORDER_DETAIL" Member="ORDER_DETAILs">
-    <Type Name="ORDER_DETAIL">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ORDER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PRODUCT_DETAIL_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="QUANTITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PRICE" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="SUBTOTAL" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="COLOR1" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="COLOR2" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Association Name="ORDER_ORDER_DETAIL" Member="ORDER" ThisKey="ORDER_ID" OtherKey="ID" Type="ORDER" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="PRODUCT_DETAIL_ORDER_DETAIL" Member="PRODUCT_DETAIL" ThisKey="PRODUCT_DETAIL_ID" OtherKey="ID" Type="PRODUCT_DETAIL" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
   <Table Name="dbo.[ORDER]" Member="ORDERs">
     <Type Name="ORDER">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -113,8 +99,8 @@
       <Column Name="BALANCEPRICE" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="CUSTOMER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CREATOR_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="ORDER_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="ID" OtherKey="ORDER_ID" Type="ORDER_DETAIL" />
       <Association Name="ORDER_INVENTORY" Member="INVENTORies" ThisKey="ID" OtherKey="ORDER_ID" Type="INVENTORY" />
+      <Association Name="ORDER_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="ID" OtherKey="ORDER_ID" Type="ORDER_DETAIL" />
       <Association Name="USER_ORDER" Member="USER" ThisKey="CREATOR_ID" OtherKey="USER_ID" Type="USER" IsForeignKey="true" DeleteRule="SET NULL" />
       <Association Name="CUSTOMER_ORDER" Member="CUSTOMER" ThisKey="CUSTOMER_ID" OtherKey="ID" Type="CUSTOMER" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
@@ -193,11 +179,26 @@
       <Column Name="TYPE_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PRODUCT_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_MATERIAL" Member="PRODUCT_DETAIL_MATERIALs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="PRODUCT_DETAIL_MATERIAL" />
-      <Association Name="PRODUCT_DETAIL_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="ORDER_DETAIL" />
       <Association Name="PRODUCT_DETAIL_INVENTORY" Member="INVENTORies" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="INVENTORY" />
       <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_SIZE" Member="PRODUCT_DETAIL_SIZEs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="PRODUCT_DETAIL_SIZE" />
+      <Association Name="PRODUCT_DETAIL_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="ORDER_DETAIL" />
       <Association Name="PRODUCT_PRODUCT_DETAIL" Member="PRODUCT" ThisKey="PRODUCT_ID" OtherKey="ID" Type="PRODUCT" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="TYPE_PRODUCT_DETAIL" Member="TYPE" ThisKey="TYPE_ID" OtherKey="ID" Type="TYPE" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDER_DETAIL" Member="ORDER_DETAILs">
+    <Type Name="ORDER_DETAIL">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ORDER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRODUCT_DETAIL_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRODUCT_DETAIL_SIZE_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QUANTITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRICE" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="SUBTOTAL" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="COLOR1" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="COLOR2" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Association Name="ORDER_ORDER_DETAIL" Member="ORDER" ThisKey="ORDER_ID" OtherKey="ID" Type="ORDER" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="PRODUCT_DETAIL_ORDER_DETAIL" Member="PRODUCT_DETAIL" ThisKey="PRODUCT_DETAIL_ID" OtherKey="ID" Type="PRODUCT_DETAIL" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>
