@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Master.Master" AutoEventWireup="true" CodeBehind="chi-tiet-don-hang.aspx.cs" Inherits="hauphatpottery.Pages.chi_tiet_don_hang" %>
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <%@ Register Assembly="DevExpress.Web.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxTabControl" TagPrefix="dx" %>
 <%@ Register Assembly="DevExpress.Web.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
@@ -61,7 +61,7 @@
         border: 1px solid #aecaf0">
         <tr>
             <td>
-                <dx:ASPxPageControl ID="ASPxPageControl2" runat="server" ActiveTabIndex="1" CssFilePath="~/App_Themes/Aqua/{0}/styles.css"
+                <dx:ASPxPageControl ID="ASPxPageControl2" runat="server" ActiveTabIndex="2" CssFilePath="~/App_Themes/Aqua/{0}/styles.css"
                     CssPostfix="Aqua" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" TabSpacing="3px"
                     Height="100%" Width="100%">
                     <TabPages>
@@ -74,6 +74,7 @@
                                             </td>
                                             <td>                                                
                                                 <asp:Label ID="Lberrors" runat="server" Text="" ForeColor="Red"></asp:Label>
+                                                
                                             </td>
                                         </tr>
                                         <tr>
@@ -103,14 +104,14 @@
                                                     CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <%--<tr>
                                             <td class="td_left" align="right" valign="top" nowrap="nowrap">
                                                 <span style="color: Red;">*</span>&nbsp;Thời hạn giao hàng
                                             </td>
                                             <td align="left" nowrap="nowrap">                                                
                                                 <uc1:pickerAndCalendar ID="pickerAndCalendarDeadlineDate" runat="server" />
                                             </td>
-                                        </tr>
+                                        </tr>--%>
                                         <tr>
                                             <td class="td_left" align="right" valign="top" nowrap="nowrap">
                                                 <span style="color: Red;">*</span>&nbsp;Thời gian bắt đầu
@@ -213,7 +214,7 @@
                                                         </td>
                                                         <td>
                                                             <asp:LinkButton ID="lbtnDeleteDetail" OnClientClick="return confirm('Bạn có chắc muốn xóa ?');"
-                                                            ToolTip="Xóa quản trị" CssClass="k-button" runat="server" OnClick="lbtnDeleteDetail_Click"><img alt="Xóa" src="../Images/icon-20-trash.png" /></asp:LinkButton>
+                                                            ToolTip="Xóa" CssClass="k-button" runat="server" OnClick="lbtnDeleteDetail_Click"><img alt="Xóa" src="../Images/icon-20-trash.png" /></asp:LinkButton>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -253,7 +254,7 @@
                                                             </dx:GridViewDataTextColumn>
                                                             <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng đặt" FieldName="Quantity"  Width="100px">
                                                                 <DataItemTemplate>
-                                                                        <%# Eval("Quantity")%> <%# getProductDetailSize(Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID"))%>
+                                                                    <strong><%# Eval("Quantity")%></strong> <%# getProductDetailSize(Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID"))%>
                                                                 </DataItemTemplate>
                                                                 <FooterTemplate>
                                                                     <strong> <%# getSumQuantity()%></strong> 
@@ -365,12 +366,133 @@
                                 </dx:ContentControl>
                             </ContentCollection>
                         </dx:TabPage>
+                        <dx:TabPage Text="Thời gian giao hàng" Name="thoigiangiaohang">
+                            <ContentCollection>
+                                <dx:ContentControl ID="ContentControl3" runat="server" SupportsDisabledAttribute="True">
+                                    <table border="0" cellspacing="1" cellpadding="3">
+                                        <tr>
+                                            <td align="left" nowrap="nowrap">                                                
+                                                <uc1:pickerAndCalendar ID="pickerAndCalendarDeadline" runat="server" />
+                                            </td>
+                                            <td align="left" nowrap="nowrap">
+                                                <asp:TextBox ID="txtNoteDeadline" runat="server" class="text" CssClass="k-textbox textbox" Width="400" placeholder="Ghi chú"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:LinkButton ID="lbtnSaveDeadline" ToolTip="Lưu thông tin" CssClass="k-button" runat="server"
+                                        OnClick="lbtnSaveDeadline_Click"><img alt="Lưu thông tin" src="../Images/icon-20-save.png" /></asp:LinkButton>
+                                            </td>
+                                            <td>
+                                                <asp:LinkButton ID="lbtnDeleteDeadline" OnClientClick="return confirm('Bạn có chắc muốn xóa ?');"
+                                                ToolTip="Xóa" CssClass="k-button" runat="server" OnClick="lbtnDeleteDeadline_Click"><img alt="Xóa" src="../Images/icon-20-trash.png" /></asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <dx:ASPxGridView ID="ASPxGridViewDeadline" runat="server" AutoGenerateColumns="False"
+                                         KeyFieldName="ID" Theme="Aqua">
+                                        <Columns>
+                                            <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Width="45px">
+                                            </dx:GridViewCommandColumn>
+                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="STT" Width="45px">
+                                                <DataItemTemplate>
+                                                    <%# Container.ItemIndex + 1 %></DataItemTemplate>
+                                                <CellStyle HorizontalAlign="Center">
+                                                </CellStyle>
+                                            </dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Thời gian giao hàng" Width="110px">
+                                                <DataItemTemplate>
+                                                        <%# getDate(Eval("DEADLINE_DATE"))%>
+                                                </DataItemTemplate>
+                                            </dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Trạng thái"  Width="100px">
+                                                <DataItemTemplate>
+                                                        <%# getDeadlineStatus(Eval("STATUS"))%>
+                                                </DataItemTemplate>
+                                            </dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Ghi chú"  Width="200px">
+                                                <DataItemTemplate>
+                                                        <%# Eval("NOTE")%>
+                                                </DataItemTemplate>
+                                            </dx:GridViewDataTextColumn>  
+                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="#" FieldName="ID" Width="200">
+                                                <DataItemTemplate>
+                                                        <a href="<%# getlink_deadline(Eval("ID")) %>">
+                                                        Số lượng</a>
+                                                </DataItemTemplate>
+                                            </dx:GridViewDataTextColumn>                                          
+                                        </Columns>
+                                        <SettingsPager PageSize="30">
+                                        </SettingsPager>
+                                    </dx:ASPxGridView>
+
+                                    <table border="0" cellspacing="1" cellpadding="3" id="trDeadlineDetail" runat="server" visible="false">
+                                        <tr>
+                                            <td colspan="4"><strong>Thời gian giao hàng: <asp:Literal ID="lbDeadlineDate" runat="server"></asp:Literal></strong></td>
+                                            </tr>
+                                            <tr>
+                                            <td><asp:DropDownList runat="server" ID="ddlProductDetailDeadline" 
+                                                CssClass="k-textbox textbox" Width="200">
+                                            </asp:DropDownList>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator45" runat="server" ErrorMessage="Chưa chọn sản phẩm"
+                                                ControlToValidate="ddlProductDetailDeadline" Display="None" ForeColor="Red" ValidationGroup="G29"
+                                                CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator></td>
+                                            <td>
+                                                <asp:Textbox id="txtQuantityDeadline" runat="server" class="k-textbox" width="100" onkeyup="FormatNumber(this);" onblur="FormatNumber(this);"
+                            name="txtQuantityDeadline" type="text" value="" runat="server" placeholder="Số lượng"></asp:Textbox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator43" runat="server" ErrorMessage="Chưa nhập số lượng"
+                                                    ControlToValidate="txtQuantityDeadline" Display="None" ForeColor="Red" ValidationGroup="G29"
+                                                    CssClass="tlp-error">*</asp:RequiredFieldValidator>
+                                            </td>                                            
+                                            <td>
+                                                <asp:LinkButton ID="lbtnSaveDeadlineDetail" ToolTip="Lưu thông tin" CssClass="k-button" runat="server" ValidationGroup="G29"
+                                        OnClick="lbtnSaveDeadlineDetail_Click"><img alt="Lưu thông tin" src="../Images/icon-20-save.png" /></asp:LinkButton>
+                                            </td>
+                                            <td>
+                                                <asp:LinkButton ID="lbtnDeleteDeadlineDetail" OnClientClick="return confirm('Bạn có chắc muốn xóa ?');"
+                                                ToolTip="Xóa" CssClass="k-button" runat="server" OnClick="lbtnDeleteDeadlineDetail_Click"><img alt="Xóa" src="../Images/icon-20-trash.png" /></asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <dx:ASPxGridView ID="ASPxGridViewDeadlineDetail" runat="server" AutoGenerateColumns="False"
+                                                     KeyFieldName="ID" Theme="Aqua">
+                                                    <Columns>                                            
+                                                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="STT" Width="45px">
+                                                            <DataItemTemplate>
+                                                                <%# Container.ItemIndex + 1 %></DataItemTemplate>
+                                                            <CellStyle HorizontalAlign="Center">
+                                                            </CellStyle>
+                                                        </dx:GridViewDataTextColumn>
+                                                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Sản phẩm chi tiết" Width="210px">
+                                                            <DataItemTemplate>
+                                                                    <%# getProductDetailDeadline(Eval("ORDER_DETAIL_ID"))%>
+                                                            </DataItemTemplate>
+                                                        </dx:GridViewDataTextColumn>
+                                                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng"  Width="100px">
+                                                            <DataItemTemplate>
+                                                                    <%# Eval("QUANTITY")%>
+                                                            </DataItemTemplate>
+                                                        </dx:GridViewDataTextColumn>
+                                                        <%--<dx:GridViewDataTextColumn VisibleIndex="1" Caption="Ghi chú"  Width="200px">
+                                                            <DataItemTemplate>
+                                                                    <%# Eval("NOTE")%>
+                                                            </DataItemTemplate>
+                                                        </dx:GridViewDataTextColumn> --%>                                      
+                                                    </Columns>
+                                                    <SettingsPager PageSize="30">
+                                                    </SettingsPager>
+                                                </dx:ASPxGridView>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </dx:ContentControl>
+                            </ContentCollection>
+                        </dx:TabPage>
                     </TabPages>
                     <LoadingPanelImage Url="~/App_Themes/Aqua/Web/Loading.gif">
                     </LoadingPanelImage>
                     <Paddings Padding="2px" PaddingLeft="5px" PaddingRight="5px" />
 
-<Paddings Padding="2px" PaddingLeft="5px" PaddingRight="5px"></Paddings>
+                    <Paddings Padding="2px" PaddingLeft="5px" PaddingRight="5px"></Paddings>
 
                     <ContentStyle>
                         <Border BorderColor="#AECAF0" BorderStyle="Solid" BorderWidth="1px" />
@@ -381,10 +503,12 @@
         </tr>
         <tr>
             <td>
-            <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" ShowMessageBox="True"
+                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" ShowMessageBox="True"
                                                     ShowSummary="False" ValidationGroup="G2" />
                 <asp:ValidationSummary ID="ValidationSummary2" runat="server" ForeColor="Red" ShowMessageBox="True"
                                                                 ShowSummary="False" ValidationGroup="G21" />
+                <asp:ValidationSummary ID="ValidationSummary24" runat="server" ForeColor="Red" ShowMessageBox="True"
+                ShowSummary="False" ValidationGroup="G29" />
             </td>
         </tr>
     </table>

@@ -33,7 +33,7 @@ namespace hauphatpottery.Pages
         #region Getinfo
         private void Loadmenu_parent()
         {
-            var list = db.MENU_PARENTs.Where(n => n.MENU_RANK == 1);
+            var list = db.MENU_PARENTs.Where(n => n.MENU_RANK == 1).OrderByDescending(n => n.ORDERBY);
             Drmenu_parent.DataValueField = "MENU_PAR_ID";
             Drmenu_parent.DataTextField = "MENU_NAME";
             Drmenu_parent.DataSource = list;

@@ -10,7 +10,16 @@
 namespace hauphatpottery.Pages {
     
     
-    public partial class xuat_san_pham {
+    public partial class danh_sach_cong_ty {
+        
+        /// <summary>
+        /// lbtnDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnDelete;
         
         /// <summary>
         /// pnContract control.
@@ -22,75 +31,48 @@ namespace hauphatpottery.Pages {
         protected global::System.Web.UI.WebControls.Panel pnContract;
         
         /// <summary>
-        /// ValidationSummary1 control.
+        /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// ddlOrder control.
+        /// txtKeyword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOrder;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtKeyword;
         
         /// <summary>
-        /// ddlProductDetail control.
+        /// lbtnSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProductDetail;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnSearch;
         
         /// <summary>
-        /// RequiredFieldValidator5 control.
+        /// lbtnDeleteKeyword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnDeleteKeyword;
         
         /// <summary>
-        /// txtQuantity control.
+        /// ASPxGridView1_Congty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtQuantity;
-        
-        /// <summary>
-        /// RequiredFieldValidator43 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator43;
-        
-        /// <summary>
-        /// lbtnSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnSave;
-        
-        /// <summary>
-        /// ASPxGridView1_Order_ProductDetail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxGridView.ASPxGridView ASPxGridView1_Order_ProductDetail;
+        protected global::DevExpress.Web.ASPxGridView.ASPxGridView ASPxGridView1_Congty;
     }
 }

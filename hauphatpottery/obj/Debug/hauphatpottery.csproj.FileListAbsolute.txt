@@ -10,10 +10,6 @@ E:\PFO\hauphatpottery\hauphatpottery_website\hauphatpottery\bin\hauphatpottery.p
 E:\PFO\hauphatpottery\hauphatpottery_website\hauphatpottery\obj\Debug\hauphatpottery.dll.licenses
 E:\PFO\hauphatpottery\hauphatpottery_website\hauphatpottery\obj\Debug\hauphatpottery.dll
 E:\PFO\hauphatpottery\hauphatpottery_website\hauphatpottery\obj\Debug\hauphatpottery.pdb
-E:\PFO\hauphatpottery\hauphatpottery_website\hauphatpottery\bin\DevExpress.Web.ASPxEditors.v12.1.xml
 E:\PFO\hauphatpottery\hauphatpottery_website\hauphatpottery\bin\DevExpress.Web.ASPxGridView.v12.1.xml
-E:\PFO\hauphatpottery\hauphatpottery_website\hauphatpottery\bin\DevExpress.Data.v12.1.xml
-E:\PFO\hauphatpottery\hauphatpottery_website\hauphatpottery\bin\DevExpress.Web.ASPxTreeList.v12.1.xml
 E:\PFO\hauphatpottery\hauphatpottery_website\hauphatpottery\bin\DevExpress.Web.v12.1.xml
-E:\PFO\hauphatpottery\hauphatpottery_website\hauphatpottery\bin\DevExpress.XtraTreeList.v12.1.xml
 E:\PFO\hauphatpottery\hauphatpottery_website\hauphatpottery\obj\Debug\hauphatpottery.csprojResolveAssemblyReference.cache

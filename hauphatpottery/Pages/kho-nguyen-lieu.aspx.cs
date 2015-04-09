@@ -10,7 +10,7 @@ using hauphatpottery.Components;
 
 namespace hauphatpottery.Pages
 {
-    public partial class nguyen_lieu : System.Web.UI.Page
+    public partial class kho_nguyen_lieu : System.Web.UI.Page
     {
         #region Declare
         private hauphatpotteryDataContext db = new hauphatpotteryDataContext();
@@ -22,7 +22,7 @@ namespace hauphatpottery.Pages
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            bool isPermission = _UnitDataRepo.checkPermissionPage("nguyen-lieu.aspx", Utils.CIntDef(Session["groupId"]), Utils.CIntDef(Session["groupType"]));
+            bool isPermission = _UnitDataRepo.checkPermissionPage("kho-nguyen-lieu.aspx", Utils.CIntDef(Session["groupId"]), Utils.CIntDef(Session["groupType"]));
             if (!isPermission)
             {
                 Response.Write("<script>alert('Bạn không có quyền truy cập vào trang này');location.href='trang-chu.aspx';</script>");
@@ -30,29 +30,12 @@ namespace hauphatpottery.Pages
             id = Utils.CIntDef(Request.QueryString["id"]);
             if (!IsPostBack)
             {
-                LoadUnit();
-                LoadInfo();
                 LoadMaterial();
             }
             else
             {
                 ASPxGridView1_Material.DataSource = HttpContext.Current.Session["listMaterial"];
                 ASPxGridView1_Material.DataBind();
-            }
-        }
-        private void LoadUnit()
-        {
-            try
-            {
-                var list = _UnitRepo.GetAll();
-                ddlUnit.DataSource = list;
-                ddlUnit.DataBind();
-
-            }
-            catch //(Exception)
-            {
-                //throw;
-
             }
         }
         private void LoadMaterial()
@@ -70,16 +53,6 @@ namespace hauphatpottery.Pages
             {
                 //throw;
             }
-        }
-
-        protected void lbtnDelete_Click(object sender, EventArgs e)
-        {
-            List<object> fieldValues = ASPxGridView1_Material.GetSelectedFieldValues(new string[] { "ID" });
-            foreach (var item in fieldValues)
-            {
-                _MaterialRepo.Remove(Utils.CIntDef(item));
-            }
-            Response.Redirect("nguyen-lieu.aspx");
         }
 
         #region Function
@@ -130,57 +103,10 @@ namespace hauphatpottery.Pages
         {
             var qty = (from a in db.ORDERMATERIAL_DETAILs
                         join b in db.ORDERMATERIALs on a.ORDERMATERIAL_ID equals b.ID
-                       where a.MATERIAL_ID == materialId && b.TYPE == type
+                        where a.MATERIAL_ID == materialId && b.TYPE == type
                         select a).Sum(z => z.QUANTITY);
             return Utils.CIntDef(qty);
         }
         #endregion
-
-        protected void lbtnSave_Click(object sender, EventArgs e)
-        {
-            Save();
-        }
-        private void LoadInfo()
-        {
-            var Material = _MaterialRepo.GetById(id);
-            if (Material != null)
-            {
-                txtName.Value = Material.NAME;
-                txtNote.Value = Material.NOTE;
-                ddlUnit.SelectedValue = Utils.CStrDef(Material.UNIT_ID);
-            }
-        }
-        private void Save()
-        {
-            try
-            {
-                var Material = _MaterialRepo.GetById(id);
-                if (id > 0 && Material != null)
-                {
-                    Material.NAME = txtName.Value;
-                    Material.NOTE = txtNote.Value;
-                    Material.UNIT_ID = Utils.CIntDef(ddlUnit.SelectedValue);
-
-                    _MaterialRepo.Update(Material);
-                }
-                else
-                {
-                    Material = new MATERIAL();
-                    Material.NAME = txtName.Value;
-                    Material.NOTE = txtNote.Value;
-                    Material.UNIT_ID = Utils.CIntDef(ddlUnit.SelectedValue);
-
-                    _MaterialRepo.Create(Material);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                Response.Redirect("nguyen-lieu.aspx");
-            }
-        }
     }
 }

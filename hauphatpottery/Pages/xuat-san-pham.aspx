@@ -69,7 +69,7 @@
                     <td>
                         <input class="k-textbox" width="40" id="txtQuantity" onkeyup="FormatNumber(this);" onblur="FormatNumber(this);"
                             name="txtQuantity" type="text" value="" runat="server" placeholder="Số lượng" />
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Chưa nhập số lượng"
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator43" runat="server" ErrorMessage="Chưa nhập số lượng"
                                                     ControlToValidate="txtQuantity" Display="None" ForeColor="Red" ValidationGroup="G2"
                                                     CssClass="tlp-error">*</asp:RequiredFieldValidator>
                     </td>

@@ -20,6 +20,9 @@ namespace hauphatpottery.Components
         public const int NHAP_THO = 1;
         public const int NHAP_TINH = 2;
         public const int XUAT_SANPHAM = 3;
+        //ORDERMATERIAL TYPE
+        public const int NHAP_NGUYENLIEU = 1;
+        public const int XUAT_NGUYENLIEU = 2;
         //SHAPE HÌNH DẠNG: Tròn D H, Chu nhat L W H, Vuong W H
     }
 }

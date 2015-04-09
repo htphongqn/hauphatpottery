@@ -22,7 +22,9 @@ namespace hauphatpottery.Pages
         private CustomerRepo _CustomerRepo = new CustomerRepo();
         private OrderRepo _OrderRepo = new OrderRepo();
         private OrderDetailRepo _OrderDetailRepo = new OrderDetailRepo();
-        private int id = 0; int activetab = 0;
+        private OrderDeadlineRepo _OrderDeadlineRepo = new OrderDeadlineRepo();
+        private OrderDeadlineOrderDetailRepo _OrderDeadlineOrderDetailRepo = new OrderDeadlineOrderDetailRepo();
+        private int id = 0; int activetab = 0; int deadlineId = 0;
         private clsFormat cls = new clsFormat();
         private InventoryRepo _InventoryRepo = new InventoryRepo();
         private UnitDataRepo _UnitDataRepo = new UnitDataRepo();
@@ -36,10 +38,12 @@ namespace hauphatpottery.Pages
                 Response.Write("<script>alert('Bạn không có quyền truy cập vào trang này');location.href='trang-chu.aspx';</script>");
             }
             id = Utils.CIntDef(Request.QueryString["id"], 0);
+            deadlineId = Utils.CIntDef(Request.QueryString["deadlineId"]);
             activetab = Utils.CIntDef(Request.QueryString["activetab"]);
             if (id > 0)
             {
                 ASPxPageControl2.TabPages.FindByName("danhsachchitiet").Visible = true;
+                ASPxPageControl2.TabPages.FindByName("thoigiangiaohang").Visible = true;
                 ASPxPageControl2.ActiveTabIndex = activetab;
                 int grouptypeId = Utils.CIntDef(Session["groupType"]);
                 if (grouptypeId == Cost.GROUPTYPE_ADMIN)
@@ -54,6 +58,7 @@ namespace hauphatpottery.Pages
             else
             {
                 ASPxPageControl2.TabPages.FindByName("danhsachchitiet").Visible = false;
+                ASPxPageControl2.TabPages.FindByName("thoigiangiaohang").Visible = false;
                 trStatus.Visible = false;
             }
             if (!IsPostBack)
@@ -61,6 +66,8 @@ namespace hauphatpottery.Pages
                 LoadCustomer();
                 LoadProduct();
                 LoadProductDetail();
+                LoadProductDetailDeadline();
+                LoadOrderDeadlineDetail();
                 getInfo();
             }
         }
@@ -110,7 +117,22 @@ namespace hauphatpottery.Pages
             }
             ddlProductDetailSize.Items.Insert(0, new ListItem("--Chọn Size--", "0"));
         }
-        #region getInfo
+        private void LoadProductDetailDeadline()
+        {
+            var orderDetail = _OrderDetailRepo.GetByOrderId(id);
+            ddlProductDetailDeadline.Items.Clear();
+            for (int i = 0; i < orderDetail.Count; i++)
+            {
+                int ProductDetailId = Utils.CIntDef(orderDetail[i].PRODUCT_DETAIL_ID);
+                int ProductDetailSizeId = Utils.CIntDef(orderDetail[i].PRODUCT_DETAIL_SIZE_ID);
+                string name = "";
+                name = getProductDetailNameSize(ProductDetailId, ProductDetailSizeId);
+                ddlProductDetailDeadline.Items.Add(new ListItem(name, Utils.CStrDef(orderDetail[i].ID)));
+            }
+            ddlProductDetailDeadline.Items.Insert(0, new ListItem("--Chọn Sản Phẩm Chi Tiết--", "0"));
+        }
+
+        #region Info & List
         private void getInfo()
         {
             try
@@ -120,25 +142,66 @@ namespace hauphatpottery.Pages
                 {
                     txtCode.Text = order.CODE;
                     ddlCustomer.SelectedValue = Utils.CStrDef(order.CUSTOMER_ID);
-                    pickerAndCalendarDeadlineDate.returnDate = Utils.CDateDef(order.DEADLINE_DATE, DateTime.Now);
+                    //pickerAndCalendarDeadlineDate.returnDate = Utils.CDateDef(order.DEADLINE_DATE, DateTime.Now);
                     pickerAndCalendarStartDate.returnDate = Utils.CDateDef(order.START_DATE, DateTime.Now);
                     txtNote.Text = Utils.CStrDef(order.NOTE);
                     rdlStatus.SelectedValue = Utils.CStrDef(order.STATUS);
                     LoadOrderDetail();
+                    LoadOrderDeadline();
                 }
             }
             catch
             {
             }
         }
-
+        
         private void LoadOrderDetail()
         {
             var orderDetail = _OrderDetailRepo.GetByOrderId(id);
             ASPxGridView1_OrderDetail.DataSource = orderDetail;
             ASPxGridView1_OrderDetail.DataBind();
         }
+        private void LoadOrderDeadline()
+        {
+            var orderDeadline = _OrderDeadlineRepo.GetByOrderId(id);
+            ASPxGridViewDeadline.DataSource = orderDeadline;
+            ASPxGridViewDeadline.DataBind();
+        }
+        private void LoadOrderDeadlineDetail()
+        {
+            if (deadlineId > 0)
+            {
+                trDeadlineDetail.Visible = true;
+            }
+            else
+            {
+                trDeadlineDetail.Visible = false;
+            }
+            var item = _OrderDeadlineRepo.GetById(deadlineId);
+            if (item != null)
+            {
+                lbDeadlineDate.Text = cls.DateToStrDate(item.DEADLINE_DATE, "{0:dd/MM/yyyy}");
+            }
+            var orderDeadlineDetail = _OrderDeadlineOrderDetailRepo.GetListByOrderDeadlineId(deadlineId);
+            if (orderDeadlineDetail != null && orderDeadlineDetail.ToList().Count > 0)
+            {
+                ASPxGridViewDeadlineDetail.DataSource = orderDeadlineDetail;
+                ASPxGridViewDeadlineDetail.DataBind();
+            }
+        }
         #endregion
+
+        protected void ddlProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadProductDetail();
+            ASPxPageControl2.ActiveTabIndex = 1;
+        }
+
+        protected void ddlProductDetail_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadProductDetailSize();
+            ASPxPageControl2.ActiveTabIndex = 1;
+        }
 
         #region Savedata
         private void Save(string strLink = "")
@@ -151,7 +214,7 @@ namespace hauphatpottery.Pages
                     order.CODE= txtCode.Text;
                     order.CUSTOMER_ID = Utils.CIntDef(ddlCustomer.SelectedValue);
                     order.START_DATE = pickerAndCalendarStartDate.returnDate;
-                    order.DEADLINE_DATE = pickerAndCalendarDeadlineDate.returnDate;
+                    //order.DEADLINE_DATE = pickerAndCalendarDeadlineDate.returnDate;
                     order.NOTE = txtNote.Text;
                     order.STATUS = Utils.CIntDef(rdlStatus.SelectedValue);
 
@@ -167,7 +230,7 @@ namespace hauphatpottery.Pages
                     order = new ORDER();
                     order.CODE = txtCode.Text;
                     order.CUSTOMER_ID = Utils.CIntDef(ddlCustomer.SelectedValue);
-                    order.DEADLINE_DATE = pickerAndCalendarDeadlineDate.returnDate;
+                    //order.DEADLINE_DATE = pickerAndCalendarDeadlineDate.returnDate;
                     order.START_DATE = pickerAndCalendarStartDate.returnDate;
                     order.NOTE = txtNote.Text;
                     order.STATUS = Cost.DANGCHO;
@@ -228,6 +291,7 @@ namespace hauphatpottery.Pages
         {
             Response.Redirect("danh-sach-don-hang.aspx");
         }
+
         protected void lbtnSaveDetail_Click(object sender, EventArgs e)
         {
             try
@@ -275,7 +339,108 @@ namespace hauphatpottery.Pages
             }
             Response.Redirect("chi-tiet-don-hang.aspx?id=" + id + "&activetab=" + 1);
         }
+
+        protected void lbtnSaveDeadline_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                var orderDeadline = new ORDER_DEADLINE();
+                orderDeadline.ORDER_ID = id;
+                orderDeadline.DEADLINE_DATE = pickerAndCalendarDeadline.returnDate;
+                orderDeadline.NOTE = Utils.CStrDef(txtNoteDeadline.Text);
+                orderDeadline.STATUS = 0;
+                _OrderDeadlineRepo.Create(orderDeadline);
+
+                Response.Redirect("chi-tiet-don-hang.aspx?id=" + id + "&activetab=" + 2);
+            }
+            catch
+            {
+            }
+        }
+        
+        protected void lbtnDeleteDeadline_Click(object sender, EventArgs e)
+        {
+            List<object> fieldValues = ASPxGridViewDeadline.GetSelectedFieldValues(new string[] { "ID" });
+            foreach (var item in fieldValues)
+            {
+                var list = _OrderDeadlineOrderDetailRepo.GetListByOrderDeadlineId(Utils.CIntDef(item));
+                _OrderDeadlineOrderDetailRepo.Remove(list);
+
+                _OrderDeadlineRepo.Remove(Utils.CIntDef(item));
+
+            }
+            Response.Redirect("chi-tiet-don-hang.aspx?id=" + id + "&activetab=" + 2);
+        }
+        protected void lbtnSaveDeadlineDetail_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var orderDeadlineDetail = _OrderDeadlineOrderDetailRepo.GetByOrderdeadlineIdAndOrderdetailId(deadlineId, Utils.CIntDef(ddlProductDetailDeadline.SelectedItem.Value));
+                if (orderDeadlineDetail != null)
+                {
+                    orderDeadlineDetail.ORDER_DEADLINE_ID = deadlineId;
+                    orderDeadlineDetail.ORDER_DETAIL_ID = Utils.CIntDef(ddlProductDetailDeadline.SelectedItem.Value);
+                    orderDeadlineDetail.QUANTITY = Utils.CIntDef(txtQuantityDeadline.Text);
+                    _OrderDeadlineOrderDetailRepo.Update(orderDeadlineDetail);
+                }
+                else
+                {
+                    orderDeadlineDetail = new ORDER_DEADLINE_ORDER_DETAIL();
+                    orderDeadlineDetail.ORDER_DEADLINE_ID = deadlineId;
+                    orderDeadlineDetail.ORDER_DETAIL_ID = Utils.CIntDef(ddlProductDetailDeadline.SelectedItem.Value);
+                    orderDeadlineDetail.QUANTITY = Utils.CIntDef(txtQuantityDeadline.Text);
+                    _OrderDeadlineOrderDetailRepo.Create(orderDeadlineDetail);
+                }
+                Response.Redirect("chi-tiet-don-hang.aspx?id=" + id + "&deadlineId=" + deadlineId + "&activetab=2");
+            }
+            catch
+            {
+            }
+        }
+
+        protected void lbtnDeleteDeadlineDetail_Click(object sender, EventArgs e)
+        {
+            List<object> fieldValues = ASPxGridViewDeadline.GetSelectedFieldValues(new string[] { "ID" });
+            foreach (var item in fieldValues)
+            {
+                _OrderDeadlineOrderDetailRepo.Remove(Utils.CIntDef(item));
+            }
+            Response.Redirect("chi-tiet-don-hang.aspx?id=" + id + "&deadlineId=" + deadlineId + "&activetab=2"); 
+                                ;
+        }
         #endregion
+
+        #region function
+        public string getProductDetailNameSize(int productDetailId, int productDetailSizeId)
+        {
+            var productDetail = _ProductDetailRepo.GetById(productDetailId);
+            string name = "";
+            if (productDetail != null)
+                name += productDetail.CODE;
+
+            var size = _ProductDetailSizeRepo.GetById(productDetailSizeId);
+            var shapeProperty = _ShapePropertyRepo.GetByProductDetailId(productDetailId);
+            if (productDetailSizeId == -1)
+                name += "(Bộ)";
+            else
+            {
+                if (size != null && shapeProperty != null)
+                {
+                    name += "(";
+                    if (Utils.CIntDef(shapeProperty.D) == 1)
+                        name += "D" + size.D + " ";
+                    if (Utils.CIntDef(shapeProperty.H) == 1)
+                        name += "H" + size.H + " ";
+                    if (Utils.CIntDef(shapeProperty.L) == 1)
+                        name += "L" + size.D + " ";
+                    if (Utils.CIntDef(shapeProperty.W) == 1)
+                        name += "W" + size.W + " ";
+                    name += ")";
+                }
+            }
+            return name;
+        }
         public string getProductDetailSize(object productDetailId, object productDetailSizeId)
         {
             int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
@@ -297,6 +462,15 @@ namespace hauphatpottery.Pages
                 if (Utils.CIntDef(shapeProperty.W) == 1)
                     name += "W" + item.W + " ";
                 return name;
+            }
+            return "";
+        }
+        public string getProductDetailDeadline(object orderDetailId)
+        {
+            var orderDetail = _OrderDetailRepo.GetById(Utils.CIntDef(orderDetailId));
+            if (orderDetail != null)
+            {
+                return getProductDetailNameSize(Utils.CIntDef(orderDetail.PRODUCT_DETAIL_ID), Utils.CIntDef(orderDetail.PRODUCT_DETAIL_SIZE_ID));
             }
             return "";
         }
@@ -339,6 +513,10 @@ namespace hauphatpottery.Pages
         {
             return string.Format("{0:dd/MM/yyyy}", date);
         }
+        public string getDeadlineStatus(object status)
+        {
+            return Utils.CIntDef(status) == 1 ? "Đã giao" : "Chưa giao";
+        }
         public string getCodeProductDetail(object oid)
         {
             int _id = Utils.CIntDef(oid);
@@ -348,6 +526,10 @@ namespace hauphatpottery.Pages
                 return item.CODE;
             }
             return "";
+        }
+        public string getlink_deadline(object deadlineId)
+        {
+            return "chi-tiet-don-hang.aspx?id=" + id + "&deadlineId=" + deadlineId + "&activetab=2";
         }
         public string getFormatQuantity(object quantity)
         {
@@ -419,17 +601,6 @@ namespace hauphatpottery.Pages
             }
             return "";
         }
-
-        protected void ddlProduct_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadProductDetail();
-            ASPxPageControl2.ActiveTabIndex = 1;
-        }
-
-        protected void ddlProductDetail_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadProductDetailSize();
-            ASPxPageControl2.ActiveTabIndex = 1;
-        }
+        #endregion
     }
 }
