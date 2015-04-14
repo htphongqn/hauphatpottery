@@ -325,6 +325,7 @@
     <Content Include="Pages\chi-tiet-san-pham-chi-tiet.aspx" />
     <Content Include="Pages\chi-tiet-don-hang.aspx" />
     <Content Include="Pages\chi-tiet-cong-ty.aspx" />
+    <Content Include="Pages\xuat-nguyen-lieu.aspx" />
     <Content Include="Pages\danh-sach-xuat-nguyen-lieu.aspx" />
     <Content Include="Pages\danh-sach-nhap-nguyen-lieu.aspx" />
     <Content Include="Pages\kho-nguyen-lieu.aspx" />
@@ -389,6 +390,7 @@
     <Compile Include="Components\clsUtility.cs" />
     <Compile Include="Components\Cost.cs" />
     <Compile Include="Data\CompanyRepo.cs" />
+    <Compile Include="Data\OrderMaterialDetailRepo.cs" />
     <Compile Include="Data\OrderMaterialRepo.cs" />
     <Compile Include="Data\OrderDeadlineOrderDetailRepo.cs" />
     <Compile Include="Data\OrderDeadlineRepo.cs" />
@@ -502,6 +504,13 @@
     </Compile>
     <Compile Include="Pages\chi-tiet-cong-ty.aspx.designer.cs">
       <DependentUpon>chi-tiet-cong-ty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\xuat-nguyen-lieu.aspx.cs">
+      <DependentUpon>xuat-nguyen-lieu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\xuat-nguyen-lieu.aspx.designer.cs">
+      <DependentUpon>xuat-nguyen-lieu.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\danh-sach-xuat-nguyen-lieu.aspx.cs">
       <DependentUpon>danh-sach-xuat-nguyen-lieu.aspx</DependentUpon>

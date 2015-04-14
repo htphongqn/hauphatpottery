@@ -75,7 +75,7 @@ namespace hauphatpottery.Pages
             var Material = _MaterialRepo.GetById(_id);
             if (Material != null)
             {
-                var Unit = _UnitRepo.GetById(_id);
+                var Unit = _UnitRepo.GetById(Utils.CIntDef(Material.UNIT_ID));
                 if (Unit != null)
                 {
                     lbUnit.Text = Unit.NAME;
@@ -156,7 +156,11 @@ namespace hauphatpottery.Pages
             var Material = _MaterialRepo.GetById(_id);
             if (Material != null)
             {
-                return Material.UNIT.NAME;
+                var Unit = _UnitRepo.GetById(Utils.CIntDef(Material.UNIT_ID));
+                if (Unit != null)
+                {
+                    return Unit.NAME;
+                }
             }
             return "";
         }

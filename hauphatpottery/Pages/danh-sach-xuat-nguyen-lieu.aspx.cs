@@ -51,7 +51,7 @@ namespace hauphatpottery.Pages
             try
             {
                 int userId = Utils.CIntDef(Session["Userid"]);
-                var list = _OrderMaterialRepo.GetByType(txtKeyword.Value, 0, Utils.CIntDef(ddlOrder.SelectedValue), Cost.NHAP_NGUYENLIEU);
+                var list = _OrderMaterialRepo.GetByType(txtKeyword.Value, 0, Utils.CIntDef(ddlOrder.SelectedValue), Cost.XUAT_NGUYENLIEU);
 
                 HttpContext.Current.Session["listOrderMaterial"] = list;
                 ASPxGridView1_OrderMaterial.DataSource = list;
@@ -94,7 +94,7 @@ namespace hauphatpottery.Pages
         }
         public string getlink(object id)
         {
-            return Utils.CIntDef(id) > 0 ? "nhap-nguyen-lieu.aspx?id=" + Utils.CIntDef(id) : "nhap-nguyen-lieu.aspx";
+            return Utils.CIntDef(id) > 0 ? "xuat-nguyen-lieu.aspx?id=" + Utils.CIntDef(id) : "xuat-nguyen-lieu.aspx";
         }
         public string getOrderCode(object oid)
         {

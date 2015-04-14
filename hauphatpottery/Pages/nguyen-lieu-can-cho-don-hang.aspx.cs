@@ -135,7 +135,11 @@ namespace hauphatpottery.Pages
             var Material = _MaterialRepo.GetById(_id);
             if (Material != null)
             {
-                return Material.UNIT.NAME;
+                var Unit = _UnitRepo.GetById(Utils.CIntDef(Material.UNIT_ID));
+                if (Unit != null)
+                {
+                    return Unit.NAME;
+                }
             }
             return "";
         }

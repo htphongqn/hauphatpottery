@@ -89,7 +89,7 @@
                                     <%# getShortString(Eval("CODE"), 40)%></a>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Order" Width="250px">
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Đơn hàng" Width="250px">
                             <DataItemTemplate>
                                     <%# getShortString(getOrderCode(Eval("Order_ID")), 40)%>
                             </DataItemTemplate>
