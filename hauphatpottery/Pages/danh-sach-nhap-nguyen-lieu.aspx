@@ -93,10 +93,25 @@
                             <DataItemTemplate>
                                     <%# getShortString(getNameCompany(Eval("COMPANY_ID")), 40)%>
                             </DataItemTemplate>
-                        </dx:GridViewDataTextColumn>    
+                        </dx:GridViewDataTextColumn> 
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Tổng tiền">
+                            <DataItemTemplate>
+                                    <%# getSumSubtotal(Eval("ID"))%>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>   
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số tiền trả trước">
                             <DataItemTemplate>
                                     <%# getFormatQuantity(Eval("Orderprice"))%>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Tổng tiền trả">
+                            <DataItemTemplate>
+                                    <%# getSumTientra(Eval("ID"))%>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Còn nợ">
+                            <DataItemTemplate>
+                                    <%# getCono(Eval("ID"), Eval("Orderprice"))%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Ghi chú">

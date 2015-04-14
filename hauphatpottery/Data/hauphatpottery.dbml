@@ -259,8 +259,18 @@
       <Column Name="CREATOR_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CREATED_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
       <Association Name="ORDERMATERIAL_ORDERMATERIAL_DETAIL" Member="ORDERMATERIAL_DETAILs" ThisKey="ID" OtherKey="ORDERMATERIAL_ID" Type="ORDERMATERIAL_DETAIL" />
+      <Association Name="ORDERMATERIAL_ORDERMATERIAL_PRICE" Member="ORDERMATERIAL_PRICEs" ThisKey="ID" OtherKey="ORDERMATERIAL_ID" Type="ORDERMATERIAL_PRICE" />
       <Association Name="COMPANY_ORDERMATERIAL" Member="COMPANY" ThisKey="COMPANY_ID" OtherKey="ID" Type="COMPANY" IsForeignKey="true" DeleteRule="SET NULL" />
       <Association Name="ORDER_ORDERMATERIAL" Member="ORDER" ThisKey="ORDER_ID" OtherKey="ID" Type="ORDER" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDERMATERIAL_PRICE" Member="ORDERMATERIAL_PRICEs">
+    <Type Name="ORDERMATERIAL_PRICE">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ORDERMATERIAL_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRICE" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="CREATE_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Association Name="ORDERMATERIAL_ORDERMATERIAL_PRICE" Member="ORDERMATERIAL" ThisKey="ORDERMATERIAL_ID" OtherKey="ID" Type="ORDERMATERIAL" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>

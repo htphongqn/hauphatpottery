@@ -96,6 +96,9 @@ namespace hauphatpottery.Data
     partial void InsertORDERMATERIAL(ORDERMATERIAL instance);
     partial void UpdateORDERMATERIAL(ORDERMATERIAL instance);
     partial void DeleteORDERMATERIAL(ORDERMATERIAL instance);
+    partial void InsertORDERMATERIAL_PRICE(ORDERMATERIAL_PRICE instance);
+    partial void UpdateORDERMATERIAL_PRICE(ORDERMATERIAL_PRICE instance);
+    partial void DeleteORDERMATERIAL_PRICE(ORDERMATERIAL_PRICE instance);
     #endregion
 		
 		public hauphatpotteryDataContext() : 
@@ -301,6 +304,14 @@ namespace hauphatpottery.Data
 			get
 			{
 				return this.GetTable<ORDERMATERIAL>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ORDERMATERIAL_PRICE> ORDERMATERIAL_PRICEs
+		{
+			get
+			{
+				return this.GetTable<ORDERMATERIAL_PRICE>();
 			}
 		}
 	}
@@ -5402,6 +5413,8 @@ namespace hauphatpottery.Data
 		
 		private EntitySet<ORDERMATERIAL_DETAIL> _ORDERMATERIAL_DETAILs;
 		
+		private EntitySet<ORDERMATERIAL_PRICE> _ORDERMATERIAL_PRICEs;
+		
 		private EntityRef<COMPANY> _COMPANY;
 		
 		private EntityRef<ORDER> _ORDER;
@@ -5433,6 +5446,7 @@ namespace hauphatpottery.Data
 		public ORDERMATERIAL()
 		{
 			this._ORDERMATERIAL_DETAILs = new EntitySet<ORDERMATERIAL_DETAIL>(new Action<ORDERMATERIAL_DETAIL>(this.attach_ORDERMATERIAL_DETAILs), new Action<ORDERMATERIAL_DETAIL>(this.detach_ORDERMATERIAL_DETAILs));
+			this._ORDERMATERIAL_PRICEs = new EntitySet<ORDERMATERIAL_PRICE>(new Action<ORDERMATERIAL_PRICE>(this.attach_ORDERMATERIAL_PRICEs), new Action<ORDERMATERIAL_PRICE>(this.detach_ORDERMATERIAL_PRICEs));
 			this._COMPANY = default(EntityRef<COMPANY>);
 			this._ORDER = default(EntityRef<ORDER>);
 			OnCreated();
@@ -5639,6 +5653,19 @@ namespace hauphatpottery.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ORDERMATERIAL_ORDERMATERIAL_PRICE", Storage="_ORDERMATERIAL_PRICEs", ThisKey="ID", OtherKey="ORDERMATERIAL_ID")]
+		public EntitySet<ORDERMATERIAL_PRICE> ORDERMATERIAL_PRICEs
+		{
+			get
+			{
+				return this._ORDERMATERIAL_PRICEs;
+			}
+			set
+			{
+				this._ORDERMATERIAL_PRICEs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="COMPANY_ORDERMATERIAL", Storage="_COMPANY", ThisKey="COMPANY_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="SET NULL")]
 		public COMPANY COMPANY
 		{
@@ -5737,6 +5764,193 @@ namespace hauphatpottery.Data
 		{
 			this.SendPropertyChanging();
 			entity.ORDERMATERIAL = null;
+		}
+		
+		private void attach_ORDERMATERIAL_PRICEs(ORDERMATERIAL_PRICE entity)
+		{
+			this.SendPropertyChanging();
+			entity.ORDERMATERIAL = this;
+		}
+		
+		private void detach_ORDERMATERIAL_PRICEs(ORDERMATERIAL_PRICE entity)
+		{
+			this.SendPropertyChanging();
+			entity.ORDERMATERIAL = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ORDERMATERIAL_PRICE")]
+	public partial class ORDERMATERIAL_PRICE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _ORDERMATERIAL_ID;
+		
+		private System.Nullable<decimal> _PRICE;
+		
+		private System.Nullable<System.DateTime> _CREATE_DATE;
+		
+		private EntityRef<ORDERMATERIAL> _ORDERMATERIAL;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnORDERMATERIAL_IDChanging(System.Nullable<int> value);
+    partial void OnORDERMATERIAL_IDChanged();
+    partial void OnPRICEChanging(System.Nullable<decimal> value);
+    partial void OnPRICEChanged();
+    partial void OnCREATE_DATEChanging(System.Nullable<System.DateTime> value);
+    partial void OnCREATE_DATEChanged();
+    #endregion
+		
+		public ORDERMATERIAL_PRICE()
+		{
+			this._ORDERMATERIAL = default(EntityRef<ORDERMATERIAL>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ORDERMATERIAL_ID", DbType="Int")]
+		public System.Nullable<int> ORDERMATERIAL_ID
+		{
+			get
+			{
+				return this._ORDERMATERIAL_ID;
+			}
+			set
+			{
+				if ((this._ORDERMATERIAL_ID != value))
+				{
+					if (this._ORDERMATERIAL.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnORDERMATERIAL_IDChanging(value);
+					this.SendPropertyChanging();
+					this._ORDERMATERIAL_ID = value;
+					this.SendPropertyChanged("ORDERMATERIAL_ID");
+					this.OnORDERMATERIAL_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRICE", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> PRICE
+		{
+			get
+			{
+				return this._PRICE;
+			}
+			set
+			{
+				if ((this._PRICE != value))
+				{
+					this.OnPRICEChanging(value);
+					this.SendPropertyChanging();
+					this._PRICE = value;
+					this.SendPropertyChanged("PRICE");
+					this.OnPRICEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATE_DATE", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> CREATE_DATE
+		{
+			get
+			{
+				return this._CREATE_DATE;
+			}
+			set
+			{
+				if ((this._CREATE_DATE != value))
+				{
+					this.OnCREATE_DATEChanging(value);
+					this.SendPropertyChanging();
+					this._CREATE_DATE = value;
+					this.SendPropertyChanged("CREATE_DATE");
+					this.OnCREATE_DATEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ORDERMATERIAL_ORDERMATERIAL_PRICE", Storage="_ORDERMATERIAL", ThisKey="ORDERMATERIAL_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public ORDERMATERIAL ORDERMATERIAL
+		{
+			get
+			{
+				return this._ORDERMATERIAL.Entity;
+			}
+			set
+			{
+				ORDERMATERIAL previousValue = this._ORDERMATERIAL.Entity;
+				if (((previousValue != value) 
+							|| (this._ORDERMATERIAL.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ORDERMATERIAL.Entity = null;
+						previousValue.ORDERMATERIAL_PRICEs.Remove(this);
+					}
+					this._ORDERMATERIAL.Entity = value;
+					if ((value != null))
+					{
+						value.ORDERMATERIAL_PRICEs.Add(this);
+						this._ORDERMATERIAL_ID = value.ID;
+					}
+					else
+					{
+						this._ORDERMATERIAL_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("ORDERMATERIAL");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

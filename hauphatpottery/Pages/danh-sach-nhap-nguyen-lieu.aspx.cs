@@ -15,6 +15,8 @@ namespace hauphatpottery.Pages
         #region Declare
         private OrderRepo _OrderRepo = new OrderRepo();
         private OrderMaterialRepo _OrderMaterialRepo = new OrderMaterialRepo();
+        private OrderMaterialDetailRepo _OrderMaterialDetailRepo = new OrderMaterialDetailRepo();
+        private OrderMaterialPriceRepo _OrderMaterialPriceRepo = new OrderMaterialPriceRepo();
         private UserRepo _UserRepo = new UserRepo();
         private CompanyRepo _CompanyRepo = new CompanyRepo();
         private clsFormat cls = new clsFormat();
@@ -104,6 +106,43 @@ namespace hauphatpottery.Pages
             {
                 return item.NAME;
             }
+            return "";
+        }
+        public string getSumSubtotal(object Id)
+        {
+            var orderMaterialDetail = _OrderMaterialDetailRepo.GetByOrderMaterialId(Utils.CIntDef(Id));
+            if (orderMaterialDetail != null)
+            {
+                return cls.FormatMoneyNotext(orderMaterialDetail.Sum(n => n.SUBTOTAL));
+            }
+            return "";
+        }
+        public string getSumTientra(object Id)
+        {
+            var orderMaterialPrice = _OrderMaterialPriceRepo.GetByOrderMaterialId(Utils.CIntDef(Id));
+            if (orderMaterialPrice != null)
+            {
+                return cls.FormatMoneyNotext(orderMaterialPrice.Sum(n => n.PRICE));
+            }
+            return "";
+        }
+        public string getCono(object Id, object Tientratruoc)
+        {
+            var orderMaterialDetail = _OrderMaterialDetailRepo.GetByOrderMaterialId(Utils.CIntDef(Id));
+            if (orderMaterialDetail != null)
+            {
+                decimal sumSubtotal = Utils.CDecDef(orderMaterialDetail.Sum(n => n.SUBTOTAL));
+                sumSubtotal = sumSubtotal - Utils.CIntDef(Tientratruoc);
+                decimal sumTientra = 0;
+                var orderMaterialPrice = _OrderMaterialPriceRepo.GetByOrderMaterialId(Utils.CIntDef(Id));
+                if (orderMaterialPrice != null)
+                {
+                    sumTientra = Utils.CDecDef(orderMaterialPrice.Sum(n => n.PRICE));
+                }
+
+                return cls.FormatMoneyNotext(sumSubtotal - sumTientra);
+            }
+            
             return "";
         }
         public string getDate(object date)
