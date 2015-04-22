@@ -36,7 +36,7 @@
    num.substring(num.length - (4 * i + 3));
         //return (((sign)?'':'-') + num); 
         eval(obj).value = (((sign) ? '' : '-') + num);
-    }
+    }    
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="CPHMain" runat="server">
@@ -61,7 +61,7 @@
         border: 1px solid #aecaf0">
         <tr>
             <td>
-                <dx:ASPxPageControl ID="ASPxPageControl2" runat="server" ActiveTabIndex="2" CssFilePath="~/App_Themes/Aqua/{0}/styles.css"
+                <dx:ASPxPageControl ID="ASPxPageControl2" runat="server" ActiveTabIndex="0" CssFilePath="~/App_Themes/Aqua/{0}/styles.css"
                     CssPostfix="Aqua" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" TabSpacing="3px"
                     Height="100%" Width="100%">
                     <TabPages>
@@ -180,7 +180,8 @@
                                                                 CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
                                                         </td>                                                        
                                                         <td>
-                                                            <asp:TextBox ID="txtQuantity" runat="server" class="text" CssClass="k-textbox textbox" onkeyup="FormatNumber(this);" onblur="FormatNumber(this);" Width="70" placeholder="Số lượng"></asp:TextBox>
+                                                            <%--<asp:TextBox ID="txtQuantity" runat="server" class="text" CssClass="k-textbox textbox" onkeyup="FormatNumber(this);" onblur="FormatNumber(this);" Width="70" placeholder="Số lượng"></asp:TextBox>--%>
+                                                            <asp:TextBox ID="txtQuantity" runat="server" class="text" CssClass="k-textbox textbox" onkeypress="return digits(this, event, false, false);" Width="70" placeholder="Số lượng"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Chưa nhập số lượng"
                                                                                         ControlToValidate="txtQuantity" Display="None" ForeColor="Red" ValidationGroup="G21"
                                                                                         CssClass="tlp-error">*</asp:RequiredFieldValidator>
@@ -244,17 +245,17 @@
                                                             </dx:GridViewDataTextColumn>
                                                             <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Sản phẩm chi tiết" Width="250px">
                                                                 <DataItemTemplate>
-                                                                        <%# getProductDetailName(Eval("Product_Detail_Id"))%>
+                                                                        <span onmouseout="BBTOnline_HideTooltip();" onmouseover="BBTOnline_ShowTooltip('../ToolTip/ToolTip.aspx?oid=<%# getProductIdByProductDetailId(Eval("PRODUCT_DETAIL_ID")) %>'); return false;"><%# getProductDetailName(Eval("Product_Detail_Id"))%></span> 
                                                                 </DataItemTemplate>
                                                             </dx:GridViewDataTextColumn>
                                                             <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Loại hàng" Width="150px">
                                                                 <DataItemTemplate>
-                                                                        <span onmouseout="BBTOnline_HideTooltip();" onmouseover="BBTOnline_ShowTooltip('../ToolTip/ToolTip.aspx?oid=<%# getProductIdByProductDetailId(Eval("PRODUCT_DETAIL_ID")) %>'); return false;"><%# getTypeName(Eval("Product_Detail_Id"))%></span> 
+                                                                        <%# getTypeName(Eval("Product_Detail_Id"))%>
                                                                 </DataItemTemplate>
                                                             </dx:GridViewDataTextColumn>
                                                             <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng đặt" FieldName="Quantity"  Width="100px">
                                                                 <DataItemTemplate>
-                                                                    <strong><%# Eval("Quantity")%></strong> <%# getProductDetailSize(Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID"))%>
+                                                                    <%# getFormatQuantity(Eval("Quantity"))%> <%# getProductDetailSize(Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID"))%>
                                                                 </DataItemTemplate>
                                                                 <FooterTemplate>
                                                                     <strong> <%# getSumQuantity()%></strong> 
@@ -278,22 +279,32 @@
                                                                         <span style='color:<%# Eval("Color1")%>'><%# Eval("Color1") + " - " + Eval("Color2") %></span
                                                                 </DataItemTemplate>
                                                             </dx:GridViewDataTextColumn>
-                                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng thô đã làm" Width="140px">
+                                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL thô đã làm" Width="140px">
                                                                 <DataItemTemplate>
                                                                     <%# getFormatQuantity(getSoluongDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
                                                                 </DataItemTemplate>
-                                                            </dx:GridViewDataTextColumn>    
-                                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng tinh đã làm" Width="140px">
+                                                            </dx:GridViewDataTextColumn>
+                                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL tinh đã làm(Sơn)" Width="140px">
                                                                 <DataItemTemplate>
-                                                                    <%# getFormatQuantity(getSoluongTinhDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                                                    <%# getFormatQuantity(getSoluongTinhSonDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                                                </DataItemTemplate>
+                                                            </dx:GridViewDataTextColumn>   
+                                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL tinh đã làm(Chét)" Width="140px">
+                                                                <DataItemTemplate>
+                                                                    <%# getFormatQuantity(getSoluongTinhChetDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
                                                                 </DataItemTemplate>
                                                             </dx:GridViewDataTextColumn>  
-                                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng xuất" Width="100px">
+                                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL tinh đã làm(Nhám)" Width="140px">
+                                                                <DataItemTemplate>
+                                                                    <%# getFormatQuantity(getSoluongTinhNhamDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                                                </DataItemTemplate>
+                                                            </dx:GridViewDataTextColumn>  
+                                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL xuất" Width="100px">
                                                                 <DataItemTemplate>
                                                                     <%# getFormatQuantity(getSoluongXuat(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
                                                                 </DataItemTemplate>
                                                             </dx:GridViewDataTextColumn>    
-                                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng còn lại">
+                                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL còn lại">
                                                                 <DataItemTemplate>
                                                                     <%# getFormatQuantity(getSoluongConlai(Eval("QUANTITY"), Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
                                                                 </DataItemTemplate>
@@ -388,7 +399,7 @@
                                         </tr>
                                     </table>
                                     <dx:ASPxGridView ID="ASPxGridViewDeadline" runat="server" AutoGenerateColumns="False"
-                                         KeyFieldName="ID" Theme="Aqua">
+                                         KeyFieldName="ID" Theme="Aqua" onhtmlrowprepared="ASPxGridView1_Order_HtmlRowPrepared">
                                         <Columns>
                                             <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Width="45px">
                                             </dx:GridViewCommandColumn>
@@ -418,7 +429,12 @@
                                                         <a href="<%# getlink_deadline(Eval("ID")) %>">
                                                         Số lượng</a>
                                                 </DataItemTemplate>
-                                            </dx:GridViewDataTextColumn>                                          
+                                            </dx:GridViewDataTextColumn>   
+                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="#" Width="200">
+                                                <DataItemTemplate>                                                        
+                                                        <asp:LinkButton ID="lnkCheck" runat="server" OnClick="lnkCheck_Click" OnClientClick="return confirm('Bạn chắc chắn tắt cảnh báo?')" Text="Tắt cảnh báo" CommandArgument='<%# Eval("ID") %>' Visible='<%# getVisibleTat(Eval("ID")) %>'></asp:LinkButton>                                                
+                                                </DataItemTemplate>
+                                            </dx:GridViewDataTextColumn>                                       
                                         </Columns>
                                         <SettingsPager PageSize="30">
                                         </SettingsPager>

@@ -44,8 +44,8 @@
       <Column Name="USER_SUA" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="USER_XOA" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="USER_CAPNHAT" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="USER_INVENTORY" Member="INVENTORies" ThisKey="USER_ID" OtherKey="CREATOR_ID" Type="INVENTORY" />
       <Association Name="USER_ORDER" Member="ORDERs" ThisKey="USER_ID" OtherKey="CREATOR_ID" Type="ORDER" />
+      <Association Name="USER_INVENTORY" Member="INVENTORies" ThisKey="USER_ID" OtherKey="CREATOR_ID" Type="INVENTORY" />
     </Type>
   </Table>
   <Table Name="dbo.UNIT" Member="UNITs">
@@ -83,20 +83,6 @@
       <Column Name="QUANTITY" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Association Name="MATERIAL_PRODUCT_DETAIL_MATERIAL" Member="MATERIAL" ThisKey="MATERIAL_ID" OtherKey="ID" Type="MATERIAL" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_MATERIAL" Member="PRODUCT_DETAIL" ThisKey="PRODUCT_DETAIL_ID" OtherKey="ID" Type="PRODUCT_DETAIL" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
-  <Table Name="dbo.INVENTORY" Member="INVENTORies">
-    <Type Name="INVENTORY">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ORDER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PRODUCT_DETAIL_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="QUANTITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CREATE_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
-      <Column Name="TYPE" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CREATOR_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="USER_INVENTORY" Member="USER" ThisKey="CREATOR_ID" OtherKey="USER_ID" Type="USER" IsForeignKey="true" DeleteRule="SET NULL" />
-      <Association Name="PRODUCT_DETAIL_INVENTORY" Member="PRODUCT_DETAIL" ThisKey="PRODUCT_DETAIL_ID" OtherKey="ID" Type="PRODUCT_DETAIL" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="ORDER_INVENTORY" Member="ORDER" ThisKey="ORDER_ID" OtherKey="ID" Type="ORDER" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.CUSTOMER" Member="CUSTOMERs">
@@ -159,9 +145,9 @@
       <Column Name="TYPE_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PRODUCT_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_MATERIAL" Member="PRODUCT_DETAIL_MATERIALs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="PRODUCT_DETAIL_MATERIAL" />
-      <Association Name="PRODUCT_DETAIL_INVENTORY" Member="INVENTORies" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="INVENTORY" />
       <Association Name="PRODUCT_DETAIL_PRODUCT_DETAIL_SIZE" Member="PRODUCT_DETAIL_SIZEs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="PRODUCT_DETAIL_SIZE" />
       <Association Name="PRODUCT_DETAIL_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="ORDER_DETAIL" />
+      <Association Name="PRODUCT_DETAIL_INVENTORY" Member="INVENTORies" ThisKey="ID" OtherKey="PRODUCT_DETAIL_ID" Type="INVENTORY" />
       <Association Name="PRODUCT_PRODUCT_DETAIL" Member="PRODUCT" ThisKey="PRODUCT_ID" OtherKey="ID" Type="PRODUCT" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="TYPE_PRODUCT_DETAIL" Member="TYPE" ThisKey="TYPE_ID" OtherKey="ID" Type="TYPE" IsForeignKey="true" DeleteRule="SET NULL" />
     </Type>
@@ -196,10 +182,10 @@
       <Column Name="BALANCEPRICE" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="CUSTOMER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CREATOR_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="ORDER_INVENTORY" Member="INVENTORies" ThisKey="ID" OtherKey="ORDER_ID" Type="INVENTORY" />
       <Association Name="ORDER_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="ID" OtherKey="ORDER_ID" Type="ORDER_DETAIL" />
-      <Association Name="ORDER_ORDER_DEADLINE" Member="ORDER_DEADLINEs" ThisKey="ID" OtherKey="ORDER_ID" Type="ORDER_DEADLINE" />
       <Association Name="ORDER_ORDERMATERIAL" Member="ORDERMATERIALs" ThisKey="ID" OtherKey="ORDER_ID" Type="ORDERMATERIAL" />
+      <Association Name="ORDER_ORDER_DEADLINE" Member="ORDER_DEADLINEs" ThisKey="ID" OtherKey="ORDER_ID" Type="ORDER_DEADLINE" />
+      <Association Name="ORDER_INVENTORY" Member="INVENTORies" ThisKey="ID" OtherKey="ORDER_ID" Type="INVENTORY" />
       <Association Name="CUSTOMER_ORDER" Member="CUSTOMER" ThisKey="CUSTOMER_ID" OtherKey="ID" Type="CUSTOMER" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="USER_ORDER" Member="USER" ThisKey="CREATOR_ID" OtherKey="USER_ID" Type="USER" IsForeignKey="true" DeleteRule="SET NULL" />
     </Type>
@@ -211,16 +197,6 @@
       <Column Name="ORDER_DETAIL_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="QUANTITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="ORDER_DETAIL_ORDER_DEADLINE_ORDER_DETAIL" Member="ORDER_DETAIL" ThisKey="ORDER_DETAIL_ID" OtherKey="ID" Type="ORDER_DETAIL" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
-  <Table Name="dbo.ORDER_DEADLINE" Member="ORDER_DEADLINEs">
-    <Type Name="ORDER_DEADLINE">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ORDER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DEADLINE_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
-      <Column Name="STATUS" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NOTE" Type="System.String" DbType="NVarChar(1050)" CanBeNull="true" />
-      <Association Name="ORDER_ORDER_DEADLINE" Member="ORDER" ThisKey="ORDER_ID" OtherKey="ID" Type="ORDER" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.COMPANY" Member="COMPANies">
@@ -271,6 +247,32 @@
       <Column Name="PRICE" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="CREATE_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
       <Association Name="ORDERMATERIAL_ORDERMATERIAL_PRICE" Member="ORDERMATERIAL" ThisKey="ORDERMATERIAL_ID" OtherKey="ID" Type="ORDERMATERIAL" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDER_DEADLINE" Member="ORDER_DEADLINEs">
+    <Type Name="ORDER_DEADLINE">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ORDER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DEADLINE_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="STATUS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NOTE" Type="System.String" DbType="NVarChar(1050)" CanBeNull="true" />
+      <Column Name="ISCHECK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ORDER_ORDER_DEADLINE" Member="ORDER" ThisKey="ORDER_ID" OtherKey="ID" Type="ORDER" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.INVENTORY" Member="INVENTORies">
+    <Type Name="INVENTORY">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ORDER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRODUCT_DETAIL_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRODUCT_DETAIL_SIZE_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QUANTITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CREATE_DATE" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="TYPE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CREATOR_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ORDER_INVENTORY" Member="ORDER" ThisKey="ORDER_ID" OtherKey="ID" Type="ORDER" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="PRODUCT_DETAIL_INVENTORY" Member="PRODUCT_DETAIL" ThisKey="PRODUCT_DETAIL_ID" OtherKey="ID" Type="PRODUCT_DETAIL" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="USER_INVENTORY" Member="USER" ThisKey="CREATOR_ID" OtherKey="USER_ID" Type="USER" IsForeignKey="true" DeleteRule="SET NULL" />
     </Type>
   </Table>
 </Database>

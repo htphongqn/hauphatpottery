@@ -173,7 +173,7 @@ namespace hauphatpottery.Pages
         {
             int _orderid = Utils.CIntDef(orderId);
             int _prodetailid = Utils.CIntDef(productDetailId);
-            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_TINH);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_TINH_SON);
             return Utils.CIntDef(list.Sum(n => n.QUANTITY));
         }
         public List<INVENTORY> getListHistory(object orderId, object productDetailId)

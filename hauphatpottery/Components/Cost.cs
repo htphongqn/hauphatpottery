@@ -18,7 +18,10 @@ namespace hauphatpottery.Components
         public const int HOANTAT = 3;
         //INVENTORY TYPE
         public const int NHAP_THO = 1;
-        public const int NHAP_TINH = 2;
+        public const int NHAP_TINH_SON = 21;
+        public const int NHAP_TINH_CHET = 22;
+        public const int NHAP_TINH_NHAM = 23;
+        public const int NHAP_KIEM_TINH = 24;
         public const int XUAT_SANPHAM = 3;
         //ORDERMATERIAL TYPE
         public const int NHAP_NGUYENLIEU = 1;

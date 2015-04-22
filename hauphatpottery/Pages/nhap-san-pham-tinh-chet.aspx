@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Master.Master" AutoEventWireup="true" CodeBehind="nhap-san-pham-tho.aspx.cs" Inherits="hauphatpottery.Pages.nhap_san_pham_tho" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Master.Master" AutoEventWireup="true" CodeBehind="nhap-san-pham-tinh-chet.aspx.cs" Inherits="hauphatpottery.Pages.nhap_san_pham_tinh_chet" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Assembly="DevExpress.Web.ASPxGridView.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
@@ -34,7 +34,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="CPHMain" runat="server">
 <div id="header">
         <div class="title">
-            Nhập Sản Phẩm Thô
+            Nhập Sản Phẩm Tinh(Chét)
         </div>
         <div style="clear: both">
         </div>
@@ -125,12 +125,22 @@
                             <DataItemTemplate>
                                 <%# getFormatQuantity(Eval("QUANTITY"))%> <%# getProductDetailSize(Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID"))%>
                             </DataItemTemplate>
-                        </dx:GridViewDataTextColumn>       
+                        </dx:GridViewDataTextColumn>     
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL thô đã làm" Width="140px">
                             <DataItemTemplate>
                                 <%# getFormatQuantity(getSoluongDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
                             </DataItemTemplate>
-                        </dx:GridViewDataTextColumn>          
+                        </dx:GridViewDataTextColumn>    
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL tinh đã làm(Sơn)" Width="140px">
+                            <DataItemTemplate>
+                                <%# getFormatQuantity(getSoluongTinhSonDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>   
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL tinh đã làm(Chét)" Width="140px">
+                            <DataItemTemplate>
+                                <%# getFormatQuantity(getSoluongTinhChetDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>    
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL còn lại">
                             <DataItemTemplate>
                                 <%# getFormatQuantity(getSoluongConlai(Eval("QUANTITY"), Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>

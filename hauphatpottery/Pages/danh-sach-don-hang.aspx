@@ -75,7 +75,7 @@
         <tr>
             <td>
                 <dx:ASPxGridView ID="ASPxGridView1_Order" runat="server" AutoGenerateColumns="False"
-                    Width="100%" KeyFieldName="ID" Theme="Aqua">
+                    Width="100%" KeyFieldName="ID" Theme="Aqua" onhtmlrowprepared="ASPxGridView1_Order_HtmlRowPrepared" >
                     <Columns>
                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Width="45px">
                         </dx:GridViewCommandColumn>

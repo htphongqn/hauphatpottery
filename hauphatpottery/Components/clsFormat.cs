@@ -15,7 +15,7 @@ namespace hauphatpottery.Components
         {
             try
             {
-                string Money = String.Format("{0:#,#}", Expression);
+                string Money = String.Format("{0:#,0}", Expression);
                 return Money;//Money.Replace(",", ".");
             }
             catch (Exception ex)
@@ -28,7 +28,7 @@ namespace hauphatpottery.Components
         {
             try
             {
-                string Money = String.Format("{0:#,# VNĐ}", Expression);
+                string Money = String.Format("{0:#,0 VNĐ}", Expression);
                 return Money;//Money.Replace(",", ".");
             }
             catch (Exception ex)

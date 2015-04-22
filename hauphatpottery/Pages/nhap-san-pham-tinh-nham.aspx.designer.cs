@@ -10,7 +10,7 @@
 namespace hauphatpottery.Pages {
     
     
-    public partial class nhap_san_pham_tho {
+    public partial class nhap_san_pham_tinh_nham {
         
         /// <summary>
         /// pnContract control.

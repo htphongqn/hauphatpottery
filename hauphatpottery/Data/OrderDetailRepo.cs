@@ -10,6 +10,17 @@ namespace hauphatpottery.Data
     {
         private hauphatpotteryDataContext db = new hauphatpotteryDataContext();
 
+        public virtual List<ORDER_DETAIL> GetByProductDetailId(int productDetailId, int orderId)
+        {
+            try
+            {
+                return this.db.ORDER_DETAILs.Where(u => u.PRODUCT_DETAIL_ID == productDetailId && u.ORDER_ID == orderId).ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public virtual ORDER_DETAIL GetByProductDetailId(int productDetailId, int productDetailSizeId, int orderId)
         {
             try

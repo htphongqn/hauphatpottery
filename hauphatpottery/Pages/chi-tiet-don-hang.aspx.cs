@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using vpro.functions;
 using hauphatpottery.Data;
 using hauphatpottery.Components;
+using System.Drawing;
 
 namespace hauphatpottery.Pages
 {
@@ -372,6 +373,35 @@ namespace hauphatpottery.Pages
             }
             Response.Redirect("chi-tiet-don-hang.aspx?id=" + id + "&activetab=" + 2);
         }
+        protected void ASPxGridView1_Order_HtmlRowPrepared(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs e)
+        {
+            var itemDeadline = _OrderDeadlineRepo.GetById(Utils.CIntDef(e.KeyValue));
+            if (itemDeadline != null && itemDeadline.STATUS != 1 && itemDeadline.ISCHECK != 1)
+            {
+                DateTime dateDeadline = Utils.CDateDef(itemDeadline.DEADLINE_DATE, DateTime.MinValue);
+                int d = (dateDeadline.Date - DateTime.Now.Date).Days;
+                if (d < 0)
+                {
+                    e.Row.ForeColor = Color.White;
+                    e.Row.BackColor = Color.Red;
+                }
+                else if (d <= 10)
+                {
+                    e.Row.ForeColor = Color.Red;
+                    e.Row.BackColor = Color.Yellow;
+                }
+            }
+        }
+        protected void lnkCheck_Click(object sender, EventArgs e)
+        {
+            LinkButton lnk = (LinkButton)sender;
+            int _id = Utils.CIntDef(lnk.CommandArgument);
+            var itemDeadline = _OrderDeadlineRepo.GetById(_id);
+            itemDeadline.ISCHECK = 1;
+            _OrderDeadlineRepo.Update(itemDeadline);
+            Response.Redirect("chi-tiet-don-hang.aspx?id=" + id + "&activetab=2"); 
+                                ;
+        }
         protected void lbtnSaveDeadlineDetail_Click(object sender, EventArgs e)
         {
             try
@@ -517,6 +547,20 @@ namespace hauphatpottery.Pages
         {
             return Utils.CIntDef(status) == 1 ? "Đã giao" : "Chưa giao";
         }
+        public bool getVisibleTat(object Id)
+        {
+            var itemDeadline = _OrderDeadlineRepo.GetById(Utils.CIntDef(Id));
+            if (itemDeadline != null && itemDeadline.STATUS != 1 && itemDeadline.ISCHECK != 1)
+            {
+                DateTime dateDeadline = Utils.CDateDef(itemDeadline.DEADLINE_DATE, DateTime.MinValue);
+                int d = (dateDeadline.Date - DateTime.Now.Date).Days;
+                if (d <= 10)
+                {
+                    return true;
+                }
+            } 
+            return false;         
+        }
         public string getCodeProductDetail(object oid)
         {
             int _id = Utils.CIntDef(oid);
@@ -542,11 +586,25 @@ namespace hauphatpottery.Pages
             var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_THO);
             return Utils.CIntDef(list.Sum(n => n.QUANTITY));
         }
-        public int getSoluongTinhDalam(object orderId, object productDetailId)
+        public int getSoluongTinhSonDalam(object orderId, object productDetailId)
         {
             int _orderid = Utils.CIntDef(orderId);
             int _prodetailid = Utils.CIntDef(productDetailId);
-            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_TINH);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_TINH_SON);
+            return Utils.CIntDef(list.Sum(n => n.QUANTITY));
+        }
+        public int getSoluongTinhChetDalam(object orderId, object productDetailId)
+        {
+            int _orderid = Utils.CIntDef(orderId);
+            int _prodetailid = Utils.CIntDef(productDetailId);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_TINH_CHET);
+            return Utils.CIntDef(list.Sum(n => n.QUANTITY));
+        }
+        public int getSoluongTinhNhamDalam(object orderId, object productDetailId)
+        {
+            int _orderid = Utils.CIntDef(orderId);
+            int _prodetailid = Utils.CIntDef(productDetailId);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_TINH_NHAM);
             return Utils.CIntDef(list.Sum(n => n.QUANTITY));
         }
         public List<INVENTORY> getListHistory(object orderId, object productDetailId)

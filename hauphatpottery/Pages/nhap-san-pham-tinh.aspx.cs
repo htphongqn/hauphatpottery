@@ -176,14 +176,14 @@ namespace hauphatpottery.Pages
         {
             int _orderid = Utils.CIntDef(orderId);
             int _prodetailid = Utils.CIntDef(productDetailId);
-            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_TINH);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_TINH_SON);
             return list;
         }
         public int getSoluongTinhDalam(object orderId, object productDetailId)
         {
             int _orderid = Utils.CIntDef(orderId);
             int _prodetailid = Utils.CIntDef(productDetailId);
-            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_TINH);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_TINH_SON);
             return Utils.CIntDef(list.Sum(n => n.QUANTITY));
         }
         public int getSoluongConlai(object quantity, object orderId, object productDetailId)
@@ -209,7 +209,7 @@ namespace hauphatpottery.Pages
                 item.ORDER_ID = Utils.CIntDef(ddlOrder.SelectedValue);
                 item.QUANTITY = Utils.CIntDef(txtQuantity.Value.Replace(",", ""));
                 item.CREATE_DATE = DateTime.Now;
-                item.TYPE = Cost.NHAP_TINH;
+                item.TYPE = Cost.NHAP_TINH_SON;
                 item.CREATOR_ID = Utils.CIntDef(Session["Userid"]);
 
                 _InventoryRepo.Create(item);

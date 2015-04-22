@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using vpro.functions;
 using hauphatpottery.Data;
 using hauphatpottery.Components;
+using System.Drawing;
 
 namespace hauphatpottery.Pages
 {
@@ -14,6 +15,7 @@ namespace hauphatpottery.Pages
     {
         #region Declare
         private OrderRepo _OrderRepo = new OrderRepo();
+        private OrderDeadlineRepo _OrderDeadlineRepo = new OrderDeadlineRepo();
         private UserRepo _UserRepo = new UserRepo();
         private CustomerRepo _CustomerRepo = new CustomerRepo();
         private int id = 0;
@@ -86,7 +88,31 @@ namespace hauphatpottery.Pages
         {
             txtKeyword.Value = "";
         }
+        protected void ASPxGridView1_Order_HtmlRowPrepared(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs e)
+        {
+            var c = _OrderRepo.GetById(Utils.CIntDef(e.KeyValue));
+            if (c != null && c.STATUS == 2)
+            {
 
+                var listDeadline = _OrderDeadlineRepo.GetByOrderId(Utils.CIntDef(e.KeyValue)).Where(n => n.STATUS != 1).OrderBy(n => n.ID);
+                if (listDeadline != null && listDeadline.ToList().Count > 0 && listDeadline.ToList()[0].ISCHECK != 1)
+                {
+                    DateTime dateDeadline = Utils.CDateDef(listDeadline.ToList()[0].DEADLINE_DATE, DateTime.MinValue);
+                    int d = (dateDeadline.Date - DateTime.Now.Date).Days;
+                    if (d < 0)
+                    {
+                        e.Row.ForeColor = Color.White;
+                        e.Row.BackColor = Color.Red;                        
+                    }
+                    else if (d <= 10)
+                    {
+                        e.Row.ForeColor = Color.Red;
+                        e.Row.BackColor = Color.Yellow;
+                    }
+                }
+
+            }
+        }
         #region Function
         public string getShortString(object title, int length)
         {
