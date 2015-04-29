@@ -28,7 +28,7 @@
                             ShowSummary="False" ValidationGroup="G2" />
                     </td>
                     <td>
-                        <asp:DropDownList runat="server" ID="ddLProductDetail" 
+                        <asp:DropDownList runat="server" ID="ddlProductDetail" 
                             CssClass="k-textbox textbox" AppendDataBoundItems="true" DataTextField="Code" 
                             DataValueField="Id" Width="200" AutoPostBack="True" 
                             onselectedindexchanged="ddLProductDetail_SelectedIndexChanged">
@@ -36,6 +36,13 @@
                         </asp:DropDownList>                                               
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Chưa chọn sản phẩm chi tiết"
                             ControlToValidate="ddLProductDetail" Display="None" ForeColor="Red" ValidationGroup="G2"
+                            CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
+                    </td>
+                    <td>
+                        <asp:DropDownList runat="server" ID="ddlProductDetailSize" CssClass="k-textbox textbox" Width="200">
+                        </asp:DropDownList>                                               
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="Chưa chọn size"
+                            ControlToValidate="ddlProductDetailSize" Display="None" ForeColor="Red" ValidationGroup="G2"
                             CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
                     </td>
                     <td>
@@ -90,6 +97,11 @@
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Mã sản phẩm chi tiết" FieldName="PRODUCT_DETAIL_ID"  Width="120px">
                             <DataItemTemplate>
                                     <span onmouseout="BBTOnline_HideTooltip();" onmouseover="BBTOnline_ShowTooltip('../ToolTip/ToolTip.aspx?oid=<%# getProductIdByProductDetailId(Eval("PRODUCT_DETAIL_ID")) %>'); return false;"><%# getShortString(getCodeProductDetail(Eval("PRODUCT_DETAIL_ID")), 40)%></span> 
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Size"  Width="120px">
+                            <DataItemTemplate>
+                                    <%# getProductDetailSize(Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID"))%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
                         <%--<dx:GridViewDataTextColumn VisibleIndex="1" Caption="Sản phẩm chi tiết" FieldName="PRODUCT_DETAIL_ID"  Width="250px">

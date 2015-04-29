@@ -71,6 +71,7 @@ namespace hauphatpottery.Pages
                 LoadCustomer();
                 LoadProduct();
                 LoadProductDetail();
+                LoadProductDetailSize();
                 LoadProductDetailDeadline();
                 LoadOrderDeadlineDetail();
                 getInfo();
@@ -613,6 +614,14 @@ namespace hauphatpottery.Pages
             int _prodetailid = Utils.CIntDef(productDetailId);
             int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
             var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_TINH_NHAM);
+            return Utils.CIntDef(list.Sum(n => n.QUANTITY));
+        }
+        public int getSoluongKiemtra(object orderId, object productDetailId, object productDetailSizeId)
+        {
+            int _orderid = Utils.CIntDef(orderId);
+            int _prodetailid = Utils.CIntDef(productDetailId);
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_KIEM_TINH);
             return Utils.CIntDef(list.Sum(n => n.QUANTITY));
         }
         public List<ORDER_DELI_DETAIL> getListHistory(object orderId, object productDetailId, object productDetailSizeId)

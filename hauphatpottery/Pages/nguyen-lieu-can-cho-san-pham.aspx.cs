@@ -17,6 +17,8 @@ namespace hauphatpottery.Pages
         private UnitRepo _UnitRepo = new UnitRepo();
         private ProductDetailRepo _ProductDetailRepo = new ProductDetailRepo();
         private ProductDetailMaterialRepo _ProductDetailMaterialRepo = new ProductDetailMaterialRepo();
+        private ProductDetailSizeRepo _ProductDetailSizeRepo = new ProductDetailSizeRepo();
+        private ShapePropertyRepo _ShapePropertyRepo = new ShapePropertyRepo();
         private int id = 0;
         private UnitDataRepo _UnitDataRepo = new UnitDataRepo();
         #endregion
@@ -31,6 +33,7 @@ namespace hauphatpottery.Pages
             if (!IsPostBack)
             {
                 LoadProductDetail();
+                LoadProductDetailSize();
                 LoadMaterial();
                 LoadProduct_Material();
             }
@@ -45,14 +48,41 @@ namespace hauphatpottery.Pages
             try
             {
                 var list = _ProductDetailRepo.GetAll();
-                ddLProductDetail.DataSource = list;
-                ddLProductDetail.DataBind();
-                ddLProductDetail.SelectedValue = Utils.CStrDef(id);
+                ddlProductDetail.DataSource = list;
+                ddlProductDetail.DataBind();
+                ddlProductDetail.SelectedValue = Utils.CStrDef(id);
             }
             catch //(Exception)
             {
                 //throw;
             }
+        }
+        private void LoadProductDetailSize()
+        {
+            int ProductDetailId = Utils.CIntDef(ddlProductDetail.SelectedValue);
+            var list = _ProductDetailSizeRepo.GetByProductDetailId(ProductDetailId);
+            var shapeProperty = _ShapePropertyRepo.GetByProductDetailId(ProductDetailId);
+            ddlProductDetailSize.Items.Clear();
+            if (list != null && list.Count > 0 && shapeProperty != null)
+            {
+                //ddlProductDetailSize.Items.Add(new ListItem("Bộ", "-1"));
+                foreach (var item in list)
+                {
+                    string name = "";
+                    if (Utils.CIntDef(shapeProperty.D) == 1)
+                        name += "D" + item.D +" ";
+                    if (Utils.CIntDef(shapeProperty.H) == 1)
+                        name += "H" + item.H + " ";
+                    if (Utils.CIntDef(shapeProperty.L) == 1)
+                        name += "L" + item.D + " "; 
+                    if (Utils.CIntDef(shapeProperty.W) == 1)
+                        name += "W" + item.W + " ";
+
+                    ddlProductDetailSize.Items.Add(new ListItem(name, Utils.CStrDef(item.ID)));
+                }
+            }
+            ddlProductDetailSize.Items.Insert(0, new ListItem("--Chọn Size--", "0"));
+        
         }
         private void LoadMaterial()
         {
@@ -85,13 +115,14 @@ namespace hauphatpottery.Pages
 
         protected void ddLProductDetail_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LoadProductDetailSize();
             LoadProduct_Material();
         }
         private void LoadProduct_Material()
         {
             try
             {
-                int productDetailId = Utils.CIntDef(ddLProductDetail.SelectedValue);
+                int productDetailId = Utils.CIntDef(ddlProductDetail.SelectedValue);
                 var list = _ProductDetailMaterialRepo.GetByProductDetailId(productDetailId);
 
                 HttpContext.Current.Session["listProductMaterial"] = list;
@@ -115,6 +146,30 @@ namespace hauphatpottery.Pages
         }
 
         #region Function
+        public string getProductDetailSize(object productDetailId, object productDetailSizeId)
+        {
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            if (_productDetailSizeId == -1)
+                return "Bộ";
+
+            var item = _ProductDetailSizeRepo.GetById(_productDetailSizeId);
+            var shapeProperty = _ShapePropertyRepo.GetByProductDetailId(Utils.CIntDef(productDetailId));
+
+            if (item != null && shapeProperty != null)
+            {
+                string name = "";
+                if (Utils.CIntDef(shapeProperty.D) == 1)
+                    name += "D" + item.D + " ";
+                if (Utils.CIntDef(shapeProperty.H) == 1)
+                    name += "H" + item.H + " ";
+                if (Utils.CIntDef(shapeProperty.L) == 1)
+                    name += "L" + item.D + " ";
+                if (Utils.CIntDef(shapeProperty.W) == 1)
+                    name += "W" + item.W + " ";
+                return name;
+            }
+            return "";
+        }
         public string getShortString(object title, int length)
         {
             string str = Utils.CStrDef(title);
@@ -204,13 +259,15 @@ namespace hauphatpottery.Pages
         {
             try
             {
-                int productDetailId = Utils.CIntDef(ddLProductDetail.SelectedValue);
+                int productDetailId = Utils.CIntDef(ddlProductDetail.SelectedValue);
+                int productDetailSizeId = Utils.CIntDef(ddlProductDetailSize.SelectedValue);
                 int materialId = Utils.CIntDef(ddlMaterial.SelectedValue);
-                var ProductDetailMateria = _ProductDetailMaterialRepo.GetByProductDetailIdAndMaterialId(productDetailId, materialId);
+                var ProductDetailMateria = _ProductDetailMaterialRepo.GetByProductDetailIdAndMaterialId(productDetailId, productDetailSizeId, materialId);
                 if (ProductDetailMateria != null)
                 {
-                    ProductDetailMateria.PRODUCT_DETAIL_ID = Utils.CIntDef(ddLProductDetail.SelectedValue);
-                    ProductDetailMateria.MATERIAL_ID = Utils.CIntDef(ddlMaterial.SelectedValue);
+                    ProductDetailMateria.PRODUCT_DETAIL_ID = productDetailId;
+                    ProductDetailMateria.PRODUCT_DETAIL_SIZE_ID = productDetailSizeId;
+                    ProductDetailMateria.MATERIAL_ID = materialId;
                     ProductDetailMateria.QUANTITY = Utils.CDecDef(txtQuantity.Value);
 
                     _ProductDetailMaterialRepo.Update(ProductDetailMateria);
@@ -218,8 +275,9 @@ namespace hauphatpottery.Pages
                 else
                 {
                     ProductDetailMateria = new PRODUCT_DETAIL_MATERIAL();
-                    ProductDetailMateria.PRODUCT_DETAIL_ID = Utils.CIntDef(ddLProductDetail.SelectedValue);
-                    ProductDetailMateria.MATERIAL_ID = Utils.CIntDef(ddlMaterial.SelectedValue);
+                    ProductDetailMateria.PRODUCT_DETAIL_ID = productDetailId;
+                    ProductDetailMateria.PRODUCT_DETAIL_SIZE_ID = productDetailSizeId;
+                    ProductDetailMateria.MATERIAL_ID = materialId;
                     ProductDetailMateria.QUANTITY = Utils.CDecDef(txtQuantity.Value);
 
                     _ProductDetailMaterialRepo.Create(ProductDetailMateria);
@@ -231,7 +289,7 @@ namespace hauphatpottery.Pages
             }
             finally
             {
-                Response.Redirect("nguyen-lieu-can-cho-san-pham.aspx?id=" + ddLProductDetail.SelectedValue);
+                Response.Redirect("nguyen-lieu-can-cho-san-pham.aspx?id=" + ddlProductDetail.SelectedValue);
             }
         }
     }

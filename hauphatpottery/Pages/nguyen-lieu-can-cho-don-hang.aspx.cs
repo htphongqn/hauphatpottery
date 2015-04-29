@@ -65,21 +65,44 @@ namespace hauphatpottery.Pages
                 var listOrderDetail = _OrderDetailRepo.GetByOrderId(OrderId);
                 foreach (var item in listOrderDetail)
                 {
-                    var listProductDetail_Material = _ProductDetailMaterialRepo.GetByProductDetailId(Utils.CIntDef(item.PRODUCT_DETAIL_ID));
-                    foreach (var item2 in listProductDetail_Material)
+                    if (Utils.CIntDef(item.PRODUCT_DETAIL_SIZE_ID) == -1)
                     {
-                        var orderMaterial = list.Find(n => n.MATERIAL_ID == item2.MATERIAL_ID);
-                        if (orderMaterial != null)
+                        var listProductDetail_Material = _ProductDetailMaterialRepo.GetByProductDetailId(Utils.CIntDef(item.PRODUCT_DETAIL_ID));
+                        foreach (var item2 in listProductDetail_Material)
                         {
-                            decimal quantity = Utils.CDecDef(item.QUANTITY) * Utils.CDecDef(item2.QUANTITY);
-                            orderMaterial.QUANTITY = orderMaterial.QUANTITY + quantity;
+                            var orderMaterial = list.Find(n => n.MATERIAL_ID == item2.MATERIAL_ID);
+                            if (orderMaterial != null)
+                            {
+                                decimal quantity = Utils.CDecDef(item.QUANTITY) * Utils.CDecDef(item2.QUANTITY);
+                                orderMaterial.QUANTITY = orderMaterial.QUANTITY + quantity;
+                            }
+                            else
+                            {
+                                orderMaterial = new OrderMaterial();
+                                orderMaterial.MATERIAL_ID = Utils.CIntDef(item2.MATERIAL_ID);
+                                orderMaterial.QUANTITY = Utils.CDecDef(item.QUANTITY) * Utils.CDecDef(item2.QUANTITY);
+                                list.Add(orderMaterial);
+                            }
                         }
-                        else
+                    }
+                    else
+                    {
+                        var listProductDetail_Material = _ProductDetailMaterialRepo.GetByProductDetailId(Utils.CIntDef(item.PRODUCT_DETAIL_ID), Utils.CIntDef(item.PRODUCT_DETAIL_SIZE_ID));
+                        foreach (var item2 in listProductDetail_Material)
                         {
-                            orderMaterial = new OrderMaterial();
-                            orderMaterial.MATERIAL_ID = Utils.CIntDef(item2.MATERIAL_ID);
-                            orderMaterial.QUANTITY = Utils.CDecDef(item.QUANTITY) * Utils.CDecDef(item2.QUANTITY);
-                            list.Add(orderMaterial);
+                            var orderMaterial = list.Find(n => n.MATERIAL_ID == item2.MATERIAL_ID);
+                            if (orderMaterial != null)
+                            {
+                                decimal quantity = Utils.CDecDef(item.QUANTITY) * Utils.CDecDef(item2.QUANTITY);
+                                orderMaterial.QUANTITY = orderMaterial.QUANTITY + quantity;
+                            }
+                            else
+                            {
+                                orderMaterial = new OrderMaterial();
+                                orderMaterial.MATERIAL_ID = Utils.CIntDef(item2.MATERIAL_ID);
+                                orderMaterial.QUANTITY = Utils.CDecDef(item.QUANTITY) * Utils.CDecDef(item2.QUANTITY);
+                                list.Add(orderMaterial);
+                            }
                         }
                     }
                 }

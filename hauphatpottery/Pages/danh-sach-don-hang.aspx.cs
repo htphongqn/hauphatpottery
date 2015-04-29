@@ -31,6 +31,8 @@ namespace hauphatpottery.Pages
             id = Utils.CIntDef(Request.QueryString["id"]);
             if (!IsPostBack)
             {
+                pickerAndCalendarFrom.returnDate = DateTime.Now.AddMonths(-2);
+                pickerAndCalendarTo.returnDate = DateTime.Now;
                 LoadCustomer();
                 LoadOrder();
             }
@@ -51,11 +53,11 @@ namespace hauphatpottery.Pages
             try
             {
                 int userId = Utils.CIntDef(Session["Userid"]);
-                var list = _OrderRepo.GetByWhereAll(txtKeyword.Value, Utils.CIntDef(ddlCustomer.SelectedValue), Utils.CIntDef(ddlStatus.SelectedItem.Value), userId);
+                var list = _OrderRepo.GetByWhereAll(txtKeyword.Value, Utils.CIntDef(ddlCustomer.SelectedValue), Utils.CIntDef(ddlStatus.SelectedItem.Value), userId, pickerAndCalendarFrom.returnDate, pickerAndCalendarTo.returnDate);
                 int grouptypeId = Utils.CIntDef(Session["groupType"]);
                 if (grouptypeId == Cost.GROUPTYPE_ADMIN)
                 {
-                    list = _OrderRepo.GetByWhereAll(txtKeyword.Value, Utils.CIntDef(ddlCustomer.SelectedValue), Utils.CIntDef(ddlStatus.SelectedItem.Value), 0);
+                    list = _OrderRepo.GetByWhereAll(txtKeyword.Value, Utils.CIntDef(ddlCustomer.SelectedValue), Utils.CIntDef(ddlStatus.SelectedItem.Value), 0, pickerAndCalendarFrom.returnDate, pickerAndCalendarTo.returnDate);
                 }
 
                 HttpContext.Current.Session["LoadOrder"] = list;

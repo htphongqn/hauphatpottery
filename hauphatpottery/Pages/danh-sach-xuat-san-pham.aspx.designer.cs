@@ -49,22 +49,31 @@ namespace hauphatpottery.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtKeyword;
         
         /// <summary>
-        /// ddlCustomer control.
+        /// pickerAndCalendarFrom control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCustomer;
+        protected global::vpro.eshop.cpanel.Calendar.pickerAndCalendar pickerAndCalendarFrom;
         
         /// <summary>
-        /// ddlStatus control.
+        /// pickerAndCalendarTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
+        protected global::vpro.eshop.cpanel.Calendar.pickerAndCalendar pickerAndCalendarTo;
+        
+        /// <summary>
+        /// ddlOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlOrder;
         
         /// <summary>
         /// lbtnSearch control.

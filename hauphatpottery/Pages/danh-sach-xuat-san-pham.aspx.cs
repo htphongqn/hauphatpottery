@@ -18,6 +18,7 @@ namespace hauphatpottery.Pages
         private OrderDeadlineRepo _OrderDeadlineRepo = new OrderDeadlineRepo();
         private UserRepo _UserRepo = new UserRepo();
         private CustomerRepo _CustomerRepo = new CustomerRepo();
+        private OrderDeliRepo _OrderDeliRepo = new OrderDeliRepo();
         private int id = 0;
         private UnitDataRepo _UnitDataRepo = new UnitDataRepo();
         #endregion
@@ -31,8 +32,10 @@ namespace hauphatpottery.Pages
             id = Utils.CIntDef(Request.QueryString["id"]);
             if (!IsPostBack)
             {
-                LoadCustomer();
+                pickerAndCalendarFrom.returnDate = DateTime.Now.AddMonths(-2);
+                pickerAndCalendarTo.returnDate = DateTime.Now;
                 LoadOrder();
+                LoadList();
             }
             else
             {
@@ -40,23 +43,18 @@ namespace hauphatpottery.Pages
                 ASPxGridView1_Order.DataBind();
             }
         }
-        private void LoadCustomer()
-        {
-            var list = _CustomerRepo.GetAll();
-            ddlCustomer.DataSource = list;
-            ddlCustomer.DataBind();
-        }
         private void LoadOrder()
+        {
+            var list = _OrderRepo.GetAll();
+            ddlOrder.DataSource = list;
+            ddlOrder.DataBind();
+        }
+        private void LoadList()
         {
             try
             {
                 int userId = Utils.CIntDef(Session["Userid"]);
-                var list = _OrderRepo.GetByWhereAll(txtKeyword.Value, Utils.CIntDef(ddlCustomer.SelectedValue), Utils.CIntDef(ddlStatus.SelectedItem.Value), userId);
-                int grouptypeId = Utils.CIntDef(Session["groupType"]);
-                if (grouptypeId == Cost.GROUPTYPE_ADMIN)
-                {
-                    list = _OrderRepo.GetByWhereAll(txtKeyword.Value, Utils.CIntDef(ddlCustomer.SelectedValue), Utils.CIntDef(ddlStatus.SelectedItem.Value), 0);
-                }
+                var list = _OrderDeliRepo.GetByWhereAll(txtKeyword.Value, Utils.CIntDef(ddlOrder.SelectedValue), 0, pickerAndCalendarFrom.returnDate, pickerAndCalendarTo.returnDate);
 
                 HttpContext.Current.Session["LoadOrder"] = list;
                 ASPxGridView1_Order.DataSource = list;
@@ -79,40 +77,16 @@ namespace hauphatpottery.Pages
             List<object> fieldValues = ASPxGridView1_Order.GetSelectedFieldValues(new string[] { "ID" });
             foreach (var item in fieldValues)
             {
-                _OrderRepo.Remove(Utils.CIntDef(item));
+                _OrderDeliRepo.Remove(Utils.CIntDef(item));
             }
-            Response.Redirect("danh-sach-don-hang.aspx");
+            Response.Redirect("danh-sach-xuat-san-pham.aspx");
         }
 
         protected void lbtnDeleteKeyword_Click(object sender, EventArgs e)
         {
             txtKeyword.Value = "";
         }
-        protected void ASPxGridView1_Order_HtmlRowPrepared(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs e)
-        {
-            var c = _OrderRepo.GetById(Utils.CIntDef(e.KeyValue));
-            if (c != null && c.STATUS == 2)
-            {
 
-                var listDeadline = _OrderDeadlineRepo.GetByOrderId(Utils.CIntDef(e.KeyValue)).Where(n => n.STATUS != 1).OrderBy(n => n.ID);
-                if (listDeadline != null && listDeadline.ToList().Count > 0 && listDeadline.ToList()[0].ISCHECK != 1)
-                {
-                    DateTime dateDeadline = Utils.CDateDef(listDeadline.ToList()[0].DEADLINE_DATE, DateTime.MinValue);
-                    int d = (dateDeadline.Date - DateTime.Now.Date).Days;
-                    if (d < 0)
-                    {
-                        e.Row.ForeColor = Color.White;
-                        e.Row.BackColor = Color.Red;                        
-                    }
-                    else if (d <= 10)
-                    {
-                        e.Row.ForeColor = Color.Red;
-                        e.Row.BackColor = Color.Yellow;
-                    }
-                }
-
-            }
-        }
         #region Function
         public string getShortString(object title, int length)
         {
@@ -123,40 +97,27 @@ namespace hauphatpottery.Pages
         }
         public string getlink(object id)
         {
-            return Utils.CIntDef(id) > 0 ? "chi-tiet-don-hang.aspx?id=" + Utils.CIntDef(id) : "chi-tiet-don-hang.aspx";
+            return Utils.CIntDef(id) > 0 ? "xuat-san-pham.aspx?id=" + Utils.CIntDef(id) : "xuat-san-pham.aspx";
         }
-        public string getlink_nguyenlieucan(object id)
-        {
-            return Utils.CIntDef(id) > 0 ? "nguyen-lieu-can-cho-don-hang.aspx?id=" + Utils.CIntDef(id) : "nguyen-lieu-can-cho-don-hang.aspx";
-        }
-        public string getlinkCus(object id)
-        {
-            return Utils.CIntDef(id) > 0 ? "chi-tiet-khach-hang.aspx?id=" + Utils.CIntDef(id) : "chi-tiet-khach-hang.aspx";
-        }
-        public string getNameCus(object oid)
+        public string getOrderCode(object oid)
         {
             int id = Utils.CIntDef(oid);
-            var item = _CustomerRepo.GetById(id);
+            var item = _OrderRepo.GetById(id);
             if (item != null)
             {
-                return item.FULLNAME;
+                return item.CODE;
             }
             return "";
         }
-        public string getStatusName(object oid)
+        public DateTime getOrderDeadline(object oid)
         {
             int id = Utils.CIntDef(oid);
-            switch (id)
+            var item = _OrderDeadlineRepo.GetById(id);
+            if (item != null)
             {
-                case 1:
-                    return "Đang chờ";
-                case 2:
-                    return "Sản xuất";
-                case 3:
-                    return "Hoàn tất";
-                default:
-                    return "";
+                return Utils.CDateDef(item.DEADLINE_DATE, DateTime.Now);
             }
+            return DateTime.Now;
         }
         public string getDate(object date)
         {

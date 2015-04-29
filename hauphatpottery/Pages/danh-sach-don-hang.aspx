@@ -7,7 +7,7 @@
 
 <%@ Register assembly="DevExpress.Web.ASPxEditors.v12.1" namespace="DevExpress.Web.ASPxEditors" tagprefix="dx" %>
 <%@ Register assembly="DevExpress.Web.ASPxGridView.v12.1" namespace="DevExpress.Web.ASPxGridView" tagprefix="dx" %>
-
+<%@ Register src="../Calendar/pickerAndCalendar.ascx" tagname="pickerAndCalendar" tagprefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="CPHMain" runat="server">
@@ -43,6 +43,16 @@
                             name="txtKeyword" type="text" value="" runat="server" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
+                    </td>   
+                    <td>
+                        Từ ngày</td>                
+                    <td>
+                        <uc1:pickerAndCalendar ID="pickerAndCalendarFrom" runat="server" />
+                    </td> 
+                    <td>
+                        Đến ngày</td>                   
+                    <td>
+                        <uc1:pickerAndCalendar ID="pickerAndCalendarTo" runat="server" />
                     </td>
                     <td>
                         <asp:DropDownList runat="server" ID="ddlCustomer" CssClass="k-textbox textbox" AppendDataBoundItems="true" DataTextField="Fullname" DataValueField="Id">
@@ -56,7 +66,7 @@
                             <asp:ListItem Value="2" Text="Sản xuất"></asp:ListItem>
                             <asp:ListItem Value="3" Text="Hoàn tất"></asp:ListItem>
                         </asp:DropDownList>
-                    </td>
+                    </td> 
                     <td>
                         <asp:LinkButton CssClass="k-button" ID="lbtnSearch" ToolTip="Tìm kiếm" runat="server"
                             OnClick="lbtnSearch_Click"><span class="p-i-search"></span></asp:LinkButton>

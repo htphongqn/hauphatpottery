@@ -107,7 +107,7 @@ namespace hauphatpottery.Pages
                             if (Utils.CIntDef(shapeProperty.W) == 1)
                                 name += "W" + itemSize.W + " ";
 
-                            ddlProductDetailSize.Items.Add(new ListItem(name, Utils.CStrDef(item.ID)));
+                            ddlProductDetailSize.Items.Add(new ListItem(name, Utils.CStrDef(productDetailSizeId)));
                         }
                     }
                 }

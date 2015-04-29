@@ -9,15 +9,19 @@ namespace hauphatpottery.Data
     {
         private hauphatpotteryDataContext db = new hauphatpotteryDataContext();
 
+        public virtual List<PRODUCT_DETAIL_MATERIAL> GetByProductDetailId(int productDetailId, int productDetailSizeId)
+        {
+            return this.db.PRODUCT_DETAIL_MATERIALs.Where(n => n.PRODUCT_DETAIL_ID == productDetailId && n.PRODUCT_DETAIL_SIZE_ID == productDetailSizeId).ToList();
+        }
         public virtual List<PRODUCT_DETAIL_MATERIAL> GetByProductDetailId(int productDetailId)
         {
-            return this.db.PRODUCT_DETAIL_MATERIALs.Where(n=>n.PRODUCT_DETAIL_ID == productDetailId).ToList();
+            return this.db.PRODUCT_DETAIL_MATERIALs.Where(n => n.PRODUCT_DETAIL_ID == productDetailId).ToList();
         }
-        public virtual PRODUCT_DETAIL_MATERIAL GetByProductDetailIdAndMaterialId(int productDetailId, int materialid)
+        public virtual PRODUCT_DETAIL_MATERIAL GetByProductDetailIdAndMaterialId(int productDetailId, int productDetailSizeId, int materialid)
         {
             try
             {
-                return this.db.PRODUCT_DETAIL_MATERIALs.Single(u => u.PRODUCT_DETAIL_ID == productDetailId && u.MATERIAL_ID == materialid);
+                return this.db.PRODUCT_DETAIL_MATERIALs.Single(u => u.PRODUCT_DETAIL_ID == productDetailId && u.PRODUCT_DETAIL_SIZE_ID == productDetailSizeId && u.MATERIAL_ID == materialid);
             }
             catch
             {

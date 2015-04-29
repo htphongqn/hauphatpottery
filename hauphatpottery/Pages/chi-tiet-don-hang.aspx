@@ -61,7 +61,7 @@
         border: 1px solid #aecaf0">
         <tr>
             <td>
-                <dx:ASPxPageControl ID="ASPxPageControl2" runat="server" ActiveTabIndex="1" CssFilePath="~/App_Themes/Aqua/{0}/styles.css"
+                <dx:ASPxPageControl ID="ASPxPageControl2" runat="server" ActiveTabIndex="0" CssFilePath="~/App_Themes/Aqua/{0}/styles.css"
                     CssPostfix="Aqua" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" TabSpacing="3px"
                     Height="100%" Width="100%">
                     <TabPages>
@@ -303,6 +303,11 @@
                                                                     <%# getFormatQuantity(getSoluongTinhNhamDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID")))%>
                                                                 </DataItemTemplate>
                                                             </dx:GridViewDataTextColumn>  
+                                                            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL đã kiểm tra" Width="140px">
+                                                                <DataItemTemplate>
+                                                                    <%# getFormatQuantity(getSoluongKiemtra(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID")))%>
+                                                                </DataItemTemplate>
+                                                            </dx:GridViewDataTextColumn>
                                                             <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL xuất" Width="100px">
                                                                 <DataItemTemplate>
                                                                     <%# getFormatQuantity(getSoluongXuat(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID")))%>

@@ -169,6 +169,9 @@
                                                             <td valign="middle" align="left">                                
                                                                 Ngày nhập
                                                             </td>
+                                                            <td valign="middle" align="left">                                
+                                                                Ghi chú
+                                                            </td>
                                                         </tr>
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
@@ -181,6 +184,9 @@
                                                             </td>
                                                             <td valign="middle" align="left">                                
                                                                 <%# getDate(Eval("CREATE_DATE"))%>
+                                                            </td>
+                                                            <td valign="middle" align="left">                                
+                                                                <%# Eval("NOTE")%>
                                                             </td>
                                                         </tr>
                                                 </ItemTemplate>

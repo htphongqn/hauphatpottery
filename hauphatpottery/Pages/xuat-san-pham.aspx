@@ -61,7 +61,7 @@
         border: 1px solid #aecaf0">
         <tr>
             <td>
-                <dx:ASPxPageControl ID="ASPxPageControl2" runat="server" ActiveTabIndex="0" CssFilePath="~/App_Themes/Aqua/{0}/styles.css"
+                <dx:ASPxPageControl ID="ASPxPageControl2" runat="server" ActiveTabIndex="1" CssFilePath="~/App_Themes/Aqua/{0}/styles.css"
                     CssPostfix="Aqua" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" TabSpacing="3px"
                     Height="100%" Width="100%">
                     <TabPages>
@@ -111,7 +111,6 @@
                                             </td>
                                             <td align="left" nowrap="nowrap">
                                                 <asp:DropDownList runat="server" ID="ddlOrderDeadline" CssClass="k-textbox textbox" 
-                                                    DataTextField="Deadline_Date" DataValueField="Id" 
                                                     Width="400px">
                                                 </asp:DropDownList>                                               
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator51" runat="server" ErrorMessage="Chưa chọn thời hạn giao hàng"
@@ -139,7 +138,7 @@
                                 </dx:ContentControl>
                             </ContentCollection>
                         </dx:TabPage>
-                        <dx:TabPage Text="Danh sách chi tiết" Name="danhsachchitiet">
+                        <dx:TabPage Text="Danh sách chi tiết" Name="danhsachchitiet" Visible="false">
                             <ContentCollection>
                                 <dx:ContentControl ID="ContentControl2" runat="server" SupportsDisabledAttribute="True">
                                         <div id="div-search">
@@ -157,7 +156,14 @@
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Chưa chọn sản phẩm chi tiết"
                                                                 ControlToValidate="ddlProductDetail" Display="None" ForeColor="Red" ValidationGroup="G21"
                                                                 CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
-                                                        </td>                                                        
+                                                        </td>     
+                                                        <td align="left" nowrap="nowrap">
+                                                            <asp:DropDownList runat="server" ID="ddlProductDetailSize" CssClass="k-textbox textbox" Width="200">
+                                                            </asp:DropDownList>                                               
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="Chưa chọn size"
+                                                                ControlToValidate="ddlProductDetailSize" Display="None" ForeColor="Red" ValidationGroup="G21"
+                                                                CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
+                                                        </td>                                                   
                                                         <td>
                                                             <%--<asp:TextBox ID="txtQuantity" runat="server" class="text" CssClass="k-textbox textbox" onkeyup="FormatNumber(this);" onblur="FormatNumber(this);" Width="70" placeholder="Số lượng"></asp:TextBox>--%>
                                                             <asp:TextBox ID="txtQuantity" runat="server" class="text" CssClass="k-textbox textbox" onkeypress="return digits(this, event, false, false);" Width="70" placeholder="Số lượng"></asp:TextBox>
@@ -168,13 +174,6 @@
                                                                                                                 ControlToValidate="txtQuantity" Display="None" 
                                                                                         ForeColor="Red" ValidationGroup="G2"
                                                                                                                 CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
-                                                        </td>
-                                                        <td align="left" nowrap="nowrap">
-                                                            <asp:DropDownList runat="server" ID="ddlProductDetailSize" CssClass="k-textbox textbox" Width="200">
-                                                            </asp:DropDownList>                                               
-                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="Chưa chọn size"
-                                                                ControlToValidate="ddlProductDetailSize" Display="None" ForeColor="Red" ValidationGroup="G21"
-                                                                CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
                                                         </td>
                                                         <td>
                                                             <asp:LinkButton ID="lbtnSaveDetail" ToolTip="Lưu thông tin" CssClass="k-button" runat="server"

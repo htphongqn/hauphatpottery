@@ -7,17 +7,17 @@
 
 <%@ Register assembly="DevExpress.Web.ASPxEditors.v12.1" namespace="DevExpress.Web.ASPxEditors" tagprefix="dx" %>
 <%@ Register assembly="DevExpress.Web.ASPxGridView.v12.1" namespace="DevExpress.Web.ASPxGridView" tagprefix="dx" %>
-
+<%@ Register src="../Calendar/pickerAndCalendar.ascx" tagname="pickerAndCalendar" tagprefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="CPHMain" runat="server">
 <div id="header">
         <div class="title">
-            Danh Sách Đơn Hàng
+            Danh Sách Xuất Sản Phẩm
         </div>
         <div class="toolbar" style="margin-left: 1006px; margin-top: -38px;">
-            &nbsp;<a href="chi-tiet-don-hang.aspx" title="Thêm đơn hàng" class="k-button"><span
-                class="p-i-add"></span></a> &nbsp;<asp:LinkButton ID="lbtnDelete" OnClientClick="return confirm('Bạn có chắc muốn xóa ?');"
+            &nbsp;<a href="xuat-san-pham.aspx" title="Xuất sản phẩm" class="k-button"><span class="p-i-add"></span></a> &nbsp;
+            <asp:LinkButton ID="lbtnDelete" OnClientClick="return confirm('Bạn có chắc muốn xóa ?');"
                     ToolTip="Xóa" CssClass="k-button" runat="server" OnClick="lbtnDelete_Click"><img alt="Xóa" src="../Images/icon-32-trash.png" /></asp:LinkButton>
         </div>
         <div style="clear: both">
@@ -43,18 +43,20 @@
                             name="txtKeyword" type="text" value="" runat="server" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
+                    </td>   
+                    <td>
+                        Từ ngày</td>                
+                    <td>
+                        <uc1:pickerAndCalendar ID="pickerAndCalendarFrom" runat="server" />
+                    </td> 
+                    <td>
+                        Đến ngày</td>                   
+                    <td>
+                        <uc1:pickerAndCalendar ID="pickerAndCalendarTo" runat="server" />
                     </td>
                     <td>
-                        <asp:DropDownList runat="server" ID="ddlCustomer" CssClass="k-textbox textbox" AppendDataBoundItems="true" DataTextField="Fullname" DataValueField="Id">
-                            <asp:ListItem Value="0" Text="--Chọn Khách Hàng--"></asp:ListItem>
-                        </asp:DropDownList>
-                    </td>
-                    <td>
-                        <asp:DropDownList runat="server" ID="ddlStatus" CssClass="k-textbox textbox" AppendDataBoundItems="true">
-                            <asp:ListItem Value="0" Text="--Chọn Trạng Thái--"></asp:ListItem>
-                            <asp:ListItem Value="1" Text="Đang chờ"></asp:ListItem>
-                            <asp:ListItem Value="2" Text="Sản xuất"></asp:ListItem>
-                            <asp:ListItem Value="3" Text="Hoàn tất"></asp:ListItem>
+                        <asp:DropDownList runat="server" ID="ddlOrder" CssClass="k-textbox textbox" AppendDataBoundItems="true" DataTextField="Code" DataValueField="Id">
+                            <asp:ListItem Value="0" Text="--Chọn Đơn Hàng--"></asp:ListItem>
                         </asp:DropDownList>
                     </td>
                     <td>
@@ -75,7 +77,7 @@
         <tr>
             <td>
                 <dx:ASPxGridView ID="ASPxGridView1_Order" runat="server" AutoGenerateColumns="False"
-                    Width="100%" KeyFieldName="ID" Theme="Aqua" onhtmlrowprepared="ASPxGridView1_Order_HtmlRowPrepared" >
+                    Width="100%" KeyFieldName="ID" Theme="Aqua">
                     <Columns>
                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Width="45px">
                         </dx:GridViewCommandColumn>
@@ -86,33 +88,22 @@
                             <CellStyle HorizontalAlign="Center">
                             </CellStyle>
                         </dx:GridViewDataTextColumn>
-                        <%--<dx:GridViewDataTextColumn VisibleIndex="1" Caption="Hình ảnh" FieldName="IMAGE" Width="200px">
-                            <DataItemTemplate>
-                            <img src="<%# getImage(Eval("IMAGE"))%>" />                                
-                            </DataItemTemplate>
-                        </dx:GridViewDataTextColumn>--%>
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Mã Đơn Hàng" FieldName="CODE"  Width="120px">
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Mã Xuất Hàng" FieldName="CODE"  Width="120px">
                             <DataItemTemplate>
                                 <a href="<%# getlink(Eval("ID")) %>" title='<%# Eval("CODE")%>'>
                                     <%# getShortString(Eval("CODE"), 40)%></a>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Khách hàng" Width="250px">
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Đơn hàng" Width="250px">
                             <DataItemTemplate>
-                                <a href="<%# getlinkCus(Eval("CUSTOMER_ID")) %>">
-                                    <%# getShortString(getNameCus(Eval("CUSTOMER_ID")), 40)%></a>
+                                    <%# getShortString(getOrderCode(Eval("ORDER_ID")), 40)%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Trạng thái" Width="100px">
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Thời Hạn Giao Hàng" FieldName="ORDER_DEADLINE_ID"  Width="120px">
                             <DataItemTemplate>
-                                    <%# getStatusName(Eval("STATUS"))%>
+                                    <%# getDate(getOrderDeadline(Eval("ORDER_DEADLINE_ID")))%>
                             </DataItemTemplate>
-                        </dx:GridViewDataTextColumn>
-                        <%--<dx:GridViewDataTextColumn VisibleIndex="1" Caption="Thời Hạn Giao Hàng" FieldName="DEADLINE_DATE"  Width="120px">
-                            <DataItemTemplate>
-                                    <%# getDate(Eval("DEADLINE_DATE"))%>
-                            </DataItemTemplate>
-                        </dx:GridViewDataTextColumn>--%>     
+                        </dx:GridViewDataTextColumn>  
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Ghi chú">
                             <DataItemTemplate>
                                     <%# getShortString(Eval("Note"), 40)%>
@@ -127,13 +118,7 @@
                             <DataItemTemplate>
                                 <%#getUser(Eval("CREATOR_ID"))%>
                             </DataItemTemplate>
-                        </dx:GridViewDataTextColumn>   
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Nguyên liệu cần cho đơn hàng" FieldName="ID" Width="200">
-                            <DataItemTemplate>
-                                    <a href="<%# getlink_nguyenlieucan(Eval("ID")) %>">
-                                    Nguyên liệu cần cho đơn hàng</a>
-                            </DataItemTemplate>
-                        </dx:GridViewDataTextColumn> 
+                        </dx:GridViewDataTextColumn>                            
                         </Columns>
                     <Settings ShowHorizontalScrollBar="true" />
                     <Settings VerticalScrollableHeight="350" />

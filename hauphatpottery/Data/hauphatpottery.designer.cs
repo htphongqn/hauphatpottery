@@ -51,9 +51,6 @@ namespace hauphatpottery.Data
     partial void InsertTYPE(TYPE instance);
     partial void UpdateTYPE(TYPE instance);
     partial void DeleteTYPE(TYPE instance);
-    partial void InsertPRODUCT_DETAIL_MATERIAL(PRODUCT_DETAIL_MATERIAL instance);
-    partial void UpdatePRODUCT_DETAIL_MATERIAL(PRODUCT_DETAIL_MATERIAL instance);
-    partial void DeletePRODUCT_DETAIL_MATERIAL(PRODUCT_DETAIL_MATERIAL instance);
     partial void InsertCUSTOMER(CUSTOMER instance);
     partial void UpdateCUSTOMER(CUSTOMER instance);
     partial void DeleteCUSTOMER(CUSTOMER instance);
@@ -105,6 +102,9 @@ namespace hauphatpottery.Data
     partial void InsertORDER_DELI_DETAIL(ORDER_DELI_DETAIL instance);
     partial void UpdateORDER_DELI_DETAIL(ORDER_DELI_DETAIL instance);
     partial void DeleteORDER_DELI_DETAIL(ORDER_DELI_DETAIL instance);
+    partial void InsertPRODUCT_DETAIL_MATERIAL(PRODUCT_DETAIL_MATERIAL instance);
+    partial void UpdatePRODUCT_DETAIL_MATERIAL(PRODUCT_DETAIL_MATERIAL instance);
+    partial void DeletePRODUCT_DETAIL_MATERIAL(PRODUCT_DETAIL_MATERIAL instance);
     #endregion
 		
 		public hauphatpotteryDataContext() : 
@@ -190,14 +190,6 @@ namespace hauphatpottery.Data
 			get
 			{
 				return this.GetTable<TYPE>();
-			}
-		}
-		
-		public System.Data.Linq.Table<PRODUCT_DETAIL_MATERIAL> PRODUCT_DETAIL_MATERIALs
-		{
-			get
-			{
-				return this.GetTable<PRODUCT_DETAIL_MATERIAL>();
 			}
 		}
 		
@@ -334,6 +326,14 @@ namespace hauphatpottery.Data
 			get
 			{
 				return this.GetTable<ORDER_DELI_DETAIL>();
+			}
+		}
+		
+		public System.Data.Linq.Table<PRODUCT_DETAIL_MATERIAL> PRODUCT_DETAIL_MATERIALs
+		{
+			get
+			{
+				return this.GetTable<PRODUCT_DETAIL_MATERIAL>();
 			}
 		}
 	}
@@ -1418,9 +1418,9 @@ namespace hauphatpottery.Data
 		
 		private System.Nullable<int> _UNIT_ID;
 		
-		private EntitySet<PRODUCT_DETAIL_MATERIAL> _PRODUCT_DETAIL_MATERIALs;
-		
 		private EntitySet<ORDERMATERIAL_DETAIL> _ORDERMATERIAL_DETAILs;
+		
+		private EntitySet<PRODUCT_DETAIL_MATERIAL> _PRODUCT_DETAIL_MATERIALs;
 		
 		private EntityRef<UNIT> _UNIT;
 		
@@ -1440,8 +1440,8 @@ namespace hauphatpottery.Data
 		
 		public MATERIAL()
 		{
-			this._PRODUCT_DETAIL_MATERIALs = new EntitySet<PRODUCT_DETAIL_MATERIAL>(new Action<PRODUCT_DETAIL_MATERIAL>(this.attach_PRODUCT_DETAIL_MATERIALs), new Action<PRODUCT_DETAIL_MATERIAL>(this.detach_PRODUCT_DETAIL_MATERIALs));
 			this._ORDERMATERIAL_DETAILs = new EntitySet<ORDERMATERIAL_DETAIL>(new Action<ORDERMATERIAL_DETAIL>(this.attach_ORDERMATERIAL_DETAILs), new Action<ORDERMATERIAL_DETAIL>(this.detach_ORDERMATERIAL_DETAILs));
+			this._PRODUCT_DETAIL_MATERIALs = new EntitySet<PRODUCT_DETAIL_MATERIAL>(new Action<PRODUCT_DETAIL_MATERIAL>(this.attach_PRODUCT_DETAIL_MATERIALs), new Action<PRODUCT_DETAIL_MATERIAL>(this.detach_PRODUCT_DETAIL_MATERIALs));
 			this._UNIT = default(EntityRef<UNIT>);
 			OnCreated();
 		}
@@ -1530,19 +1530,6 @@ namespace hauphatpottery.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MATERIAL_PRODUCT_DETAIL_MATERIAL", Storage="_PRODUCT_DETAIL_MATERIALs", ThisKey="ID", OtherKey="MATERIAL_ID")]
-		public EntitySet<PRODUCT_DETAIL_MATERIAL> PRODUCT_DETAIL_MATERIALs
-		{
-			get
-			{
-				return this._PRODUCT_DETAIL_MATERIALs;
-			}
-			set
-			{
-				this._PRODUCT_DETAIL_MATERIALs.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MATERIAL_ORDERMATERIAL_DETAIL", Storage="_ORDERMATERIAL_DETAILs", ThisKey="ID", OtherKey="MATERIAL_ID")]
 		public EntitySet<ORDERMATERIAL_DETAIL> ORDERMATERIAL_DETAILs
 		{
@@ -1553,6 +1540,19 @@ namespace hauphatpottery.Data
 			set
 			{
 				this._ORDERMATERIAL_DETAILs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MATERIAL_PRODUCT_DETAIL_MATERIAL", Storage="_PRODUCT_DETAIL_MATERIALs", ThisKey="ID", OtherKey="MATERIAL_ID")]
+		public EntitySet<PRODUCT_DETAIL_MATERIAL> PRODUCT_DETAIL_MATERIALs
+		{
+			get
+			{
+				return this._PRODUCT_DETAIL_MATERIALs;
+			}
+			set
+			{
+				this._PRODUCT_DETAIL_MATERIALs.Assign(value);
 			}
 		}
 		
@@ -1610,18 +1610,6 @@ namespace hauphatpottery.Data
 			}
 		}
 		
-		private void attach_PRODUCT_DETAIL_MATERIALs(PRODUCT_DETAIL_MATERIAL entity)
-		{
-			this.SendPropertyChanging();
-			entity.MATERIAL = this;
-		}
-		
-		private void detach_PRODUCT_DETAIL_MATERIALs(PRODUCT_DETAIL_MATERIAL entity)
-		{
-			this.SendPropertyChanging();
-			entity.MATERIAL = null;
-		}
-		
 		private void attach_ORDERMATERIAL_DETAILs(ORDERMATERIAL_DETAIL entity)
 		{
 			this.SendPropertyChanging();
@@ -1629,6 +1617,18 @@ namespace hauphatpottery.Data
 		}
 		
 		private void detach_ORDERMATERIAL_DETAILs(ORDERMATERIAL_DETAIL entity)
+		{
+			this.SendPropertyChanging();
+			entity.MATERIAL = null;
+		}
+		
+		private void attach_PRODUCT_DETAIL_MATERIALs(PRODUCT_DETAIL_MATERIAL entity)
+		{
+			this.SendPropertyChanging();
+			entity.MATERIAL = this;
+		}
+		
+		private void detach_PRODUCT_DETAIL_MATERIALs(PRODUCT_DETAIL_MATERIAL entity)
 		{
 			this.SendPropertyChanging();
 			entity.MATERIAL = null;
@@ -1770,222 +1770,6 @@ namespace hauphatpottery.Data
 		{
 			this.SendPropertyChanging();
 			entity.TYPE = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PRODUCT_DETAIL_MATERIAL")]
-	public partial class PRODUCT_DETAIL_MATERIAL : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private System.Nullable<int> _PRODUCT_DETAIL_ID;
-		
-		private System.Nullable<int> _MATERIAL_ID;
-		
-		private System.Nullable<decimal> _QUANTITY;
-		
-		private EntityRef<MATERIAL> _MATERIAL;
-		
-		private EntityRef<PRODUCT_DETAIL> _PRODUCT_DETAIL;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnPRODUCT_DETAIL_IDChanging(System.Nullable<int> value);
-    partial void OnPRODUCT_DETAIL_IDChanged();
-    partial void OnMATERIAL_IDChanging(System.Nullable<int> value);
-    partial void OnMATERIAL_IDChanged();
-    partial void OnQUANTITYChanging(System.Nullable<decimal> value);
-    partial void OnQUANTITYChanged();
-    #endregion
-		
-		public PRODUCT_DETAIL_MATERIAL()
-		{
-			this._MATERIAL = default(EntityRef<MATERIAL>);
-			this._PRODUCT_DETAIL = default(EntityRef<PRODUCT_DETAIL>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRODUCT_DETAIL_ID", DbType="Int")]
-		public System.Nullable<int> PRODUCT_DETAIL_ID
-		{
-			get
-			{
-				return this._PRODUCT_DETAIL_ID;
-			}
-			set
-			{
-				if ((this._PRODUCT_DETAIL_ID != value))
-				{
-					if (this._PRODUCT_DETAIL.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPRODUCT_DETAIL_IDChanging(value);
-					this.SendPropertyChanging();
-					this._PRODUCT_DETAIL_ID = value;
-					this.SendPropertyChanged("PRODUCT_DETAIL_ID");
-					this.OnPRODUCT_DETAIL_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MATERIAL_ID", DbType="Int")]
-		public System.Nullable<int> MATERIAL_ID
-		{
-			get
-			{
-				return this._MATERIAL_ID;
-			}
-			set
-			{
-				if ((this._MATERIAL_ID != value))
-				{
-					if (this._MATERIAL.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMATERIAL_IDChanging(value);
-					this.SendPropertyChanging();
-					this._MATERIAL_ID = value;
-					this.SendPropertyChanged("MATERIAL_ID");
-					this.OnMATERIAL_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QUANTITY", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> QUANTITY
-		{
-			get
-			{
-				return this._QUANTITY;
-			}
-			set
-			{
-				if ((this._QUANTITY != value))
-				{
-					this.OnQUANTITYChanging(value);
-					this.SendPropertyChanging();
-					this._QUANTITY = value;
-					this.SendPropertyChanged("QUANTITY");
-					this.OnQUANTITYChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MATERIAL_PRODUCT_DETAIL_MATERIAL", Storage="_MATERIAL", ThisKey="MATERIAL_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public MATERIAL MATERIAL
-		{
-			get
-			{
-				return this._MATERIAL.Entity;
-			}
-			set
-			{
-				MATERIAL previousValue = this._MATERIAL.Entity;
-				if (((previousValue != value) 
-							|| (this._MATERIAL.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._MATERIAL.Entity = null;
-						previousValue.PRODUCT_DETAIL_MATERIALs.Remove(this);
-					}
-					this._MATERIAL.Entity = value;
-					if ((value != null))
-					{
-						value.PRODUCT_DETAIL_MATERIALs.Add(this);
-						this._MATERIAL_ID = value.ID;
-					}
-					else
-					{
-						this._MATERIAL_ID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("MATERIAL");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PRODUCT_DETAIL_PRODUCT_DETAIL_MATERIAL", Storage="_PRODUCT_DETAIL", ThisKey="PRODUCT_DETAIL_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public PRODUCT_DETAIL PRODUCT_DETAIL
-		{
-			get
-			{
-				return this._PRODUCT_DETAIL.Entity;
-			}
-			set
-			{
-				PRODUCT_DETAIL previousValue = this._PRODUCT_DETAIL.Entity;
-				if (((previousValue != value) 
-							|| (this._PRODUCT_DETAIL.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._PRODUCT_DETAIL.Entity = null;
-						previousValue.PRODUCT_DETAIL_MATERIALs.Remove(this);
-					}
-					this._PRODUCT_DETAIL.Entity = value;
-					if ((value != null))
-					{
-						value.PRODUCT_DETAIL_MATERIALs.Add(this);
-						this._PRODUCT_DETAIL_ID = value.ID;
-					}
-					else
-					{
-						this._PRODUCT_DETAIL_ID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("PRODUCT_DETAIL");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -2944,8 +2728,6 @@ namespace hauphatpottery.Data
 		
 		private System.Nullable<int> _PRODUCT_ID;
 		
-		private EntitySet<PRODUCT_DETAIL_MATERIAL> _PRODUCT_DETAIL_MATERIALs;
-		
 		private EntitySet<PRODUCT_DETAIL_SIZE> _PRODUCT_DETAIL_SIZEs;
 		
 		private EntitySet<ORDER_DETAIL> _ORDER_DETAILs;
@@ -2953,6 +2735,8 @@ namespace hauphatpottery.Data
 		private EntitySet<INVENTORY> _INVENTORies;
 		
 		private EntitySet<ORDER_DELI_DETAIL> _ORDER_DELI_DETAILs;
+		
+		private EntitySet<PRODUCT_DETAIL_MATERIAL> _PRODUCT_DETAIL_MATERIALs;
 		
 		private EntityRef<PRODUCT> _PRODUCT;
 		
@@ -2980,11 +2764,11 @@ namespace hauphatpottery.Data
 		
 		public PRODUCT_DETAIL()
 		{
-			this._PRODUCT_DETAIL_MATERIALs = new EntitySet<PRODUCT_DETAIL_MATERIAL>(new Action<PRODUCT_DETAIL_MATERIAL>(this.attach_PRODUCT_DETAIL_MATERIALs), new Action<PRODUCT_DETAIL_MATERIAL>(this.detach_PRODUCT_DETAIL_MATERIALs));
 			this._PRODUCT_DETAIL_SIZEs = new EntitySet<PRODUCT_DETAIL_SIZE>(new Action<PRODUCT_DETAIL_SIZE>(this.attach_PRODUCT_DETAIL_SIZEs), new Action<PRODUCT_DETAIL_SIZE>(this.detach_PRODUCT_DETAIL_SIZEs));
 			this._ORDER_DETAILs = new EntitySet<ORDER_DETAIL>(new Action<ORDER_DETAIL>(this.attach_ORDER_DETAILs), new Action<ORDER_DETAIL>(this.detach_ORDER_DETAILs));
 			this._INVENTORies = new EntitySet<INVENTORY>(new Action<INVENTORY>(this.attach_INVENTORies), new Action<INVENTORY>(this.detach_INVENTORies));
 			this._ORDER_DELI_DETAILs = new EntitySet<ORDER_DELI_DETAIL>(new Action<ORDER_DELI_DETAIL>(this.attach_ORDER_DELI_DETAILs), new Action<ORDER_DELI_DETAIL>(this.detach_ORDER_DELI_DETAILs));
+			this._PRODUCT_DETAIL_MATERIALs = new EntitySet<PRODUCT_DETAIL_MATERIAL>(new Action<PRODUCT_DETAIL_MATERIAL>(this.attach_PRODUCT_DETAIL_MATERIALs), new Action<PRODUCT_DETAIL_MATERIAL>(this.detach_PRODUCT_DETAIL_MATERIALs));
 			this._PRODUCT = default(EntityRef<PRODUCT>);
 			this._TYPE = default(EntityRef<TYPE>);
 			OnCreated();
@@ -3138,19 +2922,6 @@ namespace hauphatpottery.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PRODUCT_DETAIL_PRODUCT_DETAIL_MATERIAL", Storage="_PRODUCT_DETAIL_MATERIALs", ThisKey="ID", OtherKey="PRODUCT_DETAIL_ID")]
-		public EntitySet<PRODUCT_DETAIL_MATERIAL> PRODUCT_DETAIL_MATERIALs
-		{
-			get
-			{
-				return this._PRODUCT_DETAIL_MATERIALs;
-			}
-			set
-			{
-				this._PRODUCT_DETAIL_MATERIALs.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PRODUCT_DETAIL_PRODUCT_DETAIL_SIZE", Storage="_PRODUCT_DETAIL_SIZEs", ThisKey="ID", OtherKey="PRODUCT_DETAIL_ID")]
 		public EntitySet<PRODUCT_DETAIL_SIZE> PRODUCT_DETAIL_SIZEs
 		{
@@ -3200,6 +2971,19 @@ namespace hauphatpottery.Data
 			set
 			{
 				this._ORDER_DELI_DETAILs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PRODUCT_DETAIL_PRODUCT_DETAIL_MATERIAL", Storage="_PRODUCT_DETAIL_MATERIALs", ThisKey="ID", OtherKey="PRODUCT_DETAIL_ID")]
+		public EntitySet<PRODUCT_DETAIL_MATERIAL> PRODUCT_DETAIL_MATERIALs
+		{
+			get
+			{
+				return this._PRODUCT_DETAIL_MATERIALs;
+			}
+			set
+			{
+				this._PRODUCT_DETAIL_MATERIALs.Assign(value);
 			}
 		}
 		
@@ -3291,18 +3075,6 @@ namespace hauphatpottery.Data
 			}
 		}
 		
-		private void attach_PRODUCT_DETAIL_MATERIALs(PRODUCT_DETAIL_MATERIAL entity)
-		{
-			this.SendPropertyChanging();
-			entity.PRODUCT_DETAIL = this;
-		}
-		
-		private void detach_PRODUCT_DETAIL_MATERIALs(PRODUCT_DETAIL_MATERIAL entity)
-		{
-			this.SendPropertyChanging();
-			entity.PRODUCT_DETAIL = null;
-		}
-		
 		private void attach_PRODUCT_DETAIL_SIZEs(PRODUCT_DETAIL_SIZE entity)
 		{
 			this.SendPropertyChanging();
@@ -3346,6 +3118,18 @@ namespace hauphatpottery.Data
 		}
 		
 		private void detach_ORDER_DELI_DETAILs(ORDER_DELI_DETAIL entity)
+		{
+			this.SendPropertyChanging();
+			entity.PRODUCT_DETAIL = null;
+		}
+		
+		private void attach_PRODUCT_DETAIL_MATERIALs(PRODUCT_DETAIL_MATERIAL entity)
+		{
+			this.SendPropertyChanging();
+			entity.PRODUCT_DETAIL = this;
+		}
+		
+		private void detach_PRODUCT_DETAIL_MATERIALs(PRODUCT_DETAIL_MATERIAL entity)
 		{
 			this.SendPropertyChanging();
 			entity.PRODUCT_DETAIL = null;
@@ -6587,6 +6371,246 @@ namespace hauphatpottery.Data
 					if ((value != null))
 					{
 						value.ORDER_DELI_DETAILs.Add(this);
+						this._PRODUCT_DETAIL_ID = value.ID;
+					}
+					else
+					{
+						this._PRODUCT_DETAIL_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("PRODUCT_DETAIL");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PRODUCT_DETAIL_MATERIAL")]
+	public partial class PRODUCT_DETAIL_MATERIAL : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _PRODUCT_DETAIL_ID;
+		
+		private System.Nullable<int> _PRODUCT_DETAIL_SIZE_ID;
+		
+		private System.Nullable<int> _MATERIAL_ID;
+		
+		private System.Nullable<decimal> _QUANTITY;
+		
+		private EntityRef<MATERIAL> _MATERIAL;
+		
+		private EntityRef<PRODUCT_DETAIL> _PRODUCT_DETAIL;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnPRODUCT_DETAIL_IDChanging(System.Nullable<int> value);
+    partial void OnPRODUCT_DETAIL_IDChanged();
+    partial void OnPRODUCT_DETAIL_SIZE_IDChanging(System.Nullable<int> value);
+    partial void OnPRODUCT_DETAIL_SIZE_IDChanged();
+    partial void OnMATERIAL_IDChanging(System.Nullable<int> value);
+    partial void OnMATERIAL_IDChanged();
+    partial void OnQUANTITYChanging(System.Nullable<decimal> value);
+    partial void OnQUANTITYChanged();
+    #endregion
+		
+		public PRODUCT_DETAIL_MATERIAL()
+		{
+			this._MATERIAL = default(EntityRef<MATERIAL>);
+			this._PRODUCT_DETAIL = default(EntityRef<PRODUCT_DETAIL>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRODUCT_DETAIL_ID", DbType="Int")]
+		public System.Nullable<int> PRODUCT_DETAIL_ID
+		{
+			get
+			{
+				return this._PRODUCT_DETAIL_ID;
+			}
+			set
+			{
+				if ((this._PRODUCT_DETAIL_ID != value))
+				{
+					if (this._PRODUCT_DETAIL.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPRODUCT_DETAIL_IDChanging(value);
+					this.SendPropertyChanging();
+					this._PRODUCT_DETAIL_ID = value;
+					this.SendPropertyChanged("PRODUCT_DETAIL_ID");
+					this.OnPRODUCT_DETAIL_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRODUCT_DETAIL_SIZE_ID", DbType="Int")]
+		public System.Nullable<int> PRODUCT_DETAIL_SIZE_ID
+		{
+			get
+			{
+				return this._PRODUCT_DETAIL_SIZE_ID;
+			}
+			set
+			{
+				if ((this._PRODUCT_DETAIL_SIZE_ID != value))
+				{
+					this.OnPRODUCT_DETAIL_SIZE_IDChanging(value);
+					this.SendPropertyChanging();
+					this._PRODUCT_DETAIL_SIZE_ID = value;
+					this.SendPropertyChanged("PRODUCT_DETAIL_SIZE_ID");
+					this.OnPRODUCT_DETAIL_SIZE_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MATERIAL_ID", DbType="Int")]
+		public System.Nullable<int> MATERIAL_ID
+		{
+			get
+			{
+				return this._MATERIAL_ID;
+			}
+			set
+			{
+				if ((this._MATERIAL_ID != value))
+				{
+					if (this._MATERIAL.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMATERIAL_IDChanging(value);
+					this.SendPropertyChanging();
+					this._MATERIAL_ID = value;
+					this.SendPropertyChanged("MATERIAL_ID");
+					this.OnMATERIAL_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QUANTITY", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> QUANTITY
+		{
+			get
+			{
+				return this._QUANTITY;
+			}
+			set
+			{
+				if ((this._QUANTITY != value))
+				{
+					this.OnQUANTITYChanging(value);
+					this.SendPropertyChanging();
+					this._QUANTITY = value;
+					this.SendPropertyChanged("QUANTITY");
+					this.OnQUANTITYChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MATERIAL_PRODUCT_DETAIL_MATERIAL", Storage="_MATERIAL", ThisKey="MATERIAL_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public MATERIAL MATERIAL
+		{
+			get
+			{
+				return this._MATERIAL.Entity;
+			}
+			set
+			{
+				MATERIAL previousValue = this._MATERIAL.Entity;
+				if (((previousValue != value) 
+							|| (this._MATERIAL.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._MATERIAL.Entity = null;
+						previousValue.PRODUCT_DETAIL_MATERIALs.Remove(this);
+					}
+					this._MATERIAL.Entity = value;
+					if ((value != null))
+					{
+						value.PRODUCT_DETAIL_MATERIALs.Add(this);
+						this._MATERIAL_ID = value.ID;
+					}
+					else
+					{
+						this._MATERIAL_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("MATERIAL");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PRODUCT_DETAIL_PRODUCT_DETAIL_MATERIAL", Storage="_PRODUCT_DETAIL", ThisKey="PRODUCT_DETAIL_ID", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public PRODUCT_DETAIL PRODUCT_DETAIL
+		{
+			get
+			{
+				return this._PRODUCT_DETAIL.Entity;
+			}
+			set
+			{
+				PRODUCT_DETAIL previousValue = this._PRODUCT_DETAIL.Entity;
+				if (((previousValue != value) 
+							|| (this._PRODUCT_DETAIL.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._PRODUCT_DETAIL.Entity = null;
+						previousValue.PRODUCT_DETAIL_MATERIALs.Remove(this);
+					}
+					this._PRODUCT_DETAIL.Entity = value;
+					if ((value != null))
+					{
+						value.PRODUCT_DETAIL_MATERIALs.Add(this);
 						this._PRODUCT_DETAIL_ID = value.ID;
 					}
 					else

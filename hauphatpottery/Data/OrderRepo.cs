@@ -10,11 +10,12 @@ namespace hauphatpottery.Data
     {
         private hauphatpotteryDataContext db = new hauphatpotteryDataContext();
 
-        public virtual List<ORDER> GetByWhereAll(string s, int customerId, int statusId, int userId)
+        public virtual List<ORDER> GetByWhereAll(string s, int customerId, int statusId, int userId, DateTime datefrom, DateTime dateto)
         {
             return this.db.ORDERs.Where(n => (n.CODE.Contains(s) || s == "")
                 && (n.CUSTOMER_ID == customerId || customerId == 0)
                 && (n.CREATOR_ID == userId || userId == 0)
+                && (n.CREATE_DATE.Value.Date >= datefrom.Date && n.CREATE_DATE.Value.Date <= dateto.Date)
                 && (n.STATUS == statusId || statusId == 0)).OrderByDescending(n => n.ID).ToList();
         }
         public virtual List<ORDER> GetByStatus(int statusId)

@@ -32,7 +32,7 @@ namespace hauphatpottery.Pages
             {
                 LoadProductDetail();
                 SetShapeProperty();
-                LoadProductDetail_Size();
+                LoadProductDetailSize();
             }
             else
             {
@@ -75,9 +75,9 @@ namespace hauphatpottery.Pages
         protected void ddLProductDetail_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetShapeProperty();
-            LoadProductDetail_Size();
+            LoadProductDetailSize();
         }
-        private void LoadProductDetail_Size()
+        private void LoadProductDetailSize()
         {
             try
             {

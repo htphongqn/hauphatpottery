@@ -54,8 +54,10 @@ namespace hauphatpottery.Pages
             if (!IsPostBack)
             {
                 LoadOrder();
+                LoadOrderDeadline();
                 LoadOrderDeliDetail();
                 LoadProductDetail();
+                LoadProductDetailSize();
                 getInfo();
             }
         }
@@ -67,10 +69,13 @@ namespace hauphatpottery.Pages
         }
         private void LoadOrderDeadline()
         {
+            ddlOrderDeadline.Items.Clear();
             int orderId = Utils.CIntDef(ddlOrder.SelectedValue);
             var list = _OrderDeadlineRepo.GetByOrderId(orderId);
-            ddlOrderDeadline.DataSource = list;
-            ddlOrderDeadline.DataBind();
+            foreach (var item in list)
+            {
+                ddlOrderDeadline.Items.Add(new ListItem(item.DEADLINE_DATE.Value.ToString("dd/MM/yyyyy"), item.ID.ToString()));
+            }
             ddlOrderDeadline.Items.Insert(0, new ListItem("--Chọn Thời gian giao hàng--", "0"));
         }
         private void LoadProductDetail()
@@ -140,7 +145,7 @@ namespace hauphatpottery.Pages
         protected void ddlOrder_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadOrderDeadline();
-            ASPxPageControl2.ActiveTabIndex = 1;
+            ASPxPageControl2.ActiveTabIndex = 0;
         }
 
         protected void ddlProductDetail_SelectedIndexChanged(object sender, EventArgs e)
@@ -159,7 +164,7 @@ namespace hauphatpottery.Pages
                 {
                     orderDeli.CODE = txtCode.Text;
                     orderDeli.ORDER_ID = Utils.CIntDef(ddlOrder.SelectedValue);
-                    orderDeli.ORDER_DEADLINE_ID = Utils.CIntDef(ddlOrderDeadline.SelectedValue);
+                    orderDeli.ORDER_DEADLINE_ID = Utils.CIntDef(ddlOrderDeadline.SelectedItem.Value);
                     orderDeli.CREATE_DATE = pickerAndCalendarDeliDate.returnDate;
                     orderDeli.NOTE = txtNote.Text;
 

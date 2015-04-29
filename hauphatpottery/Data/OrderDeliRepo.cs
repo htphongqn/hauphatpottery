@@ -10,6 +10,15 @@ namespace hauphatpottery.Data
     {
         private hauphatpotteryDataContext db = new hauphatpotteryDataContext();
 
+        public virtual List<ORDER_DELI> GetByWhereAll(string s, int orderId, int userId, DateTime datefrom, DateTime dateto)
+        {
+            return this.db.ORDER_DELIs.Where(n => (n.CODE.Contains(s) || s == "")
+                && (n.ORDER_ID == orderId || orderId == 0)
+                && (n.CREATOR_ID == userId || userId == 0)
+                && (n.CREATOR_ID == userId || userId == 0)
+                && (n.CREATE_DATE.Value.Date >= datefrom.Date && n.CREATE_DATE.Value.Date <= dateto.Date)
+                ).OrderByDescending(n => n.ID).ToList();
+        }
         public virtual List<ORDER_DELI> GetByOrderId(int orderId, string s)
         {
             return this.db.ORDER_DELIs.Where(n => (n.ORDER_ID == orderId || orderId == 0) || (n.CODE.Contains(s) || s == "")).ToList();

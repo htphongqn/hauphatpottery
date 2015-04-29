@@ -135,32 +135,32 @@
                         </dx:GridViewDataTextColumn>     
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL thô đã làm" Width="140px">
                             <DataItemTemplate>
-                                <%# getFormatQuantity(getSoluongDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                <%# getFormatQuantity(getSoluongDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID")))%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>    
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL tinh đã làm(Sơn)" Width="140px">
                             <DataItemTemplate>
-                                <%# getFormatQuantity(getSoluongTinhSonDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                <%# getFormatQuantity(getSoluongTinhSonDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID")))%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>   
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL tinh đã làm(Chét)" Width="140px">
                             <DataItemTemplate>
-                                <%# getFormatQuantity(getSoluongTinhChetDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                <%# getFormatQuantity(getSoluongTinhChetDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID")))%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>  
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL tinh đã làm(Nhám)" Width="140px">
                             <DataItemTemplate>
-                                <%# getFormatQuantity(getSoluongTinhNhamDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                <%# getFormatQuantity(getSoluongTinhNhamDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID")))%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn> 
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL đã kiểm tra" Width="140px">
                             <DataItemTemplate>
-                                <%# getFormatQuantity(getSoluongKiemtra(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                <%# getFormatQuantity(getSoluongKiemtra(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID")))%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>   
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL còn lại">
                             <DataItemTemplate>
-                                <%# getFormatQuantity(getSoluongConlai(Eval("QUANTITY"), Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                <%# getFormatQuantity(getSoluongConlai(Eval("QUANTITY"), Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID")))%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="">
@@ -179,7 +179,7 @@
                                             <asp:LinkButton ID="lnkClose" runat="server" CssClass="TitlebarRight" CausesValidation="false"/>
                                         </div>
                                         <div class="popup_Body">    
-                                            <asp:Repeater ID="rptHistory" runat="server" DataSource='<%# getListHistory(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"))%>'>
+                                            <asp:Repeater ID="rptHistory" runat="server" DataSource='<%# getListHistory(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID"))%>'>
                                                 <HeaderTemplate>
                                                     <table>
                                                         <tr>
