@@ -325,6 +325,9 @@
     <Content Include="Pages\chi-tiet-san-pham-chi-tiet.aspx" />
     <Content Include="Pages\chi-tiet-don-hang.aspx" />
     <Content Include="Pages\chi-tiet-cong-ty.aspx" />
+    <Content Include="Pages\danh-sach-xuat-san-pham.aspx" />
+    <Content Include="Pages\xuat-san-pham.aspx" />
+    <Content Include="Pages\kiem-tra-san-pham.aspx" />
     <Content Include="Pages\nhap-san-pham-tinh-nham.aspx" />
     <Content Include="Pages\nhap-san-pham-tinh-chet.aspx" />
     <Content Include="Pages\nhap-san-pham-tinh-son.aspx" />
@@ -338,8 +341,6 @@
     <Content Include="Pages\hinh-dang.aspx" />
     <Content Include="Pages\danh-sach-size-san-pham-chi-tiet.aspx" />
     <Content Include="Pages\nguyen-lieu-can-cho-san-pham.aspx" />
-    <Content Include="Pages\xuat-san-pham.aspx" />
-    <Content Include="Pages\nhap-san-pham-tinh.aspx" />
     <Content Include="Pages\nhap-san-pham-tho.aspx" />
     <Content Include="Pages\nguyen-lieu-can-cho-don-hang.aspx" />
     <Content Include="Pages\danh-sach-don-hang.aspx" />
@@ -396,6 +397,8 @@
     <Compile Include="Components\clsUtility.cs" />
     <Compile Include="Components\Cost.cs" />
     <Compile Include="Data\CompanyRepo.cs" />
+    <Compile Include="Data\OrderDeliDetailRepo.cs" />
+    <Compile Include="Data\OrderDeliRepo.cs" />
     <Compile Include="Data\OrderMaterialPriceRepo.cs" />
     <Compile Include="Data\OrderMaterialDetailRepo.cs" />
     <Compile Include="Data\OrderMaterialRepo.cs" />
@@ -512,6 +515,27 @@
     <Compile Include="Pages\chi-tiet-cong-ty.aspx.designer.cs">
       <DependentUpon>chi-tiet-cong-ty.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\danh-sach-xuat-san-pham.aspx.cs">
+      <DependentUpon>danh-sach-xuat-san-pham.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\danh-sach-xuat-san-pham.aspx.designer.cs">
+      <DependentUpon>danh-sach-xuat-san-pham.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\xuat-san-pham.aspx.cs">
+      <DependentUpon>xuat-san-pham.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\xuat-san-pham.aspx.designer.cs">
+      <DependentUpon>xuat-san-pham.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\kiem-tra-san-pham.aspx.cs">
+      <DependentUpon>kiem-tra-san-pham.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\kiem-tra-san-pham.aspx.designer.cs">
+      <DependentUpon>kiem-tra-san-pham.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\nhap-san-pham-tinh-nham.aspx.cs">
       <DependentUpon>nhap-san-pham-tinh-nham.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -602,20 +626,6 @@
     </Compile>
     <Compile Include="Pages\nguyen-lieu-can-cho-san-pham.aspx.designer.cs">
       <DependentUpon>nguyen-lieu-can-cho-san-pham.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\xuat-san-pham.aspx.cs">
-      <DependentUpon>xuat-san-pham.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\xuat-san-pham.aspx.designer.cs">
-      <DependentUpon>xuat-san-pham.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\nhap-san-pham-tinh.aspx.cs">
-      <DependentUpon>nhap-san-pham-tinh.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\nhap-san-pham-tinh.aspx.designer.cs">
-      <DependentUpon>nhap-san-pham-tinh.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\nhap-san-pham-tho.aspx.cs">
       <DependentUpon>nhap-san-pham-tho.aspx</DependentUpon>

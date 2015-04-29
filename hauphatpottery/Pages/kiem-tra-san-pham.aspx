@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Master.Master" AutoEventWireup="true" CodeBehind="nhap-san-pham-tinh.aspx.cs" Inherits="hauphatpottery.Pages.nhap_san_pham_tinh" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Master.Master" AutoEventWireup="true" CodeBehind="kiem-tra-san-pham.aspx.cs" Inherits="hauphatpottery.Pages.kiem_tra_san_pham" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Assembly="DevExpress.Web.ASPxGridView.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
@@ -34,7 +34,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="CPHMain" runat="server">
 <div id="header">
         <div class="title">
-            Nhập Sản Phẩm Tinh
+            Kiểm tra sản Phẩm
         </div>
         <div style="clear: both">
         </div>
@@ -58,24 +58,39 @@
                     </td>
                     <td>
                         <asp:DropDownList runat="server" ID="ddlProductDetail" 
-                            CssClass="k-textbox textbox" AppendDataBoundItems="true" DataTextField="Code" 
-                            DataValueField="Id" Width="200">
-                            <asp:ListItem Value="0" Text="--Chọn Sản Phẩm Chi Tiết--"></asp:ListItem>
+                            CssClass="k-textbox textbox" DataTextField="Code" 
+                            DataValueField="Id" Width="200"  AutoPostBack="True" 
+                                                                OnSelectedIndexChanged="ddlProductDetail_SelectedIndexChanged">
+                            <%--<asp:ListItem Value="0" Text="--Chọn Sản Phẩm Chi Tiết--"></asp:ListItem>--%>
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Chưa chọn sản phẩm"
                             ControlToValidate="ddlProductDetail" Display="None" ForeColor="Red" ValidationGroup="G2"
                             CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
                     </td>
                     <td>
-                        <input class="k-textbox" width="40" id="txtQuantity" onkeyup="FormatNumber(this);" onblur="FormatNumber(this);"
+                        <input class="k-textbox" width="40" id="txtQuantity" onkeypress="return digits(this, event, false, true);"
                             name="txtQuantity" type="text" value="" runat="server" placeholder="Số lượng" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Chưa nhập số lượng"
                                                     ControlToValidate="txtQuantity" Display="None" ForeColor="Red" ValidationGroup="G2"
                                                     CssClass="tlp-error">*</asp:RequiredFieldValidator>
+                         <asp:RequiredFieldValidator ID="RequiredFieldValidator33" runat="server" ErrorMessage="Chưa nhập số lượng"
+                                                    ControlToValidate="txtQuantity" Display="None" ForeColor="Red" ValidationGroup="G2"
+                                                    CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
                     </td>
                     <td>
-                        <asp:LinkButton ID="lbtnSave" ToolTip="Nhập sản phẩm" CssClass="k-button" runat="server"
-                OnClick="lbtnSave_Click" ValidationGroup="G2">Nhập</asp:LinkButton>
+                        <asp:DropDownList runat="server" ID="ddlProductDetailSize" CssClass="k-textbox textbox" Width="200">
+                        </asp:DropDownList>                                               
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="Chưa chọn size"
+                            ControlToValidate="ddlProductDetailSize" Display="None" ForeColor="Red" ValidationGroup="G2"
+                            CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
+                    </td>
+                    <td>
+                        <asp:LinkButton ID="lbtnSave" CssClass="k-button" runat="server"
+                OnClick="lbtnSave_Click" ValidationGroup="G2">OK</asp:LinkButton>
+                    </td>
+                    <td>
+                        <asp:LinkButton ID="lbtnLamlai" ToolTip="Làm lại sản phẩm" CssClass="k-button" runat="server"
+                OnClick="lbtnLamlai_Click" ValidationGroup="G2">Làm lại</asp:LinkButton>
                     </td>
                 </tr>
             </tbody>
@@ -113,22 +128,37 @@
                                     <span onmouseout="BBTOnline_HideTooltip();" onmouseover="BBTOnline_ShowTooltip('../ToolTip/ToolTip.aspx?oid=<%# getProductIdByProductDetailId(Eval("PRODUCT_DETAIL_ID")) %>'); return false;"><%# getShortString(getProductDetailName(Eval("PRODUCT_DETAIL_ID")), 40)%></span>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng">
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng đặt">
                             <DataItemTemplate>
-                                <%# getFormatQuantity(Eval("QUANTITY"))%>
+                                <%# getFormatQuantity(Eval("QUANTITY"))%> <%# getProductDetailSize(Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID"))%>
                             </DataItemTemplate>
-                        </dx:GridViewDataTextColumn>       
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng thô đã làm" Width="140px">
+                        </dx:GridViewDataTextColumn>     
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL thô đã làm" Width="140px">
                             <DataItemTemplate>
                                 <%# getFormatQuantity(getSoluongDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>    
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng tinh đã làm" Width="140px">
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL tinh đã làm(Sơn)" Width="140px">
                             <DataItemTemplate>
-                                <%# getFormatQuantity(getSoluongTinhDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                <%# getFormatQuantity(getSoluongTinhSonDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
                             </DataItemTemplate>
-                        </dx:GridViewDataTextColumn>      
-                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Số lượng còn lại">
+                        </dx:GridViewDataTextColumn>   
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL tinh đã làm(Chét)" Width="140px">
+                            <DataItemTemplate>
+                                <%# getFormatQuantity(getSoluongTinhChetDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>  
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL tinh đã làm(Nhám)" Width="140px">
+                            <DataItemTemplate>
+                                <%# getFormatQuantity(getSoluongTinhNhamDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn> 
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL đã kiểm tra" Width="140px">
+                            <DataItemTemplate>
+                                <%# getFormatQuantity(getSoluongKiemtra(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>   
+                        <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL còn lại">
                             <DataItemTemplate>
                                 <%# getFormatQuantity(getSoluongConlai(Eval("QUANTITY"), Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
                             </DataItemTemplate>
@@ -162,6 +192,9 @@
                                                             <td valign="middle" align="left">                                
                                                                 Ngày nhập
                                                             </td>
+                                                            <td valign="middle" align="left">                                
+                                                                Ghi chú
+                                                            </td>
                                                         </tr>
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
@@ -174,6 +207,9 @@
                                                             </td>
                                                             <td valign="middle" align="left">                                
                                                                 <%# getDate(Eval("CREATE_DATE"))%>
+                                                            </td>
+                                                            <td valign="middle" align="left">                                
+                                                                <%# Eval("NOTE")%>
                                                             </td>
                                                         </tr>
                                                 </ItemTemplate>

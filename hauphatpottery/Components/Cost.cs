@@ -22,7 +22,7 @@ namespace hauphatpottery.Components
         public const int NHAP_TINH_CHET = 22;
         public const int NHAP_TINH_NHAM = 23;
         public const int NHAP_KIEM_TINH = 24;
-        public const int XUAT_SANPHAM = 3;
+        //public const int XUAT_SANPHAM = 3;
         //ORDERMATERIAL TYPE
         public const int NHAP_NGUYENLIEU = 1;
         public const int XUAT_NGUYENLIEU = 2;

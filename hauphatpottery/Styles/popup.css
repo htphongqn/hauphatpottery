@@ -18,7 +18,7 @@
 
 .popupConfirmation
 {
-	width: 300px;
+	width: 375px;
 	height: 200px;
 }
 .popupConfirmation2
@@ -54,6 +54,7 @@
 	font-weight:bold;
 	font-size:12px;
 	color:#FFFFFF;
+	cursor:move;
 }
 .TitlebarRight 
 {

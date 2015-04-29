@@ -233,40 +233,45 @@ namespace hauphatpottery.Pages
             }
             return "";
         }
-        public int getSoluongDalam(object orderId, object productDetailId)
+        public int getSoluongDalam(object orderId, object productDetailId, object productDetailSizeId)
         {
             int _orderid = Utils.CIntDef(orderId);
             int _prodetailid = Utils.CIntDef(productDetailId);
-            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_THO);
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_THO);
             return Utils.CIntDef(list.Sum(n => n.QUANTITY));
         }
-        public int getSoluongTinhSonDalam(object orderId, object productDetailId)
+        public int getSoluongTinhSonDalam(object orderId, object productDetailId, object productDetailSizeId)
         {
             int _orderid = Utils.CIntDef(orderId);
             int _prodetailid = Utils.CIntDef(productDetailId);
-            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_TINH_SON);
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_TINH_SON);
             return Utils.CIntDef(list.Sum(n => n.QUANTITY));
         }
-        public List<INVENTORY> getListHistory(object orderId, object productDetailId)
+        public List<INVENTORY> getListHistory(object orderId, object productDetailId, object productDetailSizeId)
         {
             int _orderid = Utils.CIntDef(orderId);
             int _prodetailid = Utils.CIntDef(productDetailId);
-            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_TINH_CHET);
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_TINH_CHET);
             return list;
         }
-        public int getSoluongTinhChetDalam(object orderId, object productDetailId)
+        public int getSoluongTinhChetDalam(object orderId, object productDetailId, object productDetailSizeId)
         {
             int _orderid = Utils.CIntDef(orderId);
             int _prodetailid = Utils.CIntDef(productDetailId);
-            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_TINH_CHET);
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_TINH_CHET);
             return Utils.CIntDef(list.Sum(n => n.QUANTITY));
         }
-        public int getSoluongConlai(object quantity, object orderId, object productDetailId)
+        public int getSoluongConlai(object quantity, object orderId, object productDetailId, object productDetailSizeId)
         {
             int _quantity = Utils.CIntDef(quantity);
             int _orderid = Utils.CIntDef(orderId);
             int _prodetailid = Utils.CIntDef(productDetailId);
-            var sumDalam = getSoluongTinhChetDalam(_orderid, _prodetailid);
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            var sumDalam = getSoluongTinhChetDalam(_orderid, _prodetailid, _productDetailSizeId);
             int sumConlai = _quantity - sumDalam;
             return sumConlai;
         }
@@ -291,7 +296,7 @@ namespace hauphatpottery.Pages
 
                 _InventoryRepo.Create(item);
 
-                Response.Redirect("nhap-san-pham-chet.aspx?id=" + item.ORDER_ID);
+                Response.Redirect("nhap-san-pham-tinh-chet.aspx?id=" + item.ORDER_ID);
 
             }
             catch

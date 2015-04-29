@@ -9,9 +9,9 @@ namespace hauphatpottery.Data
     {
         private hauphatpotteryDataContext db = new hauphatpotteryDataContext();
 
-        public virtual List<INVENTORY> GetByOrderIdAndProductDetailId(int orderId, int productDetailId, int type)
+        public virtual List<INVENTORY> GetByOrderIdAndProductDetailId(int orderId, int productDetailId, int productDetaiSizelId, int type)
         {
-            return this.db.INVENTORies.Where(n => n.ORDER_ID == orderId && n.PRODUCT_DETAIL_ID == productDetailId && n.TYPE == type).OrderByDescending(n=>n.CREATE_DATE).ToList();
+            return this.db.INVENTORies.Where(n => n.ORDER_ID == orderId && n.PRODUCT_DETAIL_ID == productDetailId && n.PRODUCT_DETAIL_SIZE_ID == productDetaiSizelId && n.TYPE == type).OrderByDescending(n => n.CREATE_DATE).ToList();
         }
         public virtual INVENTORY GetById(int id)
         {

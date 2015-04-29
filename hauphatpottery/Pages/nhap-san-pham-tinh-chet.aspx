@@ -73,6 +73,10 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Chưa nhập số lượng"
                                                     ControlToValidate="txtQuantity" Display="None" ForeColor="Red" ValidationGroup="G2"
                                                     CssClass="tlp-error">*</asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator33" runat="server" ErrorMessage="Chưa nhập số lượng"
+                                                    ControlToValidate="txtQuantity" Display="None" 
+                            ForeColor="Red" ValidationGroup="G2"
+                                                    CssClass="tlp-error" InitialValue="0">*</asp:RequiredFieldValidator>
                     </td>
                     <td>
                         <asp:DropDownList runat="server" ID="ddlProductDetailSize" CssClass="k-textbox textbox" Width="200">
@@ -128,22 +132,22 @@
                         </dx:GridViewDataTextColumn>     
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL thô đã làm" Width="140px">
                             <DataItemTemplate>
-                                <%# getFormatQuantity(getSoluongDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                <%# getFormatQuantity(getSoluongDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID")))%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>    
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL tinh đã làm(Sơn)" Width="140px">
                             <DataItemTemplate>
-                                <%# getFormatQuantity(getSoluongTinhSonDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                <%# getFormatQuantity(getSoluongTinhSonDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID")))%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>   
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL tinh đã làm(Chét)" Width="140px">
                             <DataItemTemplate>
-                                <%# getFormatQuantity(getSoluongTinhChetDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                <%# getFormatQuantity(getSoluongTinhChetDalam(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID")))%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>    
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="SL còn lại">
                             <DataItemTemplate>
-                                <%# getFormatQuantity(getSoluongConlai(Eval("QUANTITY"), Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID")))%>
+                                <%# getFormatQuantity(getSoluongConlai(Eval("QUANTITY"), Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID")))%>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn VisibleIndex="1" Caption="">
@@ -162,7 +166,7 @@
                                             <asp:LinkButton ID="lnkClose" runat="server" CssClass="TitlebarRight" CausesValidation="false"/>
                                         </div>
                                         <div class="popup_Body">    
-                                            <asp:Repeater ID="rptHistory" runat="server" DataSource='<%# getListHistory(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"))%>'>
+                                            <asp:Repeater ID="rptHistory" runat="server" DataSource='<%# getListHistory(Eval("ORDER_ID"), Eval("PRODUCT_DETAIL_ID"), Eval("PRODUCT_DETAIL_SIZE_ID"))%>'>
                                                 <HeaderTemplate>
                                                     <table>
                                                         <tr>
@@ -175,6 +179,9 @@
                                                             <td valign="middle" align="left">                                
                                                                 Ngày nhập
                                                             </td>
+                                                            <td valign="middle" align="left">                                
+                                                                Ghi chú
+                                                            </td>
                                                         </tr>
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
@@ -185,8 +192,11 @@
                                                             <td style="width: 60px" valign="middle" align="center">
                                                                 <%# Eval("QUANTITY")%>
                                                             </td>
-                                                            <td valign="middle" align="left">                                
+                                                            <td style="width: 100px" valign="middle" align="left">                                
                                                                 <%# getDate(Eval("CREATE_DATE"))%>
+                                                            </td>
+                                                            <td valign="middle" align="left">                                
+                                                                <%# Eval("NOTE")%>
                                                             </td>
                                                         </tr>
                                                 </ItemTemplate>

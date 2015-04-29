@@ -10,7 +10,7 @@ using hauphatpottery.Components;
 
 namespace hauphatpottery.Pages
 {
-    public partial class nhap_san_pham_tinh_son : System.Web.UI.Page
+    public partial class kiem_tra_san_pham : System.Web.UI.Page
     {
         #region Declare
         private hauphatpotteryDataContext db = new hauphatpotteryDataContext();
@@ -29,7 +29,7 @@ namespace hauphatpottery.Pages
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            bool isPermission = _UnitDataRepo.checkPermissionPage("nhap-san-pham-tinh-son.aspx", Utils.CIntDef(Session["groupId"]), Utils.CIntDef(Session["groupType"]));
+            bool isPermission = _UnitDataRepo.checkPermissionPage("kiem-tra-san-pham.aspx", Utils.CIntDef(Session["groupId"]), Utils.CIntDef(Session["groupType"]));
             if (!isPermission)
             {
                 Response.Write("<script>alert('Bạn không có quyền truy cập vào trang này');location.href='trang-chu.aspx';</script>");
@@ -241,14 +241,6 @@ namespace hauphatpottery.Pages
             var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_THO);
             return Utils.CIntDef(list.Sum(n => n.QUANTITY));
         }
-        public List<INVENTORY> getListHistory(object orderId, object productDetailId, object productDetailSizeId)
-        {
-            int _orderid = Utils.CIntDef(orderId);
-            int _prodetailid = Utils.CIntDef(productDetailId);
-            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
-            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_TINH_SON);
-            return list;
-        }
         public int getSoluongTinhSonDalam(object orderId, object productDetailId, object productDetailSizeId)
         {
             int _orderid = Utils.CIntDef(orderId);
@@ -257,13 +249,45 @@ namespace hauphatpottery.Pages
             var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_TINH_SON);
             return Utils.CIntDef(list.Sum(n => n.QUANTITY));
         }
+        public int getSoluongTinhChetDalam(object orderId, object productDetailId, object productDetailSizeId)
+        {
+            int _orderid = Utils.CIntDef(orderId);
+            int _prodetailid = Utils.CIntDef(productDetailId);
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_TINH_CHET);
+            return Utils.CIntDef(list.Sum(n => n.QUANTITY));
+        }
+        public int getSoluongTinhNhamDalam(object orderId, object productDetailId, object productDetailSizeId)
+        {
+            int _orderid = Utils.CIntDef(orderId);
+            int _prodetailid = Utils.CIntDef(productDetailId);
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_TINH_NHAM);
+            return Utils.CIntDef(list.Sum(n => n.QUANTITY));
+        }
+        public List<INVENTORY> getListHistory(object orderId, object productDetailId, object productDetailSizeId)
+        {
+            int _orderid = Utils.CIntDef(orderId);
+            int _prodetailid = Utils.CIntDef(productDetailId);
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_KIEM_TINH);
+            return list;
+        }
+        public int getSoluongKiemtra(object orderId, object productDetailId, object productDetailSizeId)
+        {
+            int _orderid = Utils.CIntDef(orderId);
+            int _prodetailid = Utils.CIntDef(productDetailId);
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_KIEM_TINH);
+            return Utils.CIntDef(list.Sum(n => n.QUANTITY));
+        }
         public int getSoluongConlai(object quantity, object orderId, object productDetailId, object productDetailSizeId)
         {
             int _quantity = Utils.CIntDef(quantity);
             int _orderid = Utils.CIntDef(orderId);
             int _prodetailid = Utils.CIntDef(productDetailId);
             int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
-            var sumDalam = getSoluongTinhSonDalam(_orderid, _prodetailid, _productDetailSizeId);
+            var sumDalam = getSoluongKiemtra(_orderid, _prodetailid, _productDetailSizeId);
             int sumConlai = _quantity - sumDalam;
             return sumConlai;
         }
@@ -283,17 +307,62 @@ namespace hauphatpottery.Pages
                 item.PRODUCT_DETAIL_SIZE_ID = productDetailSizeId;
                 item.QUANTITY = Utils.CIntDef(txtQuantity.Value.Replace(",", ""));
                 item.CREATE_DATE = DateTime.Now;
-                item.TYPE = Cost.NHAP_TINH_SON;
+                item.TYPE = Cost.NHAP_KIEM_TINH;
                 item.CREATOR_ID = Utils.CIntDef(Session["Userid"]);
 
                 _InventoryRepo.Create(item);
 
-                Response.Redirect("nhap-san-pham-tinh-son.aspx?id=" + item.ORDER_ID);
+                Response.Redirect("kiem-tra-san-pham.aspx?id=" + item.ORDER_ID);
 
             }
             catch
             {
             }
+        }
+
+        protected void lbtnLamlai_Click(object sender, EventArgs e)
+        {
+            int productDetailId = Utils.CIntDef(ddlProductDetail.SelectedValue);
+            int orderId = Utils.CIntDef(ddlOrder.SelectedValue);
+            int productDetailSizeId = Utils.CIntDef(ddlProductDetailSize.SelectedValue);
+
+            var item = new INVENTORY();
+            item.PRODUCT_DETAIL_ID = productDetailId;
+            item.ORDER_ID = orderId;
+            item.PRODUCT_DETAIL_SIZE_ID = productDetailSizeId;
+            item.QUANTITY = -Utils.CIntDef(txtQuantity.Value.Replace(",", ""));
+            item.NOTE = "Sản phẩm sửa";
+            item.CREATE_DATE = DateTime.Now;
+            item.TYPE = Cost.NHAP_TINH_SON;
+            item.CREATOR_ID = Utils.CIntDef(Session["Userid"]);
+
+            _InventoryRepo.Create(item);
+
+            item = new INVENTORY();
+            item.PRODUCT_DETAIL_ID = productDetailId;
+            item.ORDER_ID = orderId;
+            item.PRODUCT_DETAIL_SIZE_ID = productDetailSizeId;
+            item.QUANTITY = -Utils.CIntDef(txtQuantity.Value.Replace(",", ""));
+            item.NOTE = "Sản phẩm sửa";
+            item.CREATE_DATE = DateTime.Now;
+            item.TYPE = Cost.NHAP_TINH_CHET;
+            item.CREATOR_ID = Utils.CIntDef(Session["Userid"]);
+
+            _InventoryRepo.Create(item);
+
+            item = new INVENTORY();
+            item.PRODUCT_DETAIL_ID = productDetailId;
+            item.ORDER_ID = orderId;
+            item.PRODUCT_DETAIL_SIZE_ID = productDetailSizeId;
+            item.QUANTITY = -Utils.CIntDef(txtQuantity.Value.Replace(",", ""));
+            item.NOTE = "Sản phẩm sửa";
+            item.CREATE_DATE = DateTime.Now;
+            item.TYPE = Cost.NHAP_TINH_NHAM;
+            item.CREATOR_ID = Utils.CIntDef(Session["Userid"]);
+
+            _InventoryRepo.Create(item);
+
+            Response.Redirect("kiem-tra-san-pham.aspx?id=" + item.ORDER_ID);
         }
 
     }

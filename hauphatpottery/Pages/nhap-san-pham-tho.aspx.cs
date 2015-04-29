@@ -233,26 +233,29 @@ namespace hauphatpottery.Pages
             }
             return "";
         }
-        public List<INVENTORY> getListHistory(object orderId, object productDetailId)
+        public List<INVENTORY> getListHistory(object orderId, object productDetailId, object productDetailSizeId)
         {
             int _orderid = Utils.CIntDef(orderId);
             int _prodetailid = Utils.CIntDef(productDetailId);
-            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_THO);
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_THO);
             return list;
         }
-        public int getSoluongDalam(object orderId, object productDetailId)
+        public int getSoluongDalam(object orderId, object productDetailId, object productDetailSizeId)
         {
             int _orderid = Utils.CIntDef(orderId);
             int _prodetailid = Utils.CIntDef(productDetailId);
-            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, Cost.NHAP_THO);
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            var list = _InventoryRepo.GetByOrderIdAndProductDetailId(_orderid, _prodetailid, _productDetailSizeId, Cost.NHAP_THO);
             return Utils.CIntDef(list.Sum(n => n.QUANTITY));
         }
-        public int getSoluongConlai(object quantity, object orderId, object productDetailId)
+        public int getSoluongConlai(object quantity, object orderId, object productDetailId, object productDetailSizeId)
         {
             int _quantity = Utils.CIntDef(quantity);
             int _orderid = Utils.CIntDef(orderId);
             int _prodetailid = Utils.CIntDef(productDetailId);
-            var sumDalam = getSoluongDalam(_orderid, _prodetailid);
+            int _productDetailSizeId = Utils.CIntDef(productDetailSizeId);
+            var sumDalam = getSoluongDalam(_orderid, _prodetailid, _productDetailSizeId);
             int sumConlai = _quantity - sumDalam;
             return sumConlai;
         }

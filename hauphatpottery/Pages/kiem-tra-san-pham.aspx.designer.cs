@@ -10,7 +10,7 @@
 namespace hauphatpottery.Pages {
     
     
-    public partial class nhap_san_pham_tho {
+    public partial class kiem_tra_san_pham {
         
         /// <summary>
         /// pnContract control.
@@ -110,6 +110,15 @@ namespace hauphatpottery.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnSave;
+        
+        /// <summary>
+        /// lbtnLamlai control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnLamlai;
         
         /// <summary>
         /// ASPxGridView1_Order_ProductDetail control.
