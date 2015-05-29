@@ -42,9 +42,9 @@ namespace hauphatpottery.Pages
 
         private void LogIn()
         {
-            //try
-            //{
-            int id =Log_In(txtUsername.Value, txtPassword.Value);
+            try
+            {
+                int id = Log_In(txtUsername.Value, txtPassword.Value);
                 if (id == 10)
                 {
                     Load_All_Cus(txtUsername.Value);
@@ -54,15 +54,15 @@ namespace hauphatpottery.Pages
                 {
                     clsDataUtil.Show("Tài khoản chưa kích hoạt!");
                 }
-                else if( id == 1 || id == 2)
+                else if (id == 1 || id == 2)
                 {
                     clsDataUtil.Show("Tên đăng nhập hoặc mập khẩu không chính xác!");
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    clsVproErrorHandler.HandlerError(ex);
-            //}
+            }
+            catch (Exception ex)
+            {
+                clsVproErrorHandler.HandlerError(ex);
+            }
         }
 
         public int Log_In(string Username, string MatKhau)
@@ -93,9 +93,10 @@ namespace hauphatpottery.Pages
                     return 1;//1 sai username
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                return 0;// loi
+                clsVproErrorHandler.HandlerError(ex);
+                return 0;//lỗi
             }
         }
 
